@@ -35,13 +35,13 @@ export default function App() {
           <img 
             src="https://i.imgur.com/8Qoqkef.png" 
             alt="Astrateq Gadgets Logo" 
-            className="w-[52px] h-[52px] rounded-[14px] object-cover shadow-sm select-none"
+            className="w-[68px] h-[68px] rounded-[18px] object-cover shadow-sm select-none"
             referrerPolicy="no-referrer"
           />
-          <h1 className="font-serif text-[22px] text-navy mt-2.5 mb-1">
-            Astrateq Gadgets
-          </h1>
-          <p className="font-sans text-[11px] font-medium tracking-[0.1em] uppercase text-accent-cyan">
+          <p 
+            className="font-bold text-[13px] tracking-[0.12em] uppercase text-accent-cyan mt-3.5"
+            style={{ fontFamily: '"Segoe UI", -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", Segoe, Roboto, Helvetica, Arial, sans-serif' }}
+          >
             Drive Safer. Drive Smarter.
           </p>
         </div>
