@@ -142,7 +142,7 @@ export default function App() {
 
         {/* SECTION 5 — SECONDARY ACTION CARDS (Separate Cards for Clarity) */}
         <div 
-          className="flex flex-col gap-4 animate-fade-in-up"
+          className="flex flex-col gap-4.5 animate-fade-in-up"
           style={{ animationDelay: '0.1s' }}
         >
           {/* Row 1 — Summer Vehicle Readiness Check (Highlighted with Amber/Gold Side priority indicator) */}
@@ -150,25 +150,25 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=readiness"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#d97706]/70 border-l-[6px] border-l-[#d97706] hover:border-[#d97706] hover:border-l-[#d97706] hover:shadow-[0_8px_24px_rgba(217,119,6,0.1)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#d97706] border-l-[10px] border-l-[#d97706] hover:border-[#b45309] hover:border-l-[#d97706] hover:bg-[#fffdf9] hover:shadow-[0_10px_28px_rgba(217,119,6,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
           >
-            <div className="w-10 h-10 rounded-[12px] bg-[#f0a832]/8 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
-              <Sun className="w-5 h-5 text-accent-amber animate-spin" style={{ animationDuration: '24s' }} />
+            <div className="w-12 h-12 rounded-[14px] bg-[#d97706]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+              <Sun className="w-6.5 h-6.5 text-[#d97706] animate-spin" style={{ animationDuration: '24s' }} />
             </div>
             <div className="flex-1">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <h3 className="font-sans text-[13.5px] font-extrabold text-navy group-hover:text-accent-cyan transition-colors duration-150">
+              <div className="flex items-center gap-2.5 flex-wrap">
+                <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#d97706] transition-colors duration-150">
                   Summer Vehicle Readiness Check
                 </h3>
-                <span className="text-[9px] font-extrabold bg-[#f0a832]/12 text-[#b87810] px-1.5 py-0.5 rounded-[4px] uppercase tracking-wider select-none">
+                <span className="text-[10px] font-black bg-[#d97706] text-white px-2 py-0.5 rounded-[6px] uppercase tracking-wider select-none border border-[#d97706]">
                   Priority 2
                 </span>
               </div>
-              <p className="font-sans text-[11px] font-bold text-navy/80 leading-[1.4] mt-0.5">
+              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
                 Take a quick 60-second check to understand your summer driving readiness profile.
               </p>
             </div>
-            <ChevronRight className="w-4.5 h-4.5 text-[#b0c4dc] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+            <ChevronRight className="w-6 h-6 text-[#d97706] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
           </a>
 
           {/* Row 2 — Check Vehicle Compatibility */}
@@ -176,20 +176,20 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=compatibility"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4] hover:border-[#1a5a9e] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
           >
-            <div className="w-10 h-10 rounded-[12px] bg-frost flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
-              <Car className="w-5 h-5 text-[#1a5a9e]" />
+            <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+              <Car className="w-6 h-6 text-[#0078d4]" strokeWidth={3} />
             </div>
             <div className="flex-1">
-              <h3 className="font-sans text-[13.5px] font-extrabold text-navy group-hover:text-accent-cyan transition-colors duration-150">
+              <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
                 Check Vehicle Compatibility
               </h3>
-              <p className="font-sans text-[11px] font-bold text-navy/80 leading-[1.4] mt-0.5">
+              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
                 Confirm whether your vehicle profile is likely to support the Astrateq pre-launch concept.
               </p>
             </div>
-            <ChevronRight className="w-4.5 h-4.5 text-[#b0c4dc] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+            <ChevronRight className="w-6 h-6 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
           </a>
 
           {/* Row 3 — See How Astrateq Works */}
@@ -197,20 +197,20 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=explainer"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4] hover:border-[#1a5a9e] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
           >
-            <div className="w-10 h-10 rounded-[12px] bg-frost flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
-              <Activity className="w-5 h-5 text-[#1a5a9e]" />
+            <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+              <Activity className="w-6 h-6 text-[#0078d4]" strokeWidth={3} />
             </div>
             <div className="flex-1">
-              <h3 className="font-sans text-[13.5px] font-extrabold text-navy group-hover:text-accent-cyan transition-colors duration-150">
+              <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
                 See How Astrateq Works
               </h3>
-              <p className="font-sans text-[11px] font-bold text-navy/80 leading-[1.4] mt-0.5">
+              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
                 Learn how privacy-first vehicle intelligence could help drivers understand signals, patterns, and readiness context.
               </p>
             </div>
-            <ChevronRight className="w-4.5 h-4.5 text-[#b0c4dc] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+            <ChevronRight className="w-6 h-6 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
           </a>
 
           {/* Row 4 — Privacy-First Data Approach */}
@@ -218,20 +218,20 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=privacy"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4] hover:border-[#1a5a9e] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
           >
-            <div className="w-10 h-10 rounded-[12px] bg-frost flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
-              <Lock className="w-5 h-5 text-[#1a5a9e]" />
+            <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+              <Lock className="w-6 h-6 text-[#0078d4]" strokeWidth={3} />
             </div>
             <div className="flex-1">
-              <h3 className="font-sans text-[13.5px] font-extrabold text-navy group-hover:text-accent-cyan transition-colors duration-150">
+              <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
                 Privacy-First Data Approach
               </h3>
-              <p className="font-sans text-[11px] font-bold text-navy/80 leading-[1.4] mt-0.5">
+              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
                 Review how Astrateq Gadgets is approaching local-first intelligence and reduced data exposure.
               </p>
             </div>
-            <ChevronRight className="w-4.5 h-4.5 text-[#b0c4dc] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+            <ChevronRight className="w-6 h-6 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
           </a>
 
           {/* Row 5 — Project Roadmap & Build Updates */}
@@ -239,20 +239,20 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=updates"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4] hover:border-[#1a5a9e] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
           >
-            <div className="w-10 h-10 rounded-[12px] bg-frost flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
-              <Bell className="w-5 h-5 text-[#1a5a9e]" />
+            <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+              <Bell className="w-6 h-6 text-[#0078d4]" strokeWidth={3} />
             </div>
             <div className="flex-1">
-              <h3 className="font-sans text-[13.5px] font-extrabold text-navy group-hover:text-accent-cyan transition-colors duration-150">
+              <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
                 Project Roadmap & Build Updates
               </h3>
-              <p className="font-sans text-[11px] font-bold text-navy/80 leading-[1.4] mt-0.5">
+              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
                 Follow pre-launch progress, product direction, validation updates, and Canadian rollout planning.
               </p>
             </div>
-            <ChevronRight className="w-4.5 h-4.5 text-[#b0c4dc] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+            <ChevronRight className="w-6 h-6 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
           </a>
         </div>
 
