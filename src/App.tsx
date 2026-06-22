@@ -10,6 +10,7 @@ import {
   ChevronRight, 
   Check 
 } from 'lucide-react';
+import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 
 export default function App() {
   return (
@@ -58,7 +59,7 @@ export default function App() {
           <div className="h-[210px] w-full relative overflow-hidden select-none">
             {/* Real luxury SUV city image */}
             <img 
-              src="/src/assets/images/luxury_suv_hero_1782157912256.jpg" 
+              src={luxurySuvHero} 
               alt="Luxury SUV in Toronto city background" 
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               referrerPolicy="no-referrer"
