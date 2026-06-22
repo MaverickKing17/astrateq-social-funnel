@@ -52,75 +52,17 @@ export default function App() {
           style={{ animationDelay: '0s' }}
         >
           {/* Top — image placeholder area */}
-          <div className="h-[200px] w-full bg-gradient-to-br from-[#b8d4e8] via-[#d6e8f5] to-[#c2d9ed] relative overflow-hidden select-none">
-            {/* Custom horizon SUV landscape illustration */}
-            <svg className="w-full h-full" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="400" height="200" fill="url(#skyGradient)" />
-              
-              {/* Sun Glow */}
-              <circle cx="200" cy="120" r="45" fill="url(#sunGlow)" opacity="0.6" />
-              
-              {/* Mountain / Hills backdrop */}
-              <path d="M-40 145 C110 125, 230 155, 440 135 L440 200 L-40 200 Z" fill="#adc9dd" opacity="0.4" />
-              <path d="M-40 155 C120 148, 270 138, 440 160 L440 200 L-40 200 Z" fill="#9dbbd2" opacity="0.7" />
-              <path d="M-40 168 C150 162, 290 155, 440 172 L440 200 L-40 200 Z" fill="#88a9c2" opacity="0.9" />
-
-              {/* Highway Road leading to horizon */}
-              <path d="M195 130 L110 200 L290 200 L205 130 Z" fill="#2d3d54" />
-              
-              {/* Road markings */}
-              <line x1="200" y1="130" x2="200" y2="200" stroke="#ffffff" strokeWidth="2.5" strokeDasharray="5 7" opacity="0.75" />
-              
-              {/* Forest silhouettes on sides */}
-              <path d="M0 160 L20 150 L25 155 L40 142 L45 147 L60 135 L70 160 Z" fill="#6c8ba3" opacity="0.8" />
-              <path d="M330 160 L345 138 L355 144 L370 132 L380 140 L400 155 Z" fill="#6c8ba3" opacity="0.8" />
-
-              {/* Front Silhouette of Crossover SUV driving out */}
-              <g transform="translate(182, 142) scale(0.9)" opacity="0.95">
-                {/* Car Shadow */}
-                <ellipse cx="20" cy="24" rx="20" ry="4" fill="#0e1f3d" opacity="0.4" />
-                
-                {/* Wheels */}
-                <rect x="1" y="15" width="7" height="10" rx="3" fill="#141a24" />
-                <rect x="32" y="15" width="7" height="10" rx="3" fill="#141a24" />
-                
-                {/* Cyber / Minimal LED Tail Lights */}
-                <path d="M2 17 L38 17 L36 9 L4 9 Z" fill="#0e1f3d" />
-                <path d="M4 17 Q20 19 36 17 L34 10 Q20 12 6 10 Z" fill="#1e2f47" />
-                
-                {/* Light reflection */}
-                <path d="M6 10 L34 10 L35 15 L5 15 Z" fill="#2d415b" />
-                
-                {/* Rear Cabin */}
-                <path d="M9 9 C9 3, 31 3, 31 9 Z" fill="#071122" />
-                <path d="M11 8 C11 5, 29 5, 29 8 Z" fill="#7ab8e8" opacity="0.45" />
-
-                {/* Cyber red bar tail light */}
-                <rect x="4" y="11" width="32" height="1.5" rx="0.5" fill="#e74c3c" />
-                <circle cx="8" cy="11.75" r="1" fill="#ff7675" />
-                <circle cx="32" cy="11.75" r="1" fill="#ff7675" />
-
-                {/* Canadian plate holder */}
-                <rect x="15" y="18" width="10" height="5" rx="1" fill="#ffffff" />
-                <rect x="17" y="19" width="6" height="1.5" fill="#2d8fd4" />
-              </g>
-
-              {/* Gradients */}
-              <defs>
-                <linearGradient id="skyGradient" x1="200" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#b8d4e8" />
-                  <stop offset="45%" stopColor="#d6e8f5" />
-                  <stop offset="100%" stopColor="#c2d9ed" />
-                </linearGradient>
-                <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#f0a832" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#f0a832" stopOpacity="0" />
-                </radialGradient>
-              </defs>
-            </svg>
+          <div className="h-[200px] w-full relative overflow-hidden select-none">
+            {/* Real luxury SUV city image */}
+            <img 
+              src="/src/assets/images/luxury_suv_hero_1782157912256.jpg" 
+              alt="Luxury SUV in Toronto city background" 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
 
             {/* Bottom-left corner badge */}
-            <div className="absolute bottom-2.5 left-3 text-[10px] font-sans font-medium bg-[rgba(255,255,255,0.65)] backdrop-blur-xs rounded-[8px] py-0.5 px-2.5 text-navy border border-[rgba(14,31,61,0.06)]">
+            <div className="absolute bottom-2.5 left-3 z-10 text-[10px] font-sans font-medium bg-[rgba(255,255,255,0.75)] backdrop-blur-xs rounded-[8px] py-0.5 px-2.5 text-navy border border-[rgba(14,31,61,0.06)]">
               Ontario · Summer 2026
             </div>
           </div>
