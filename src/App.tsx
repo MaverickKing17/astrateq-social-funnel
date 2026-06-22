@@ -150,7 +150,7 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=readiness"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4]/25 border-l-[6px] border-l-accent-amber hover:border-[#2d8fd4]/60 hover:border-l-accent-amber hover:shadow-[0_8px_24px_rgba(14,31,61,0.07)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#d97706]/70 border-l-[6px] border-l-[#d97706] hover:border-[#d97706] hover:border-l-[#d97706] hover:shadow-[0_8px_24px_rgba(217,119,6,0.1)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
           >
             <div className="w-10 h-10 rounded-[12px] bg-[#f0a832]/8 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
               <Sun className="w-5 h-5 text-accent-amber animate-spin" style={{ animationDuration: '24s' }} />
@@ -176,7 +176,7 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=compatibility"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4]/25 hover:border-[#2d8fd4]/60 hover:shadow-[0_8px_24px_rgba(14,31,61,0.07)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4] hover:border-[#1a5a9e] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
           >
             <div className="w-10 h-10 rounded-[12px] bg-frost flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
               <Car className="w-5 h-5 text-[#1a5a9e]" />
@@ -197,7 +197,7 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=explainer"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4]/25 hover:border-[#2d8fd4]/60 hover:shadow-[0_8px_24px_rgba(14,31,61,0.07)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4] hover:border-[#1a5a9e] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
           >
             <div className="w-10 h-10 rounded-[12px] bg-frost flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
               <Activity className="w-5 h-5 text-[#1a5a9e]" />
@@ -218,7 +218,7 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=privacy"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4]/25 hover:border-[#2d8fd4]/60 hover:shadow-[0_8px_24px_rgba(14,31,61,0.07)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4] hover:border-[#1a5a9e] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
           >
             <div className="w-10 h-10 rounded-[12px] bg-frost flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
               <Lock className="w-5 h-5 text-[#1a5a9e]" />
@@ -239,7 +239,7 @@ export default function App() {
             href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=updates"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4]/25 hover:border-[#2d8fd4]/60 hover:shadow-[0_8px_24px_rgba(14,31,61,0.07)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
+            className="flex items-center gap-4 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4] hover:border-[#1a5a9e] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)]"
           >
             <div className="w-10 h-10 rounded-[12px] bg-frost flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-200">
               <Bell className="w-5 h-5 text-[#1a5a9e]" />
