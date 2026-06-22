@@ -146,7 +146,7 @@ export default function App() {
         >
           {/* Row 1 — Summer Vehicle Readiness Check (Highlighted with Amber/Gold Side priority indicator) */}
           <a 
-            href="https://join.astrateqgadgets.com/summer-readiness?entry=linkbio&intent=readiness"
+            href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=readiness"
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4 p-4 text-decoration-none bg-white border-l-[4px] border-accent-amber hover:bg-[#f7fafd] active:bg-[#f0f5fa] border-b border-[#0e1f3d]/5 group transition-all duration-200"
@@ -235,7 +235,7 @@ export default function App() {
 
           {/* Row 5 — Project Roadmap & Build Updates */}
           <a 
-            href="https://join.astrateqgadgets.com?entry=linkbio&intent=updates"
+            href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=updates"
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4 p-4 text-decoration-none bg-white hover:bg-[#f7fafd] active:bg-[#f0f5fa] group transition-all duration-200"
@@ -414,19 +414,19 @@ export default function App() {
 
         {/* SECTION 8 — PRE-LAUNCH TRANSPARENCY CARD — Amber-tinted disclosure */}
         <div 
-          className="bg-gradient-to-r from-accent-amber/[0.04] to-accent-amber/[0.08] border-2 border-[#f0a832]/60 rounded-[20px] p-5 shadow-xs animate-fade-in-up"
+          className="bg-gradient-to-br from-[#fffdf6] to-[#fffbf0] border-2 border-[#d97706]/40 rounded-[20px] p-5.5 shadow-[0_4px_16px_rgba(217,119,6,0.05)] animate-fade-in-up"
           style={{ animationDelay: '0.25s' }}
         >
-          <div className="flex items-center gap-2 mb-2.5">
-            <span className="w-1.5 h-3.5 bg-accent-amber/70 rounded-full"></span>
-            <h4 className="font-sans text-[10px] font-bold tracking-[0.12em] uppercase text-[#8a5f10]">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-1.5 h-3.5 bg-[#d97706] rounded-full"></span>
+            <h4 className="font-sans text-[11px] font-extrabold tracking-[0.14em] uppercase text-[#854d0e]">
               Pre-launch transparency
             </h4>
           </div>
-          <p className="font-sans text-[11px] font-bold text-[#63491f] leading-[1.65] mb-2">
+          <p className="font-sans text-[12px] font-bold text-[#451a03]/95 leading-relaxed mb-2.5">
             Astrateq Gadgets is currently in pre-launch market validation. Hardware availability, compatibility, pricing, and rollout timing are subject to validation results, supplier readiness, and future manufacturing decisions.
           </p>
-          <p className="font-sans text-[11px] font-bold text-[#63491f] leading-[1.65]">
+          <p className="font-sans text-[12px] font-bold text-[#451a03]/95 leading-relaxed">
             This page is designed to measure early interest and route Canadian drivers into readiness, compatibility, and founding cohort flows.
           </p>
         </div>
