@@ -1,0 +1,6 @@
+{
+  "name": "Astrateq Gadgets Link-in-Bio",
+  "description": "Privacy-first vehicle intelligence pre-launch link-in-bio page for Astrateq Gadgets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
