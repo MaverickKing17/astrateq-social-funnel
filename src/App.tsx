@@ -147,7 +147,7 @@ export default function App() {
         >
           {/* Row 1 — Summer Vehicle Readiness Check (Highlighted with Amber/Gold Side priority indicator) */}
           <a 
-            href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=readiness"
+            href="https://summer.astrateqgadgets.com"
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#d97706] border-l-[10px] border-l-[#d97706] hover:border-[#b45309] hover:border-l-[#d97706] hover:bg-[#fffdf9] hover:shadow-[0_10px_28px_rgba(217,119,6,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
