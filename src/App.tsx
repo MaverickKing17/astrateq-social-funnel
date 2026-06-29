@@ -15,7 +15,8 @@ import {
   MegaphoneOff,
   Beaker,
   Map,
-  Info
+  Info,
+  ArrowRight
 } from 'lucide-react';
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 
@@ -139,10 +140,10 @@ export default function App() {
             href="https://score.astrateqgadgets.com"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2.5 w-full bg-accent-cyan hover:bg-[#1a7dc4] active:scale-[0.985] text-white rounded-[14px] py-4.5 font-sans text-[15.5px] font-extrabold text-decoration-none shadow-[0_4px_14px_rgba(45,143,212,0.4)] transition-all duration-200 group-hover:shadow-[0_6px_20px_rgba(45,143,212,0.5)] cursor-pointer"
+            className="flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-cyan via-[#2195e3] to-[#0078d4] hover:from-[#1b85ce] hover:to-[#005a9e] active:scale-[0.985] text-white rounded-[16px] py-5.5 font-sans text-[16.5px] font-black text-decoration-none shadow-[0_0_24px_rgba(45,143,212,0.45)] hover:shadow-[0_0_36px_rgba(45,143,212,0.7)] hover:scale-[1.025] transition-all duration-300 cursor-pointer group/btn"
           >
             <span>Start Awareness Simulation</span>
-            <span className="text-[18px] group-hover:translate-x-1.5 transition-transform duration-250">→</span>
+            <ArrowRight className="w-5.5 h-5.5 text-white transition-transform duration-300 group-hover/btn:translate-x-1.5" strokeWidth={2.8} />
           </a>
 
           {/* Microcopy row */}
@@ -221,27 +222,6 @@ export default function App() {
               </h3>
               <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
                 See how Astrateq avoids vehicle tracking, insurance sharing, and hardware dependency.
-              </p>
-            </div>
-            <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
-          </a>
-
-          {/* Row 4 — Join Research Updates */}
-          <a 
-            href="https://score.astrateqgadgets.com?intent=updates"
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
-          >
-            <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-              <Bell className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
-                Join Research Updates
-              </h3>
-              <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
-                Follow the validation study and future Driver Awareness Intelligence concept development.
               </p>
             </div>
             <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
@@ -458,10 +438,32 @@ export default function App() {
           </div>
         </div>
 
+        {/* SECTION 7.5 — SECONDARY RESEARCH CARD — Positioned lower to optimize top funnel conversions */}
+        <a 
+          href="https://score.astrateqgadgets.com?intent=updates"
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4]/20 hover:border-[#0078d4]/60 hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.1)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)] animate-fade-in-up"
+          style={{ animationDelay: '0.24s' }}
+        >
+          <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+            <Bell className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
+              Join Research Updates
+            </h3>
+            <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
+              Follow the validation study and future Driver Awareness Intelligence concept development.
+            </p>
+          </div>
+          <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
+        </a>
+
         {/* SECTION 8 — PRE-LAUNCH TRANSPARENCY CARD — Amber-tinted disclosure */}
         <div 
           className="bg-gradient-to-br from-[#fffbeb] to-[#fffaf0] border-2 border-[#d97706] rounded-[24px] p-6.5 shadow-[0_12px_32px_rgba(217,119,6,0.1)] hover:shadow-[0_16px_40px_rgba(217,119,6,0.15)] transition-all duration-300 animate-fade-in-up hover:scale-[1.01]"
-          style={{ animationDelay: '0.25s' }}
+          style={{ animationDelay: '0.28s' }}
         >
           <div className="flex items-center gap-4 mb-5">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#d97706] to-[#b45309] text-white flex items-center justify-center flex-shrink-0 shadow-[0_4px_12px_rgba(217,119,6,0.25)] ring-4 ring-[#fef3c7]">
@@ -472,7 +474,7 @@ export default function App() {
                 Pre-launch transparency
               </h4>
               <p className="font-sans text-[16px] font-black text-[#78350f] tracking-tight leading-none">
-                Official Validation Study Notice
+                Pre-launch Validation Notice
               </p>
             </div>
           </div>
