@@ -307,19 +307,21 @@ export default function App() {
 
         {/* SECTION 7 — PRIVACY TRUST CARD */}
         <div 
-          className="bg-white rounded-[28px] border-2 border-[#2d8fd4]/25 p-6 shadow-[0_12px_36px_rgba(14,31,61,0.05)] animate-fade-in-up"
+          className="bg-white rounded-[28px] border-2 border-[#2d8fd4]/35 p-6 shadow-[0_16px_40px_rgba(14,31,61,0.06)] animate-fade-in-up"
           style={{ animationDelay: '0.2s' }}
         >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#0e2c54] to-[#1a5a9e] flex items-center justify-center shadow-md">
-              <Shield className="w-6 h-6 text-white" />
+          {/* Header area with subtle mesh background */}
+          <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[#0e1f3d]/5">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0e2c54] to-[#1a5a9e] flex items-center justify-center shadow-lg relative overflow-hidden">
+              <Shield className="w-6.5 h-6.5 text-white relative z-10" />
+              <div className="absolute inset-0 bg-white/10 blur-xs"></div>
             </div>
             <div>
-              <h3 className="font-sans text-[16px] font-extrabold text-navy tracking-tight leading-none mb-1.5">
-                Privacy-first by design
+              <h3 className="font-sans text-[17px] font-black text-navy tracking-tight leading-none mb-1.5">
+                Privacy-First by Design
               </h3>
-              <span className="font-sans text-[9px] font-extrabold text-[#0078d4] tracking-widest uppercase bg-[#0078d4]/10 px-3 py-1 rounded-full inline-block">
-                ASTRATEQ DATA PRINCIPLES
+              <span className="font-sans text-[9px] font-black text-[#0078d4] tracking-widest uppercase bg-[#0078d4]/12 px-3 py-1 rounded-full inline-block">
+                Astrateq Data Principles
               </span>
             </div>
           </div>
@@ -328,90 +330,126 @@ export default function App() {
           <div className="flex flex-col gap-4">
             
             {/* Principle 1 — No vehicle tracking */}
-            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+              {/* Corner Verified Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              </div>
+
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
                 <EyeOff className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div className="flex-1">
-                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+              <div className="flex-1 pr-12">
+                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   No vehicle tracking
                 </h4>
-                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
                   The simulation does not connect to your vehicle or collect live driving data.
                 </p>
               </div>
             </div>
 
             {/* Principle 2 — No insurance sharing */}
-            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+              {/* Corner Verified Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              </div>
+
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
                 <Ban className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div className="flex-1">
-                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+              <div className="flex-1 pr-12">
+                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   No insurance sharing
                 </h4>
-                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
                   Your responses are not used for insurance scoring, underwriting, or pricing.
                 </p>
               </div>
             </div>
 
             {/* Principle 3 — No hardware required */}
-            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+              {/* Corner Verified Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              </div>
+
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
                 <Cpu className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div className="flex-1">
-                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+              <div className="flex-1 pr-12">
+                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   No hardware required
                 </h4>
-                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
                   The experience does not require a dashcam, scanner, device, or installation.
                 </p>
               </div>
             </div>
 
             {/* Principle 4 — No advertising resale model */}
-            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+              {/* Corner Verified Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              </div>
+
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
                 <MegaphoneOff className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div className="flex-1">
-                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+              <div className="flex-1 pr-12">
+                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   No advertising resale model
                 </h4>
-                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
                   The concept is not being designed around selling driver data to advertisers.
                 </p>
               </div>
             </div>
 
             {/* Principle 5 — Simulation-only research */}
-            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+              {/* Corner Verified Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              </div>
+
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
                 <Beaker className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div className="flex-1">
-                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+              <div className="flex-1 pr-12">
+                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   Simulation-only research
                 </h4>
-                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
                   Your inputs help validate interest in a future software concept.
                 </p>
               </div>
             </div>
 
             {/* Principle 6 — Canadian driver focus */}
-            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+              {/* Corner Verified Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              </div>
+
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
                 <Map className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div className="flex-1">
-                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+              <div className="flex-1 pr-12">
+                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   Canadian driver focus
                 </h4>
-                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
                   Designed around Canadian driving realities, privacy expectations, and road conditions.
                 </p>
               </div>
