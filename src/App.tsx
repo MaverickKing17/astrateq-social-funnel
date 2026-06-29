@@ -8,7 +8,14 @@ import {
   Lock, 
   Bell, 
   ChevronRight, 
-  Check 
+  Check,
+  EyeOff,
+  Ban,
+  Cpu,
+  MegaphoneOff,
+  Beaker,
+  Map,
+  Info
 } from 'lucide-react';
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 
@@ -129,7 +136,7 @@ export default function App() {
           </p>
 
           <a 
-            href="https://summer.astrateqgadgets.com"
+            href="https://score.astrateqgadgets.com"
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2.5 w-full bg-accent-cyan hover:bg-[#1a7dc4] active:scale-[0.985] text-white rounded-[14px] py-4.5 font-sans text-[15.5px] font-extrabold text-decoration-none shadow-[0_4px_14px_rgba(45,143,212,0.4)] transition-all duration-200 group-hover:shadow-[0_6px_20px_rgba(45,143,212,0.5)] cursor-pointer"
@@ -158,7 +165,7 @@ export default function App() {
         >
           {/* Row 1 — Check Your Driving Context */}
           <a 
-            href="https://summer.astrateqgadgets.com?intent=context"
+            href="https://score.astrateqgadgets.com?intent=context"
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
@@ -179,7 +186,7 @@ export default function App() {
 
           {/* Row 2 — How the Simulation Works */}
           <a 
-            href="https://summer.astrateqgadgets.com?intent=howitworks"
+            href="https://score.astrateqgadgets.com?intent=howitworks"
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
@@ -200,7 +207,7 @@ export default function App() {
 
           {/* Row 3 — Privacy & Trust */}
           <a 
-            href="https://summer.astrateqgadgets.com?intent=privacy"
+            href="https://score.astrateqgadgets.com?intent=privacy"
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
@@ -221,7 +228,7 @@ export default function App() {
 
           {/* Row 4 — Join Research Updates */}
           <a 
-            href="https://summer.astrateqgadgets.com?intent=updates"
+            href="https://score.astrateqgadgets.com?intent=updates"
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
@@ -300,111 +307,111 @@ export default function App() {
 
         {/* SECTION 7 — PRIVACY TRUST CARD */}
         <div 
-          className="bg-white rounded-[24px] border-2 border-[#2d8fd4]/25 p-6 animate-fade-in-up hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(14,31,61,0.1)] hover:border-[#2d8fd4]/60 transition-all duration-200"
+          className="bg-white rounded-[28px] border-2 border-[#2d8fd4]/25 p-6 shadow-[0_12px_36px_rgba(14,31,61,0.05)] animate-fade-in-up"
           style={{ animationDelay: '0.2s' }}
         >
-          <div className="flex items-center gap-3.5 mb-5">
-            <div className="w-9 h-9 rounded-[10px] bg-navy/5 flex items-center justify-center">
-              <Shield className="w-5 h-5 text-navy" />
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#0e2c54] to-[#1a5a9e] flex items-center justify-center shadow-md">
+              <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 className="font-sans text-[14px] font-bold text-navy mb-0.5">
+              <h3 className="font-sans text-[16px] font-extrabold text-navy tracking-tight leading-none mb-1.5">
                 Privacy-first by design
               </h3>
-              <p className="font-sans text-[11px] font-bold text-accent-cyan uppercase tracking-wider text-xs">
+              <span className="font-sans text-[9px] font-extrabold text-[#0078d4] tracking-widest uppercase bg-[#0078d4]/10 px-3 py-1 rounded-full inline-block">
                 ASTRATEQ DATA PRINCIPLES
-              </p>
+              </span>
             </div>
           </div>
 
-          {/* Trust Rows */}
-          <div className="flex flex-col gap-1">
+          {/* Trust Cards Grid / List */}
+          <div className="flex flex-col gap-4">
             
-            {/* Row 1 */}
-            <div className="flex items-start gap-3 py-3 border-t border-[#0e1f3d]/5 hover:bg-frost/40 px-1 rounded-md transition-colors duration-150 group">
-              <div className="w-[18px] h-[18px] bg-[#e8f4ed] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs group-hover:scale-105 transition-transform">
-                <Check className="w-2.5 h-2.5 text-[#2e7d52]" strokeWidth={4} />
+            {/* Principle 1 — No vehicle tracking */}
+            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <EyeOff className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div>
-                <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
+              <div className="flex-1">
+                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   No vehicle tracking
                 </h4>
-                <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
+                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
                   The simulation does not connect to your vehicle or collect live driving data.
                 </p>
               </div>
             </div>
 
-            {/* Row 2 */}
-            <div className="flex items-start gap-3 py-3 border-t border-[#0e1f3d]/5 hover:bg-frost/40 px-1 rounded-md transition-colors duration-150 group">
-              <div className="w-[18px] h-[18px] bg-[#e8f4ed] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs group-hover:scale-105 transition-transform">
-                <Check className="w-2.5 h-2.5 text-[#2e7d52]" strokeWidth={4} />
+            {/* Principle 2 — No insurance sharing */}
+            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <Ban className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div>
-                <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
+              <div className="flex-1">
+                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   No insurance sharing
                 </h4>
-                <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
+                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
                   Your responses are not used for insurance scoring, underwriting, or pricing.
                 </p>
               </div>
             </div>
 
-            {/* Row 3 */}
-            <div className="flex items-start gap-3 py-3 border-t border-[#0e1f3d]/5 hover:bg-frost/40 px-1 rounded-md transition-colors duration-150 group">
-              <div className="w-[18px] h-[18px] bg-[#e8f4ed] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs group-hover:scale-105 transition-transform">
-                <Check className="w-2.5 h-2.5 text-[#2e7d52]" strokeWidth={4} />
+            {/* Principle 3 — No hardware required */}
+            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <Cpu className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div>
-                <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
+              <div className="flex-1">
+                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   No hardware required
                 </h4>
-                <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
+                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
                   The experience does not require a dashcam, scanner, device, or installation.
                 </p>
               </div>
             </div>
 
-            {/* Row 4 */}
-            <div className="flex items-start gap-3 py-3 border-t border-[#0e1f3d]/5 hover:bg-frost/40 px-1 rounded-md transition-colors duration-150 group">
-              <div className="w-[18px] h-[18px] bg-[#e8f4ed] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs group-hover:scale-105 transition-transform">
-                <Check className="w-2.5 h-2.5 text-[#2e7d52]" strokeWidth={4} />
+            {/* Principle 4 — No advertising resale model */}
+            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <MegaphoneOff className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div>
-                <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
+              <div className="flex-1">
+                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   No advertising resale model
                 </h4>
-                <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
+                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
                   The concept is not being designed around selling driver data to advertisers.
                 </p>
               </div>
             </div>
 
-            {/* Row 5 */}
-            <div className="flex items-start gap-3 py-3 border-t border-[#0e1f3d]/5 hover:bg-frost/40 px-1 rounded-md transition-colors duration-150 group">
-              <div className="w-[18px] h-[18px] bg-[#e8f4ed] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs group-hover:scale-105 transition-transform">
-                <Check className="w-2.5 h-2.5 text-[#2e7d52]" strokeWidth={4} />
+            {/* Principle 5 — Simulation-only research */}
+            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <Beaker className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div>
-                <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
+              <div className="flex-1">
+                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   Simulation-only research
                 </h4>
-                <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
+                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
                   Your inputs help validate interest in a future software concept.
                 </p>
               </div>
             </div>
 
-            {/* Row 6 */}
-            <div className="flex items-start gap-3 py-3 border-t border-[#0e1f3d]/5 hover:bg-frost/40 px-1 rounded-md transition-colors duration-150 group">
-              <div className="w-[18px] h-[18px] bg-[#e8f4ed] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs group-hover:scale-105 transition-transform">
-                <Check className="w-2.5 h-2.5 text-[#2e7d52]" strokeWidth={4} />
+            {/* Principle 6 — Canadian driver focus */}
+            <div className="group flex items-start gap-4 p-5 bg-[#f4f8fd] rounded-2xl border-2 border-[#2d8fd4]/40 hover:border-[#0078d4] hover:bg-[#ebf4fc] hover:shadow-[0_8px_24px_rgba(45,143,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(45,143,212,0.04)]">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <Map className="w-5.5 h-5.5" strokeWidth={2.2} />
               </div>
-              <div>
-                <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
+              <div className="flex-1">
+                <h4 className="font-sans text-[14px] font-extrabold text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
                   Canadian driver focus
                 </h4>
-                <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
+                <p className="font-sans text-[12px] font-bold text-[#1a3a62]/90 leading-[1.5]">
                   Designed around Canadian driving realities, privacy expectations, and road conditions.
                 </p>
               </div>
@@ -415,21 +422,31 @@ export default function App() {
 
         {/* SECTION 8 — PRE-LAUNCH TRANSPARENCY CARD — Amber-tinted disclosure */}
         <div 
-          className="bg-gradient-to-br from-[#fffdf6] to-[#fffbf0] border-2 border-[#d97706]/40 rounded-[20px] p-5.5 shadow-[0_4px_16px_rgba(217,119,6,0.05)] animate-fade-in-up"
+          className="bg-gradient-to-br from-[#fffbeb] to-[#fffaf0] border-2 border-[#d97706] rounded-[24px] p-6.5 shadow-[0_12px_32px_rgba(217,119,6,0.1)] hover:shadow-[0_16px_40px_rgba(217,119,6,0.15)] transition-all duration-300 animate-fade-in-up hover:scale-[1.01]"
           style={{ animationDelay: '0.25s' }}
         >
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-1.5 h-3.5 bg-[#d97706] rounded-full"></span>
-            <h4 className="font-sans text-[11px] font-extrabold tracking-[0.14em] uppercase text-[#854d0e]">
-              Pre-launch transparency
-            </h4>
+          <div className="flex items-center gap-4 mb-5">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#d97706] to-[#b45309] text-white flex items-center justify-center flex-shrink-0 shadow-[0_4px_12px_rgba(217,119,6,0.25)] ring-4 ring-[#fef3c7]">
+              <Info className="w-5.5 h-5.5" strokeWidth={2.5} />
+            </div>
+            <div>
+              <h4 className="font-sans text-[10px] font-black tracking-[0.18em] uppercase text-[#b45309] leading-none mb-1.5">
+                Pre-launch transparency
+              </h4>
+              <p className="font-sans text-[16px] font-black text-[#78350f] tracking-tight leading-none">
+                Official Validation Study Notice
+              </p>
+            </div>
           </div>
-          <p className="font-sans text-[12.5px] font-bold text-[#451a03]/95 leading-relaxed mb-2.5">
-            Astrateq Gadgets is currently validating interest in a software-based Driver Awareness Intelligence concept. This experience is simulated and does not connect to your vehicle, insurer, or hardware.
-          </p>
-          <p className="font-sans text-[12.5px] font-bold text-[#451a03]/95 leading-relaxed">
-            Your participation helps determine whether this concept should move toward prototype development.
-          </p>
+          
+          <div className="space-y-4 text-[#451a03] font-sans text-[13.5px] font-extrabold leading-relaxed">
+            <p className="border-l-4 border-[#d97706] pl-3.5">
+              Astrateq Gadgets is currently validating interest in a software-based Driver Awareness Intelligence concept. This experience is simulated and does not connect to your vehicle, insurer, or hardware.
+            </p>
+            <p className="border-l-4 border-[#d97706] pl-3.5">
+              Your participation helps determine whether this concept should move toward prototype development.
+            </p>
+          </div>
         </div>
 
         {/* SECTION 9 — SOCIAL FOOTER WITH PREMIUM ENHANCEMENTS */}
