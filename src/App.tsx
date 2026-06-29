@@ -60,7 +60,7 @@ export default function App() {
 
         {/* SECTION 3 — HERO CARD */}
         <div 
-          className="bg-white rounded-[24px] border-2 border-[#2d8fd4]/25 shadow-[0_4px_20px_rgba(14,31,61,0.04)] overflow-hidden animate-fade-in-up hover:scale-[1.01] hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(14,31,61,0.08)] hover:border-[#2d8fd4]/60 transition-all duration-300 group"
+          className="bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[24px] border-2 border-[#2d8fd4]/35 shadow-[0_4px_20px_rgba(14,31,61,0.06)] overflow-hidden animate-fade-in-up hover:scale-[1.01] hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(14,31,61,0.18)] hover:border-[#2d8fd4]/60 transition-all duration-300 group"
           style={{ animationDelay: '0s' }}
         >
           {/* Top — image area */}
@@ -83,28 +83,28 @@ export default function App() {
 
           {/* Bottom — text body */}
           <div className="p-6">
-            <h2 className="font-serif text-[21px] font-bold text-navy leading-[1.3] mb-3 group-hover:text-accent-cyan transition-colors duration-200">
+            <h2 className="font-serif text-[21px] font-bold text-white leading-[1.3] mb-3 group-hover:text-accent-cyan transition-colors duration-200">
               Privacy-first Driver Awareness Intelligence for Canadian roads.
             </h2>
-            <p className="font-sans text-[13.5px] font-semibold text-navy/85 leading-[1.6] mb-5">
+            <p className="font-sans text-[13.5px] font-bold text-[#badef3] leading-[1.6] mb-5">
               Complete a 60-second simulation to explore your fatigue exposure, attention patterns, and driving awareness profile — without vehicle tracking, insurance scoring, or hardware.
             </p>
             
             {/* Trust badge row with subtle pill styles */}
             <div className="flex gap-2 flex-wrap">
-              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
+              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#badef3] font-sans bg-[#2d8fd4]/15 border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
                 <Shield className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" strokeWidth={2.5} />
                 <span>Privacy by design</span>
               </div>
-              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
+              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#badef3] font-sans bg-[#2d8fd4]/15 border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
                 <Lock className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" strokeWidth={2.5} />
                 <span>No tracking</span>
               </div>
-              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
+              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#badef3] font-sans bg-[#2d8fd4]/15 border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
                 <PlusCircle className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" strokeWidth={2.5} />
                 <span>No hardware required</span>
               </div>
-              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
+              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#badef3] font-sans bg-[#2d8fd4]/15 border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
                 <TrendingUp className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" strokeWidth={2.5} />
                 <span>Pre-launch validation</span>
               </div>
@@ -169,20 +169,20 @@ export default function App() {
             href="https://score.astrateqgadgets.com?intent=context"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/35 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)]"
           >
-            <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-              <Car className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
+            <div className="w-12 h-12 rounded-[14px] bg-[#2d8fd4]/15 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+              <Car className="w-6 h-6 text-accent-cyan-2" strokeWidth={2.5} />
             </div>
             <div className="flex-1">
-              <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
+              <h3 className="font-ms text-[16px] font-black tracking-normal text-white group-hover:text-accent-cyan-2 transition-colors duration-150">
                 Check Your Driving Context
               </h3>
-              <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
+              <p className="font-ms text-[12.5px] font-bold text-[#badef3]/95 leading-relaxed mt-1">
                 See how commute type, driving frequency, and road conditions shape your awareness profile.
               </p>
             </div>
-            <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
+            <ChevronRight className="w-5.5 h-5.5 text-accent-cyan-2 flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
           </a>
 
           {/* Row 2 — How the Simulation Works */}
@@ -190,20 +190,20 @@ export default function App() {
             href="https://score.astrateqgadgets.com?intent=howitworks"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/35 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)]"
           >
-            <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-              <Activity className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
+            <div className="w-12 h-12 rounded-[14px] bg-[#2d8fd4]/15 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+              <Activity className="w-6 h-6 text-accent-cyan-2" strokeWidth={2.5} />
             </div>
             <div className="flex-1">
-              <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
+              <h3 className="font-ms text-[16px] font-black tracking-normal text-white group-hover:text-accent-cyan-2 transition-colors duration-150">
                 How the Simulation Works
               </h3>
-              <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
+              <p className="font-ms text-[12.5px] font-bold text-[#badef3]/95 leading-relaxed mt-1">
                 Learn how behavioral inputs generate a simulated awareness profile for concept validation.
               </p>
             </div>
-            <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
+            <ChevronRight className="w-5.5 h-5.5 text-accent-cyan-2 flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
           </a>
 
           {/* Row 3 — Privacy & Trust */}
@@ -211,74 +211,74 @@ export default function App() {
             href="https://score.astrateqgadgets.com?intent=privacy"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/35 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)]"
           >
-            <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-              <Lock className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
+            <div className="w-12 h-12 rounded-[14px] bg-[#2d8fd4]/15 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+              <Lock className="w-6 h-6 text-accent-cyan-2" strokeWidth={2.5} />
             </div>
             <div className="flex-1">
-              <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
+              <h3 className="font-ms text-[16px] font-black tracking-normal text-white group-hover:text-accent-cyan-2 transition-colors duration-150">
                 Privacy & Trust
               </h3>
-              <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
+              <p className="font-ms text-[12.5px] font-bold text-[#badef3]/95 leading-relaxed mt-1">
                 See how Astrateq avoids vehicle tracking, insurance sharing, and hardware dependency.
               </p>
             </div>
-            <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
+            <ChevronRight className="w-5.5 h-5.5 text-accent-cyan-2 flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
           </a>
         </div>
 
         {/* SECTION 6 — HOW IT WORKS */}
         <div 
-          className="bg-white rounded-[24px] border-2 border-[#2d8fd4]/25 p-6 animate-fade-in-up hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(14,31,61,0.1)] hover:border-[#2d8fd4]/60 transition-all duration-200"
+          className="bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[24px] border-2 border-[#2d8fd4]/35 p-6 animate-fade-in-up hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(14,31,61,0.18)] hover:border-[#2d8fd4]/60 transition-all duration-300"
           style={{ animationDelay: '0.15s' }}
         >
           {/* Centered decorative accent bar */}
           <div className="w-8 h-[3px] bg-accent-cyan rounded-full mx-auto mb-3.5"></div>
           
-          <h2 className="font-serif text-[18px] text-navy text-center mb-6 font-bold">
+          <h2 className="font-serif text-[18px] text-white text-center mb-6 font-bold">
             How the validation flow works
           </h2>
 
           <div className="flex gap-2.5 items-start relative">
             {/* Connected beautiful dotted line across steps */}
-            <div className="absolute top-3.5 left-8 right-8 h-[1px] border-t border-dashed border-[#0e1f3d]/15 z-0 pointer-events-none"></div>
+            <div className="absolute top-3.5 left-8 right-8 h-[1px] border-t border-dashed border-white/15 z-0 pointer-events-none"></div>
 
             {/* Step 1 */}
             <div className="flex-1 text-center relative z-10 group/step">
-              <div className="w-7 h-7 rounded-full bg-navy text-[#c8dff6] text-xs font-bold flex items-center justify-center mx-auto mb-2.5 select-none transition-transform duration-300 group-hover/step:scale-110 shadow-xs border border-white/20">
+              <div className="w-7 h-7 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center mx-auto mb-2.5 select-none transition-transform duration-300 group-hover/step:scale-110 shadow-xs border border-white/20">
                 1
               </div>
-              <h4 className="font-sans text-[12px] font-extrabold text-navy mb-1 leading-tight group-hover/step:text-accent-cyan transition-colors duration-150">
+              <h4 className="font-sans text-[12px] font-extrabold text-white mb-1 leading-tight group-hover/step:text-accent-cyan transition-colors duration-150">
                 Start simulation
               </h4>
-              <p className="font-sans text-[10px] font-bold text-[#1a3a62] leading-[1.45]">
+              <p className="font-sans text-[10px] font-bold text-[#badef3]/85 leading-[1.45]">
                 Answer quick awareness questions.
               </p>
             </div>
 
             {/* Step 2 */}
             <div className="flex-1 text-center relative z-10 group/step">
-              <div className="w-7 h-7 rounded-full bg-navy text-[#c8dff6] text-xs font-bold flex items-center justify-center mx-auto mb-2.5 select-none transition-transform duration-300 group-hover/step:scale-110 shadow-xs border border-white/20">
+              <div className="w-7 h-7 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center mx-auto mb-2.5 select-none transition-transform duration-300 group-hover/step:scale-110 shadow-xs border border-white/20">
                 2
               </div>
-              <h4 className="font-sans text-[12px] font-extrabold text-navy mb-1 leading-tight group-hover/step:text-accent-cyan transition-colors duration-150">
+              <h4 className="font-sans text-[12px] font-extrabold text-white mb-1 leading-tight group-hover/step:text-accent-cyan transition-colors duration-150">
                 View your profile
               </h4>
-              <p className="font-sans text-[10px] font-bold text-[#1a3a62] leading-[1.45]">
+              <p className="font-sans text-[10px] font-bold text-[#badef3]/85 leading-[1.45]">
                 Receive your simulated awareness score and fatigue profile.
               </p>
             </div>
 
             {/* Step 3 */}
             <div className="flex-1 text-center relative z-10 group/step">
-              <div className="w-7 h-7 rounded-full bg-navy text-[#c8dff6] text-xs font-bold flex items-center justify-center mx-auto mb-2.5 select-none transition-transform duration-300 group-hover/step:scale-110 shadow-xs border border-white/20">
+              <div className="w-7 h-7 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center mx-auto mb-2.5 select-none transition-transform duration-300 group-hover/step:scale-110 shadow-xs border border-white/20">
                 3
               </div>
-              <h4 className="font-sans text-[12px] font-extrabold text-navy mb-1 leading-tight group-hover/step:text-accent-cyan transition-colors duration-150">
+              <h4 className="font-sans text-[12px] font-extrabold text-white mb-1 leading-tight group-hover/step:text-accent-cyan transition-colors duration-150">
                 Join research cohort
               </h4>
-              <p className="font-sans text-[10px] font-bold text-[#1a3a62] leading-[1.45]">
+              <p className="font-sans text-[10px] font-bold text-[#badef3]/85 leading-[1.45]">
                 Choose whether to participate in the validation study.
               </p>
             </div>
@@ -287,20 +287,20 @@ export default function App() {
 
         {/* SECTION 7 — PRIVACY TRUST CARD */}
         <div 
-          className="bg-white rounded-[28px] border-2 border-[#2d8fd4]/35 p-6 shadow-[0_16px_40px_rgba(14,31,61,0.06)] animate-fade-in-up"
+          className="bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[28px] border-2 border-[#2d8fd4]/35 p-6 shadow-[0_16px_40px_rgba(14,31,61,0.18)] animate-fade-in-up"
           style={{ animationDelay: '0.2s' }}
         >
           {/* Header area with subtle mesh background */}
-          <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[#0e1f3d]/5">
+          <div className="flex items-center gap-4 mb-6 pb-4 border-b border-white/10">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0e2c54] to-[#1a5a9e] flex items-center justify-center shadow-lg relative overflow-hidden">
               <Shield className="w-6.5 h-6.5 text-white relative z-10" />
               <div className="absolute inset-0 bg-white/10 blur-xs"></div>
             </div>
             <div>
-              <h3 className="font-sans text-[17px] font-black text-navy tracking-tight leading-none mb-1.5">
+              <h3 className="font-sans text-[17px] font-black text-white tracking-tight leading-none mb-1.5">
                 Privacy-First by Design
               </h3>
-              <span className="font-sans text-[9px] font-black text-[#0078d4] tracking-widest uppercase bg-[#0078d4]/12 px-3 py-1 rounded-full inline-block">
+              <span className="font-sans text-[9px] font-black text-accent-cyan-2 tracking-widest uppercase bg-[#2d8fd4]/15 px-3 py-1 rounded-full inline-block">
                 Astrateq Data Principles
               </span>
             </div>
@@ -310,126 +310,126 @@ export default function App() {
           <div className="flex flex-col gap-4">
             
             {/* Principle 1 — No vehicle tracking */}
-            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
               {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
-                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
               </div>
 
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
-                <EyeOff className="w-5.5 h-5.5" strokeWidth={2.2} />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <EyeOff className="w-5.5 h-5.5 text-white" strokeWidth={2.2} />
               </div>
               <div className="flex-1 pr-12">
-                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+                <h4 className="font-sans text-[14px] font-black text-white mb-1 leading-tight group-hover:text-accent-cyan-2 transition-colors duration-150">
                   No vehicle tracking
                 </h4>
-                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#badef3]/90 leading-[1.5]">
                   The simulation does not connect to your vehicle or collect live driving data.
                 </p>
               </div>
             </div>
 
             {/* Principle 2 — No insurance sharing */}
-            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
               {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
-                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
               </div>
 
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
-                <Ban className="w-5.5 h-5.5" strokeWidth={2.2} />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <Ban className="w-5.5 h-5.5 text-white" strokeWidth={2.2} />
               </div>
               <div className="flex-1 pr-12">
-                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+                <h4 className="font-sans text-[14px] font-black text-white mb-1 leading-tight group-hover:text-accent-cyan-2 transition-colors duration-150">
                   No insurance sharing
                 </h4>
-                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#badef3]/90 leading-[1.5]">
                   Your responses are not used for insurance scoring, underwriting, or pricing.
                 </p>
               </div>
             </div>
 
             {/* Principle 3 — No hardware required */}
-            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
               {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
-                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
               </div>
 
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
-                <Cpu className="w-5.5 h-5.5" strokeWidth={2.2} />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <Cpu className="w-5.5 h-5.5 text-white" strokeWidth={2.2} />
               </div>
               <div className="flex-1 pr-12">
-                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+                <h4 className="font-sans text-[14px] font-black text-white mb-1 leading-tight group-hover:text-accent-cyan-2 transition-colors duration-150">
                   No hardware required
                 </h4>
-                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#badef3]/90 leading-[1.5]">
                   The experience does not require a dashcam, scanner, device, or installation.
                 </p>
               </div>
             </div>
 
             {/* Principle 4 — No advertising resale model */}
-            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
               {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
-                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
               </div>
 
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
-                <MegaphoneOff className="w-5.5 h-5.5" strokeWidth={2.2} />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <MegaphoneOff className="w-5.5 h-5.5 text-white" strokeWidth={2.2} />
               </div>
               <div className="flex-1 pr-12">
-                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+                <h4 className="font-sans text-[14px] font-black text-white mb-1 leading-tight group-hover:text-accent-cyan-2 transition-colors duration-150">
                   No advertising resale model
                 </h4>
-                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#badef3]/90 leading-[1.5]">
                   The concept is not being designed around selling driver data to advertisers.
                 </p>
               </div>
             </div>
 
             {/* Principle 5 — Simulation-only research */}
-            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
               {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
-                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
               </div>
 
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
-                <Beaker className="w-5.5 h-5.5" strokeWidth={2.2} />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <Beaker className="w-5.5 h-5.5 text-white" strokeWidth={2.2} />
               </div>
               <div className="flex-1 pr-12">
-                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+                <h4 className="font-sans text-[14px] font-black text-white mb-1 leading-tight group-hover:text-accent-cyan-2 transition-colors duration-150">
                   Simulation-only research
                 </h4>
-                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#badef3]/90 leading-[1.5]">
                   Your inputs help validate interest in a future software concept.
                 </p>
               </div>
             </div>
 
             {/* Principle 6 — Canadian driver focus */}
-            <div className="group flex items-start gap-4 p-5 bg-gradient-to-r from-[#f3f8fe] via-[#f7faff] to-white rounded-2xl border-2 border-[#2d8fd4]/35 border-l-4 border-l-[#0078d4] hover:border-[#0078d4] hover:border-l-[#0078d4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
               {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#1a5a9e]/10 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-[#0078d4]" strokeWidth={3} />
-                <span className="font-sans text-[8px] font-black tracking-wider text-[#0078d4] uppercase">VERIFIED</span>
+              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
+                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
+                <span className="font-sans text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
               </div>
 
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0078d4] to-[#1a5a9e] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
-                <Map className="w-5.5 h-5.5" strokeWidth={2.2} />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
+                <Map className="w-5.5 h-5.5 text-white" strokeWidth={2.2} />
               </div>
               <div className="flex-1 pr-12">
-                <h4 className="font-sans text-[14px] font-black text-[#081326] mb-1 leading-tight group-hover:text-[#0078d4] transition-colors duration-150">
+                <h4 className="font-sans text-[14px] font-black text-white mb-1 leading-tight group-hover:text-accent-cyan-2 transition-colors duration-150">
                   Canadian driver focus
                 </h4>
-                <p className="font-sans text-[12px] font-extrabold text-[#1a3a62]/95 leading-[1.5]">
+                <p className="font-sans text-[12px] font-extrabold text-[#badef3]/90 leading-[1.5]">
                   Designed around Canadian driving realities, privacy expectations, and road conditions.
                 </p>
               </div>
@@ -443,47 +443,47 @@ export default function App() {
           href="https://score.astrateqgadgets.com?intent=updates"
           target="_blank" 
           rel="noopener noreferrer"
-          className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#2d8fd4]/20 hover:border-[#0078d4]/60 hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.1)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.03)] animate-fade-in-up"
+          className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/35 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)] animate-fade-in-up"
           style={{ animationDelay: '0.24s' }}
         >
-          <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-            <Bell className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
+          <div className="w-12 h-12 rounded-[14px] bg-[#2d8fd4]/15 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
+            <Bell className="w-6 h-6 text-accent-cyan-2" strokeWidth={2.5} />
           </div>
           <div className="flex-1">
-            <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
+            <h3 className="font-ms text-[16px] font-black tracking-normal text-white group-hover:text-accent-cyan-2 transition-colors duration-150">
               Join Research Updates
             </h3>
-            <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
+            <p className="font-ms text-[12.5px] font-bold text-[#badef3]/95 leading-relaxed mt-1">
               Follow the validation study and future Driver Awareness Intelligence concept development.
             </p>
           </div>
-          <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
+          <ChevronRight className="w-5.5 h-5.5 text-accent-cyan-2 flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
         </a>
 
-        {/* SECTION 8 — PRE-LAUNCH TRANSPARENCY CARD — Amber-tinted disclosure */}
+        {/* SECTION 8 — PRE-LAUNCH TRANSPARENCY CARD — Styled identically to the other boxes to reduce eye strain */}
         <div 
-          className="bg-gradient-to-br from-[#fffbeb] to-[#fffaf0] border-2 border-[#d97706] rounded-[24px] p-6.5 shadow-[0_12px_32px_rgba(217,119,6,0.1)] hover:shadow-[0_16px_40px_rgba(217,119,6,0.15)] transition-all duration-300 animate-fade-in-up hover:scale-[1.01]"
+          className="bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] border-2 border-[#2d8fd4]/35 rounded-[24px] p-6.5 shadow-[0_4px_16px_rgba(14,31,61,0.06)] hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] transition-all duration-300 animate-fade-in-up hover:scale-[1.01]"
           style={{ animationDelay: '0.28s' }}
         >
           <div className="flex items-center gap-4 mb-5">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#d97706] to-[#b45309] text-white flex items-center justify-center flex-shrink-0 shadow-[0_4px_12px_rgba(217,119,6,0.25)] ring-4 ring-[#fef3c7]">
+            <div className="w-10 h-10 rounded-xl bg-[#2d8fd4]/15 text-accent-cyan-2 flex items-center justify-center flex-shrink-0 shadow-2xs ring-4 ring-[#2d8fd4]/5">
               <Info className="w-5.5 h-5.5" strokeWidth={2.5} />
             </div>
             <div>
-              <h4 className="font-sans text-[10px] font-black tracking-[0.18em] uppercase text-[#b45309] leading-none mb-1.5">
+              <h4 className="font-sans text-[10px] font-black tracking-[0.18em] uppercase text-accent-cyan-2 leading-none mb-1.5">
                 Pre-launch transparency
               </h4>
-              <p className="font-sans text-[16px] font-black text-[#78350f] tracking-tight leading-none">
+              <p className="font-sans text-[16px] font-black text-white tracking-tight leading-none">
                 Pre-launch Validation Notice
               </p>
             </div>
           </div>
           
-          <div className="space-y-4 text-[#451a03] font-sans text-[13.5px] font-extrabold leading-relaxed">
-            <p className="border-l-4 border-[#d97706] pl-3.5">
+          <div className="space-y-4 text-[#badef3] font-sans text-[13.5px] font-bold leading-relaxed">
+            <p className="border-l-4 border-[#2d8fd4]/45 pl-3.5">
               Astrateq Gadgets is currently validating interest in a software-based Driver Awareness Intelligence concept. This experience is simulated and does not connect to your vehicle, insurer, or hardware.
             </p>
-            <p className="border-l-4 border-[#d97706] pl-3.5">
+            <p className="border-l-4 border-[#2d8fd4]/45 pl-3.5">
               Your participation helps determine whether this concept should move toward prototype development.
             </p>
           </div>
