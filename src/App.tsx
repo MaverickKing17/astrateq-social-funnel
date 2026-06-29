@@ -27,8 +27,8 @@ export default function App() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2d8fd4] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2d8fd4] animate-pulse-dot"></span>
             </span>
-            <span className="font-sans text-[11px] font-semibold tracking-wider text-[#0e4b7a]">
-              🇨🇦 Validation active · Program open
+            <span className="font-sans text-[11.5px] font-semibold tracking-wider text-[#0e4b7a]">
+              Pre-launch validation active · Canada
             </span>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function App() {
           className="bg-white rounded-[24px] border-2 border-[#2d8fd4]/25 shadow-[0_4px_20px_rgba(14,31,61,0.04)] overflow-hidden animate-fade-in-up hover:scale-[1.01] hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(14,31,61,0.08)] hover:border-[#2d8fd4]/60 transition-all duration-300 group"
           style={{ animationDelay: '0s' }}
         >
-          {/* Top — image placeholder area */}
+          {/* Top — image area */}
           <div className="h-[210px] w-full relative overflow-hidden select-none">
             {/* Real luxury SUV city image */}
             <img 
@@ -76,25 +76,29 @@ export default function App() {
           {/* Bottom — text body */}
           <div className="p-6">
             <h2 className="font-serif text-[21px] font-bold text-navy leading-[1.3] mb-3 group-hover:text-accent-cyan transition-colors duration-200">
-              Privacy-first vehicle intelligence for smarter driving decisions.
+              Privacy-first Driver Awareness Intelligence for Canadian roads.
             </h2>
             <p className="font-sans text-[13.5px] font-semibold text-navy/85 leading-[1.6] mb-5">
-              Join the Canadian pre-launch validation program, check your vehicle fit, or complete the Summer Vehicle Readiness Check before the founding cohort window closes.
+              Complete a 60-second simulation to explore your fatigue exposure, attention patterns, and driving awareness profile — without vehicle tracking, insurance scoring, or hardware.
             </p>
             
             {/* Trust badge row with subtle pill styles */}
-            <div className="flex gap-3 flex-wrap">
-              <div className="inline-flex items-center gap-[6px] text-[11.5px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-3 rounded-full shadow-2xs">
+            <div className="flex gap-2 flex-wrap">
+              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
                 <Shield className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" strokeWidth={2.5} />
                 <span>Privacy by design</span>
               </div>
-              <div className="inline-flex items-center gap-[6px] text-[11.5px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-3 rounded-full shadow-2xs">
-                <PlusCircle className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" strokeWidth={2.5} />
-                <span>No charge today</span>
+              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
+                <Lock className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" strokeWidth={2.5} />
+                <span>No tracking</span>
               </div>
-              <div className="inline-flex items-center gap-[6px] text-[11.5px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-3 rounded-full shadow-2xs">
+              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
+                <PlusCircle className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" strokeWidth={2.5} />
+                <span>No hardware required</span>
+              </div>
+              <div className="inline-flex items-center gap-[6px] text-[11px] font-bold text-[#1a5a9e] font-sans bg-frost border border-[#2d8fd4]/25 py-1 px-2.5 rounded-full shadow-2xs">
                 <TrendingUp className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" strokeWidth={2.5} />
-                <span>Pre-launch pilot</span>
+                <span>Pre-launch validation</span>
               </div>
             </div>
           </div>
@@ -112,147 +116,128 @@ export default function App() {
           {/* Eyebrow with animated cyan bar */}
           <div className="flex items-center mb-3">
             <span className="w-5 h-[2.5px] bg-accent-cyan rounded-full inline-block mr-2 group-hover:w-8 transition-all duration-300"></span>
-            <span className="font-sans text-[10px] font-extrabold tracking-[0.16em] text-accent-cyan-2 uppercase select-none">
-              FOUNDING DRIVER COHORT
+            <span className="font-sans text-[10.5px] font-extrabold tracking-[0.16em] text-accent-cyan-2 uppercase select-none">
+              Driver Awareness Simulation
             </span>
           </div>
 
-          <h2 className="font-serif text-[27px] text-white leading-[1.20] mb-3">
-            Reserve Early Access Consideration
+          <h2 className="font-serif text-[26px] text-white leading-[1.20] mb-3">
+            Start the 60-second Driver Awareness Simulation
           </h2>
-          <p className="font-sans text-[14px] font-bold text-[#badef3] leading-[1.6] mb-5">
-            Submit your founding cohort interest and selected early-access tier. No payment is charged today during validation testing.
+          <p className="font-sans text-[14.5px] font-bold text-[#badef3] leading-[1.6] mb-5">
+            Receive a simulated Driver Awareness Score, Fatigue Risk Awareness Profile, and Research Cohort Classification.
           </p>
 
-          <a 
-            href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=cohort"
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2.5 w-full bg-accent-cyan hover:bg-[#1a7dc4] active:scale-[0.985] text-white rounded-[14px] py-4.5 font-sans text-[15px] font-extrabold text-decoration-none shadow-[0_4px_14px_rgba(45,143,212,0.4)] transition-all duration-200 group-hover:shadow-[0_6px_20px_rgba(45,143,212,0.5)] cursor-pointer"
-          >
-            <span>Join Founding Driver Cohort</span>
-            <span className="text-[18px] group-hover:translate-x-1.5 transition-transform duration-250">→</span>
-          </a>
-
-          {/* Microcopy row */}
-          <div className="mt-3.5 text-center text-[11px] text-white font-extrabold font-sans tracking-wide">
-            No charge today · Pre-launch validation · Canadian driver program
-          </div>
-        </div>
-
-        {/* SECTION 5 — SECONDARY ACTION CARDS (Separate Cards for Clarity) */}
-        <div 
-          className="flex flex-col gap-4.5 animate-fade-in-up"
-          style={{ animationDelay: '0.1s' }}
-        >
-          {/* Row 1 — Summer Vehicle Readiness Check (Highlighted with Amber/Gold Side priority indicator) */}
           <a 
             href="https://summer.astrateqgadgets.com"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#d97706] border-l-[10px] border-l-[#d97706] hover:border-[#b45309] hover:border-l-[#d97706] hover:bg-[#fffdf9] hover:shadow-[0_10px_28px_rgba(217,119,6,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
+            className="flex items-center justify-center gap-2.5 w-full bg-accent-cyan hover:bg-[#1a7dc4] active:scale-[0.985] text-white rounded-[14px] py-4.5 font-sans text-[15.5px] font-extrabold text-decoration-none shadow-[0_4px_14px_rgba(45,143,212,0.4)] transition-all duration-200 group-hover:shadow-[0_6px_20px_rgba(45,143,212,0.5)] cursor-pointer"
           >
-            <div className="w-12 h-12 rounded-[14px] bg-[#d97706]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-              <Sun className="w-6.5 h-6.5 text-[#d97706] animate-spin" style={{ animationDuration: '24s' }} />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-2.5 flex-wrap">
-                <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#d97706] transition-colors duration-150">
-                  Summer Vehicle Readiness Check
-                </h3>
-                <span className="text-[10px] font-black bg-[#d97706] text-white px-2 py-0.5 rounded-[6px] uppercase tracking-wider select-none border border-[#d97706]">
-                  Priority 2
-                </span>
-              </div>
-              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
-                Take a quick 60-second check to understand your summer driving readiness profile.
-              </p>
-            </div>
-            <ChevronRight className="w-6 h-6 text-[#d97706] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
+            <span>Start Awareness Simulation</span>
+            <span className="text-[18px] group-hover:translate-x-1.5 transition-transform duration-250">→</span>
           </a>
 
-          {/* Row 2 — Check Vehicle Compatibility */}
+          {/* Microcopy row */}
+          <div className="mt-3.5 text-center text-[11px] text-[#badef3] font-bold font-sans tracking-wide">
+            Free · 60 seconds · No vehicle tracking · No hardware required
+          </div>
+        </div>
+
+        {/* CORE POSITIONING LINE */}
+        <div className="text-center py-1.5 animate-fade-in-up" style={{ animationDelay: '0.08s' }}>
+          <p className="font-ms text-[12px] font-black tracking-wider text-[#0078d4] uppercase">
+            Awareness intelligence without surveillance.
+          </p>
+        </div>
+
+        {/* SECTION 5 — SECONDARY ACTION CARDS */}
+        <div 
+          className="flex flex-col gap-4.5 animate-fade-in-up"
+          style={{ animationDelay: '0.1s' }}
+        >
+          {/* Row 1 — Check Your Driving Context */}
           <a 
-            href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=compatibility"
+            href="https://summer.astrateqgadgets.com?intent=context"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
           >
             <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-              <Car className="w-6 h-6 text-[#0078d4]" strokeWidth={3} />
+              <Car className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
             </div>
             <div className="flex-1">
-              <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
-                Check Vehicle Compatibility
+              <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
+                Check Your Driving Context
               </h3>
-              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
-                Confirm whether your vehicle profile is likely to support the Astrateq pre-launch concept.
+              <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
+                See how commute type, driving frequency, and road conditions shape your awareness profile.
               </p>
             </div>
-            <ChevronRight className="w-6 h-6 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
+            <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
           </a>
 
-          {/* Row 3 — See How Astrateq Works */}
+          {/* Row 2 — How the Simulation Works */}
           <a 
-            href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=explainer"
+            href="https://summer.astrateqgadgets.com?intent=howitworks"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
           >
             <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-              <Activity className="w-6 h-6 text-[#0078d4]" strokeWidth={3} />
+              <Activity className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
             </div>
             <div className="flex-1">
-              <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
-                See How Astrateq Works
+              <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
+                How the Simulation Works
               </h3>
-              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
-                Learn how privacy-first vehicle intelligence could help drivers understand signals, patterns, and readiness context.
+              <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
+                Learn how behavioral inputs generate a simulated awareness profile for concept validation.
               </p>
             </div>
-            <ChevronRight className="w-6 h-6 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
+            <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
           </a>
 
-          {/* Row 4 — Privacy-First Data Approach */}
+          {/* Row 3 — Privacy & Trust */}
           <a 
-            href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=privacy"
+            href="https://summer.astrateqgadgets.com?intent=privacy"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
           >
             <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-              <Lock className="w-6 h-6 text-[#0078d4]" strokeWidth={3} />
+              <Lock className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
             </div>
             <div className="flex-1">
-              <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
-                Privacy-First Data Approach
+              <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
+                Privacy & Trust
               </h3>
-              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
-                Review how Astrateq Gadgets is approaching local-first intelligence and reduced data exposure.
+              <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
+                See how Astrateq avoids vehicle tracking, insurance sharing, and hardware dependency.
               </p>
             </div>
-            <ChevronRight className="w-6 h-6 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
+            <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
           </a>
 
-          {/* Row 5 — Project Roadmap & Build Updates */}
+          {/* Row 4 — Join Research Updates */}
           <a 
-            href="https://reserve.astrateqgadgets.com?entry=linkbio&intent=updates"
+            href="https://summer.astrateqgadgets.com?intent=updates"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-[3px] border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.2)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.05)]"
+            className="flex items-center gap-4.5 p-5 text-decoration-none bg-white rounded-[20px] border-2 border-[#0078d4] hover:border-[#005a9e] hover:bg-[#f3f9fd] hover:shadow-[0_10px_28px_rgba(0,120,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.04)]"
           >
             <div className="w-12 h-12 rounded-[14px] bg-[#0078d4]/10 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
-              <Bell className="w-6 h-6 text-[#0078d4]" strokeWidth={3} />
+              <Bell className="w-6 h-6 text-[#0078d4]" strokeWidth={2.5} />
             </div>
             <div className="flex-1">
-              <h3 className="font-ms text-[17.5px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
-                Project Roadmap & Build Updates
+              <h3 className="font-ms text-[16px] font-black tracking-normal text-[#081326] group-hover:text-[#0078d4] transition-colors duration-150">
+                Join Research Updates
               </h3>
-              <p className="font-ms text-[13.5px] font-extrabold text-[#1c324e] leading-snug mt-1.5">
-                Follow pre-launch progress, product direction, validation updates, and Canadian rollout planning.
+              <p className="font-ms text-[12.5px] font-bold text-[#1a2f4a] leading-relaxed mt-1">
+                Follow the validation study and future Driver Awareness Intelligence concept development.
               </p>
             </div>
-            <ChevronRight className="w-6 h-6 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3.5} />
+            <ChevronRight className="w-5.5 h-5.5 text-[#0078d4] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" strokeWidth={3} />
           </a>
         </div>
 
@@ -265,7 +250,7 @@ export default function App() {
           <div className="w-8 h-[3px] bg-accent-cyan rounded-full mx-auto mb-3.5"></div>
           
           <h2 className="font-serif text-[18px] text-navy text-center mb-6 font-bold">
-            How the pre-launch program works
+            How the validation flow works
           </h2>
 
           <div className="flex gap-2.5 items-start relative">
@@ -278,10 +263,10 @@ export default function App() {
                 1
               </div>
               <h4 className="font-sans text-[12px] font-extrabold text-navy mb-1 leading-tight group-hover/step:text-accent-cyan transition-colors duration-150">
-                Join Early Access
+                Start simulation
               </h4>
               <p className="font-sans text-[10px] font-bold text-[#1a3a62] leading-[1.45]">
-                Submit your founding cohort interest.
+                Answer quick awareness questions.
               </p>
             </div>
 
@@ -291,10 +276,10 @@ export default function App() {
                 2
               </div>
               <h4 className="font-sans text-[12px] font-extrabold text-navy mb-1 leading-tight group-hover/step:text-accent-cyan transition-colors duration-150">
-                Confirm Vehicle Fit
+                View your profile
               </h4>
               <p className="font-sans text-[10px] font-bold text-[#1a3a62] leading-[1.45]">
-                Complete a short compatibility check.
+                Receive your simulated awareness score and fatigue profile.
               </p>
             </div>
 
@@ -304,10 +289,10 @@ export default function App() {
                 3
               </div>
               <h4 className="font-sans text-[12px] font-extrabold text-navy mb-1 leading-tight group-hover/step:text-accent-cyan transition-colors duration-150">
-                Follow Validation
+                Join research cohort
               </h4>
               <p className="font-sans text-[10px] font-bold text-[#1a3a62] leading-[1.45]">
-                Receive updates as Astrateq validates readiness.
+                Choose whether to participate in the validation study.
               </p>
             </div>
           </div>
@@ -324,10 +309,10 @@ export default function App() {
             </div>
             <div>
               <h3 className="font-sans text-[14px] font-bold text-navy mb-0.5">
-                Privacy by design
+                Privacy-first by design
               </h3>
               <p className="font-sans text-[11px] font-bold text-accent-cyan uppercase tracking-wider text-xs">
-                Astrateq data principles
+                ASTRATEQ DATA PRINCIPLES
               </p>
             </div>
           </div>
@@ -342,10 +327,10 @@ export default function App() {
               </div>
               <div>
                 <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
-                  Local-first intelligence direction
+                  No vehicle tracking
                 </h4>
                 <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
-                  Designed to reduce unnecessary cloud dependency.
+                  The simulation does not connect to your vehicle or collect live driving data.
                 </p>
               </div>
             </div>
@@ -357,10 +342,10 @@ export default function App() {
               </div>
               <div>
                 <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
-                  User-controlled data expectations
+                  No insurance sharing
                 </h4>
                 <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
-                  Built around clear consent and driver transparency.
+                  Your responses are not used for insurance scoring, underwriting, or pricing.
                 </p>
               </div>
             </div>
@@ -372,10 +357,10 @@ export default function App() {
               </div>
               <div>
                 <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
-                  No unnecessary data sharing
+                  No hardware required
                 </h4>
                 <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
-                  Data minimization is a core design principle.
+                  The experience does not require a dashcam, scanner, device, or installation.
                 </p>
               </div>
             </div>
@@ -387,10 +372,10 @@ export default function App() {
               </div>
               <div>
                 <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
-                  No ad-tracking resale
+                  No advertising resale model
                 </h4>
                 <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
-                  Astrateq Gadgets is not being designed around advertising resale models.
+                  The concept is not being designed around selling driver data to advertisers.
                 </p>
               </div>
             </div>
@@ -402,10 +387,25 @@ export default function App() {
               </div>
               <div>
                 <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
-                  Canadian driver trust
+                  Simulation-only research
                 </h4>
                 <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
-                  Built with Canadian privacy expectations in mind.
+                  Your inputs help validate interest in a future software concept.
+                </p>
+              </div>
+            </div>
+
+            {/* Row 6 */}
+            <div className="flex items-start gap-3 py-3 border-t border-[#0e1f3d]/5 hover:bg-frost/40 px-1 rounded-md transition-colors duration-150 group">
+              <div className="w-[18px] h-[18px] bg-[#e8f4ed] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-2xs group-hover:scale-105 transition-transform">
+                <Check className="w-2.5 h-2.5 text-[#2e7d52]" strokeWidth={4} />
+              </div>
+              <div>
+                <h4 className="font-sans text-[12.5px] font-extrabold text-[#1a2f4a] mb-0.5 leading-tight">
+                  Canadian driver focus
+                </h4>
+                <p className="font-sans text-[11px] font-bold text-[#1a3a62]/80 leading-[1.45]">
+                  Designed around Canadian driving realities, privacy expectations, and road conditions.
                 </p>
               </div>
             </div>
@@ -424,11 +424,11 @@ export default function App() {
               Pre-launch transparency
             </h4>
           </div>
-          <p className="font-sans text-[12px] font-bold text-[#451a03]/95 leading-relaxed mb-2.5">
-            Astrateq Gadgets is currently in pre-launch market validation. Hardware availability, compatibility, pricing, and rollout timing are subject to validation results, supplier readiness, and future manufacturing decisions.
+          <p className="font-sans text-[12.5px] font-bold text-[#451a03]/95 leading-relaxed mb-2.5">
+            Astrateq Gadgets is currently validating interest in a software-based Driver Awareness Intelligence concept. This experience is simulated and does not connect to your vehicle, insurer, or hardware.
           </p>
-          <p className="font-sans text-[12px] font-bold text-[#451a03]/95 leading-relaxed">
-            This page is designed to measure early interest and route Canadian drivers into readiness, compatibility, and founding cohort flows.
+          <p className="font-sans text-[12.5px] font-bold text-[#451a03]/95 leading-relaxed">
+            Your participation helps determine whether this concept should move toward prototype development.
           </p>
         </div>
 
@@ -437,7 +437,7 @@ export default function App() {
           {/* Fading Divider */}
           <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#0e1f3d]/12 to-transparent mb-7"></div>
 
-          {/* Social Icons with Premium Brands Hover Micro-Interactions */}
+          {/* Social Icons */}
           <div className="flex justify-center gap-4 mb-6">
             {/* Instagram */}
             <a 
@@ -481,17 +481,17 @@ export default function App() {
             </a>
           </div>
 
-          {/* Premium Footer text block with meta items */}
+          {/* Premium Footer text */}
           <div className="flex flex-col items-center gap-3">
             <span className="font-sans text-[10px] font-bold text-navy tracking-[0.12em] uppercase bg-white border border-[#0e1f3d]/10 rounded-full py-1 px-4 shadow-3xs select-none">
               © 2026 Astrateq Gadgets • Toronto, ON • Canada
             </span>
             
-            {/* Exquisite statement container with left visual pointer indicator */}
+            {/* Exquisite statement container */}
             <div className="max-w-[360px] mx-auto mt-2 p-[8px_16px] rounded-xl bg-[rgba(45,143,212,0.06)] border-2 border-[#2d8fd4]/25 shadow-xs relative">
               <span className="absolute top-1/2 left-2.5 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-accent-cyan"></span>
               <p className="font-sans text-[11.5px] font-bold text-navy leading-relaxed pl-3.5">
-                Built for Canadian drivers exploring smarter, privacy-first vehicle awareness.
+                Built for Canadian drivers exploring smarter, privacy-first driver awareness.
               </p>
             </div>
           </div>
