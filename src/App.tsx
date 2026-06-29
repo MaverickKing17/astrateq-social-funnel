@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { 
   Shield, 
   PlusCircle, 
@@ -21,6 +22,37 @@ import {
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 
 export default function App() {
+  const [glowColor, setGlowColor] = useState<'white' | 'yellow' | 'duo'>('yellow');
+
+  // Helper to dynamically get bright glowing border and matching shadow classes
+  const getGlowClasses = (boxIndex: number, variant: 'primary' | 'secondary' = 'secondary') => {
+    const isYellow = glowColor === 'yellow' || (glowColor === 'duo' && boxIndex % 2 === 1);
+    
+    if (isYellow) {
+      if (variant === 'primary') {
+        return "border-yellow-400 shadow-[0_0_24px_rgba(250,204,21,0.55)] hover:border-yellow-300 hover:shadow-[0_0_38px_rgba(250,204,21,0.9)]";
+      }
+      return "border-yellow-400/80 shadow-[0_0_15px_rgba(250,204,21,0.4)] hover:border-yellow-300 hover:shadow-[0_0_28px_rgba(250,204,21,0.7)]";
+    } else {
+      // White glow
+      if (variant === 'primary') {
+        return "border-white shadow-[0_0_24px_rgba(255,255,255,0.55)] hover:border-white hover:shadow-[0_0_38px_rgba(255,255,255,0.95)]";
+      }
+      return "border-white/80 shadow-[0_0_15px_rgba(255,255,255,0.35)] hover:border-white hover:shadow-[0_0_28px_rgba(255,255,255,0.7)]";
+    }
+  };
+
+  // Helper to dynamically get glow classes for left-accented items (Principle boxes)
+  const getPrincipleGlowClasses = (boxIndex: number) => {
+    const isYellow = glowColor === 'yellow' || (glowColor === 'duo' && boxIndex % 2 === 1);
+    
+    if (isYellow) {
+      return "border-2 border-yellow-400/50 border-l-4 border-l-yellow-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] hover:border-yellow-300 hover:border-l-yellow-400 hover:shadow-[0_0_24px_rgba(250,204,21,0.65)]";
+    } else {
+      return "border-2 border-white/40 border-l-4 border-l-white shadow-[0_0_12px_rgba(255,255,255,0.2)] hover:border-white hover:border-l-white hover:shadow-[0_0_24px_rgba(255,255,255,0.6)]";
+    }
+  };
+
   return (
     <div className="bg-[#e9f0f8] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-[#ebf0f7] to-[#d9e3ef] min-h-screen font-ms text-navy pb-16 px-4 relative overflow-x-hidden">
       {/* Decorative premium light reflections */}
@@ -58,9 +90,56 @@ export default function App() {
           </p>
         </div>
 
+        {/* GLOW CUSTOMIZER CONTROLLER */}
+        <div className="bg-navy/85 backdrop-blur-md rounded-2xl border-2 border-[#2d8fd4]/25 p-3.5 flex flex-col gap-2.5 items-center justify-between shadow-lg animate-fade-in-up" style={{ animationDelay: '0.02s' }}>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse"></span>
+            <span className="text-[11px] font-black text-white/95 uppercase tracking-widest font-ms">
+              Select Glowing Border Style
+            </span>
+          </div>
+          <div className="grid grid-cols-3 gap-2 w-full">
+            <button 
+              onClick={() => setGlowColor('yellow')}
+              className={`flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-lg text-[11px] font-black tracking-wide font-ms transition-all duration-200 cursor-pointer border ${
+                glowColor === 'yellow' 
+                  ? 'bg-yellow-400 text-navy border-yellow-300 shadow-[0_0_12px_rgba(250,204,21,0.5)] scale-105' 
+                  : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              <span className="w-2 h-2 rounded-full bg-yellow-400 border border-white/20"></span>
+              <span>Yellow Neon</span>
+            </button>
+            
+            <button 
+              onClick={() => setGlowColor('white')}
+              className={`flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-lg text-[11px] font-black tracking-wide font-ms transition-all duration-200 cursor-pointer border ${
+                glowColor === 'white' 
+                  ? 'bg-white text-navy border-white shadow-[0_0_12px_rgba(255,255,255,0.5)] scale-105' 
+                  : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              <span className="w-2 h-2 rounded-full bg-white border border-white/20"></span>
+              <span>Bright White</span>
+            </button>
+
+            <button 
+              onClick={() => setGlowColor('duo')}
+              className={`flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-lg text-[11px] font-black tracking-wide font-ms transition-all duration-200 cursor-pointer border ${
+                glowColor === 'duo' 
+                  ? 'bg-gradient-to-r from-yellow-400 to-white text-navy border-yellow-300 shadow-[0_0_12px_rgba(250,204,21,0.4)] scale-105' 
+                  : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              <span className="w-2 h-2 rounded-full bg-gradient-to-r from-yellow-400 to-white border border-white/20"></span>
+              <span>Duo Neon</span>
+            </button>
+          </div>
+        </div>
+
         {/* SECTION 3 — HERO CARD */}
         <div 
-          className="bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[24px] border-2 border-[#2d8fd4]/35 shadow-[0_4px_20px_rgba(14,31,61,0.06)] overflow-hidden animate-fade-in-up hover:scale-[1.01] hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(14,31,61,0.18)] hover:border-[#2d8fd4]/60 transition-all duration-300 group"
+          className={`bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[24px] border-2 overflow-hidden animate-fade-in-up hover:scale-[1.01] hover:-translate-y-1 transition-all duration-300 group ${getGlowClasses(0, 'secondary')}`}
           style={{ animationDelay: '0s' }}
         >
           {/* Top — image area */}
@@ -114,7 +193,7 @@ export default function App() {
 
         {/* SECTION 4 — PRIMARY CTA CARD — Deep Premium Navy with glow */}
         <div 
-          className="bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[24px] p-7 relative overflow-hidden animate-fade-in-up hover:scale-[1.01] hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(14,31,61,0.22)] border-2 border-[#2d8fd4] transition-all duration-300 group"
+          className={`bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[24px] p-7 relative overflow-hidden animate-fade-in-up hover:scale-[1.01] hover:-translate-y-1 border-2 transition-all duration-300 group ${getGlowClasses(1, 'primary')}`}
           style={{ animationDelay: '0.05s' }}
         >
           {/* Advanced glowing modern backdrop blobs */}
@@ -169,7 +248,7 @@ export default function App() {
             href="https://score.astrateqgadgets.com?intent=context"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/35 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)]"
+            className={`flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 hover:bg-[#0d2245]/80 hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 ${getGlowClasses(2, 'secondary')}`}
           >
             <div className="w-12 h-12 rounded-[14px] bg-[#2d8fd4]/15 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
               <Car className="w-6 h-6 text-accent-cyan-2" strokeWidth={2.5} />
@@ -190,7 +269,7 @@ export default function App() {
             href="https://score.astrateqgadgets.com?intent=howitworks"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/35 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)]"
+            className={`flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 hover:bg-[#0d2245]/80 hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 ${getGlowClasses(3, 'secondary')}`}
           >
             <div className="w-12 h-12 rounded-[14px] bg-[#2d8fd4]/15 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
               <Activity className="w-6 h-6 text-accent-cyan-2" strokeWidth={2.5} />
@@ -211,7 +290,7 @@ export default function App() {
             href="https://score.astrateqgadgets.com?intent=privacy"
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/35 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)]"
+            className={`flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 hover:bg-[#0d2245]/80 hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 ${getGlowClasses(4, 'secondary')}`}
           >
             <div className="w-12 h-12 rounded-[14px] bg-[#2d8fd4]/15 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
               <Lock className="w-6 h-6 text-accent-cyan-2" strokeWidth={2.5} />
@@ -230,7 +309,7 @@ export default function App() {
 
         {/* SECTION 6 — HOW IT WORKS */}
         <div 
-          className="bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[24px] border-2 border-[#2d8fd4]/35 p-6 animate-fade-in-up hover:scale-[1.01] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(14,31,61,0.18)] hover:border-[#2d8fd4]/60 transition-all duration-300"
+          className={`bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[24px] border-2 p-6 animate-fade-in-up hover:scale-[1.01] hover:-translate-y-0.5 transition-all duration-300 ${getGlowClasses(5, 'secondary')}`}
           style={{ animationDelay: '0.15s' }}
         >
           {/* Centered decorative accent bar */}
@@ -287,7 +366,7 @@ export default function App() {
 
         {/* SECTION 7 — PRIVACY TRUST CARD */}
         <div 
-          className="bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[28px] border-2 border-[#2d8fd4]/35 p-6 shadow-[0_16px_40px_rgba(14,31,61,0.18)] animate-fade-in-up"
+          className={`bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[28px] border-2 p-6 animate-fade-in-up ${getGlowClasses(6, 'secondary')}`}
           style={{ animationDelay: '0.2s' }}
         >
           {/* Header area with subtle mesh background */}
@@ -310,7 +389,7 @@ export default function App() {
           <div className="flex flex-col gap-4">
             
             {/* Principle 1 — No vehicle tracking */}
-            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className={`group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden ${getPrincipleGlowClasses(7)}`}>
               {/* Corner Verified Badge */}
               <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
                 <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
@@ -331,7 +410,7 @@ export default function App() {
             </div>
 
             {/* Principle 2 — No insurance sharing */}
-            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className={`group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden ${getPrincipleGlowClasses(8)}`}>
               {/* Corner Verified Badge */}
               <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
                 <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
@@ -352,7 +431,7 @@ export default function App() {
             </div>
 
             {/* Principle 3 — No hardware required */}
-            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className={`group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden ${getPrincipleGlowClasses(9)}`}>
               {/* Corner Verified Badge */}
               <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
                 <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
@@ -373,7 +452,7 @@ export default function App() {
             </div>
 
             {/* Principle 4 — No advertising resale model */}
-            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className={`group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden ${getPrincipleGlowClasses(10)}`}>
               {/* Corner Verified Badge */}
               <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
                 <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
@@ -394,7 +473,7 @@ export default function App() {
             </div>
 
             {/* Principle 5 — Simulation-only research */}
-            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className={`group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden ${getPrincipleGlowClasses(11)}`}>
               {/* Corner Verified Badge */}
               <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
                 <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
@@ -415,7 +494,7 @@ export default function App() {
             </div>
 
             {/* Principle 6 — Canadian driver focus */}
-            <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
+            <div className={`group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden ${getPrincipleGlowClasses(12)}`}>
               {/* Corner Verified Badge */}
               <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
                 <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
@@ -443,7 +522,7 @@ export default function App() {
           href="https://score.astrateqgadgets.com?intent=updates"
           target="_blank" 
           rel="noopener noreferrer"
-          className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/35 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)] animate-fade-in-up"
+          className={`flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 hover:bg-[#0d2245]/80 hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 animate-fade-in-up ${getGlowClasses(13, 'secondary')}`}
           style={{ animationDelay: '0.24s' }}
         >
           <div className="w-12 h-12 rounded-[14px] bg-[#2d8fd4]/15 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-110 transition-transform duration-200">
@@ -462,7 +541,7 @@ export default function App() {
 
         {/* SECTION 8 — PRE-LAUNCH TRANSPARENCY CARD — Styled identically to the other boxes to reduce eye strain */}
         <div 
-          className="bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] border-2 border-[#2d8fd4]/35 rounded-[24px] p-6.5 shadow-[0_4px_16px_rgba(14,31,61,0.06)] hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] transition-all duration-300 animate-fade-in-up hover:scale-[1.01]"
+          className={`bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] border-2 rounded-[24px] p-6.5 transition-all duration-300 animate-fade-in-up hover:scale-[1.01] ${getGlowClasses(14, 'secondary')}`}
           style={{ animationDelay: '0.28s' }}
         >
           <div className="flex items-center gap-4 mb-5">
