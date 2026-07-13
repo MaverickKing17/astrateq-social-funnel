@@ -125,9 +125,9 @@ export default function App() {
 
           {/* Hero text section */}
           <div className="px-6 py-4 flex flex-col gap-3">
-            <h1 className="px-5 py-3 text-xl md:text-2xl font-extrabold text-white leading-snug tracking-tight mb-2">
+            <div role="heading" aria-level={1} className="px-5 py-3 text-xl md:text-2xl font-extrabold text-white leading-snug tracking-tight mb-2 bg-transparent">
               Privacy-first Driver Awareness Intelligence for Canadian roads.
-            </h1>
+            </div>
             
             <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-4">
               Complete a brief simulation to explore your baseline focus profile—without vehicle tracking, hardware dependencies, or third-party data sharing.
@@ -166,9 +166,9 @@ export default function App() {
             </span>
           </div>
 
-          <h2 className="px-5 py-3 text-lg md:text-xl font-extrabold text-white leading-snug mb-2">
+          <div role="heading" aria-level={2} className="px-5 py-3 text-lg md:text-xl font-extrabold text-white leading-snug mb-2 bg-transparent">
             Start the 60-second Driver Awareness Simulation
-          </h2>
+          </div>
           
           <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-4">
             Receive a simulated Driver Awareness Score, Fatigue Risk Profile, and Research Cohort Classification.
@@ -205,9 +205,9 @@ export default function App() {
           
           {/* Interactive Accordion Block */}
           <div className="bg-slate-900 border border-white/10 rounded-[28px] px-6 py-4 flex flex-col gap-3 shadow-md">
-            <h3 className="px-5 py-3 text-white text-[12.5px] font-black tracking-wider uppercase mb-1 border-b border-white/5 pb-2.5">
+            <div role="heading" aria-level={3} className="px-5 py-3 text-white text-[12.5px] font-black tracking-wider uppercase mb-1 border-b border-white/5 pb-2.5 bg-transparent">
               Explore Concept Dimensions
-            </h3>
+            </div>
 
             {/* Accordion 1 */}
             <div className="border-b border-white/5 pb-2">
@@ -351,9 +351,9 @@ export default function App() {
               <Shield className="w-5.5 h-5.5 text-blue-400" />
             </div>
             <div>
-              <h3 className="px-5 py-3 text-white font-extrabold text-[15px] leading-tight">
+              <div role="heading" aria-level={3} className="px-5 py-3 text-white font-extrabold text-[15px] leading-tight bg-transparent">
                 Privacy-First by Design
-              </h3>
+              </div>
               <p className="text-[9.5px] font-black tracking-widest text-blue-400 uppercase mt-0.5">
                 Core Architecture Principles
               </p>
@@ -474,9 +474,9 @@ export default function App() {
                 <Bell className="w-4.5 h-4.5" />
               </div>
               <div>
-                <h4 className="px-5 py-3 text-white text-[13.5px] font-extrabold leading-snug">
+                <div role="heading" aria-level={4} className="px-5 py-3 text-white text-[13.5px] font-extrabold leading-snug bg-transparent">
                   Join Research Updates
-                </h4>
+                </div>
                 <p className="text-slate-400 text-[11px] leading-normal font-medium">
                   Follow study updates and future concept milestones.
                 </p>
@@ -496,9 +496,9 @@ export default function App() {
               <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 text-blue-400">
                 <Info className="w-4.5 h-4.5" />
               </div>
-              <h4 className="px-5 py-3 text-white text-[13px] font-extrabold">
+              <div role="heading" aria-level={4} className="px-5 py-3 text-white text-[13px] font-extrabold bg-transparent">
                 Pre-Launch Validation Notice
-              </h4>
+              </div>
             </div>
             <p className="text-slate-300 text-[11.5px] leading-relaxed border-l-2 border-blue-500/30 pl-3">
               Astrateq Gadgets is currently conducting early-stage Canadian research to check demand and validate consumer interest in this software concept. This pre-launch simulation does not represent a finished consumer product, nor does it log live vehicular telemetry.
