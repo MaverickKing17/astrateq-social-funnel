@@ -124,12 +124,12 @@ export default function App() {
           </div>
 
           {/* Hero text section */}
-          <div className="p-6">
-            <h1 className="text-xl md:text-2xl font-extrabold text-white leading-snug tracking-tight mb-3">
+          <div className="px-6 py-4 flex flex-col gap-3">
+            <h1 className="text-xl md:text-2xl font-extrabold text-white leading-snug tracking-tight mb-2">
               Privacy-first Driver Awareness Intelligence for Canadian roads.
             </h1>
             
-            <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-5.5">
+            <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-4">
               Complete a brief simulation to explore your baseline focus profile—without vehicle tracking, hardware dependencies, or third-party data sharing.
             </p>
 
@@ -154,7 +154,7 @@ export default function App() {
         {/* ========================================================================= */}
         {/* 3. PRIMARY CTA ACCENT CARD */}
         {/* ========================================================================= */}
-        <section id="primary-cta" className="bg-slate-900 border border-white/10 rounded-[28px] p-6 relative overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group">
+        <section id="primary-cta" className="bg-slate-900 border border-white/10 rounded-[28px] px-6 py-4 relative overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group">
           
           {/* Subtle Ambient Accent Glow Grid in corner */}
           <div className="absolute -top-[60px] -right-[60px] w-32 h-32 rounded-full bg-blue-500/10 blur-2xl pointer-events-none group-hover:bg-blue-500/15 transition-colors duration-300"></div>
@@ -170,7 +170,7 @@ export default function App() {
             Start the 60-second Driver Awareness Simulation
           </h2>
           
-          <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-5">
+          <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-4">
             Receive a simulated Driver Awareness Score, Fatigue Risk Profile, and Research Cohort Classification.
           </p>
 
@@ -204,7 +204,7 @@ export default function App() {
         <section id="simulation-flow-details" className="flex flex-col gap-4">
           
           {/* Interactive Accordion Block */}
-          <div className="bg-slate-900 border border-white/10 rounded-[28px] p-5 flex flex-col gap-3 shadow-md">
+          <div className="bg-slate-900 border border-white/10 rounded-[28px] px-6 py-4 flex flex-col gap-3 shadow-md">
             <h3 className="text-white text-[12.5px] font-black tracking-wider uppercase mb-1 border-b border-white/5 pb-2.5">
               Explore Concept Dimensions
             </h3>
@@ -228,7 +228,7 @@ export default function App() {
               </button>
               
               {openAccordion === 'context' && (
-                <div className="pl-11 pr-2 pb-3 pt-1 text-slate-300 text-[12.5px] leading-relaxed animate-fade-in-up">
+                <div className="pl-11 pr-4 pb-3 pt-1 text-slate-300 text-[12.5px] leading-relaxed animate-fade-in-up">
                   Analyze how your common commute types, weekly driving frequencies, road weather conditions, and seasonal parameters influence driver attention and stress margins.
                 </div>
               )}
@@ -253,7 +253,7 @@ export default function App() {
               </button>
               
               {openAccordion === 'howitworks' && (
-                <div className="pl-11 pr-2 pb-3 pt-1 text-slate-300 text-[12.5px] leading-relaxed animate-fade-in-up">
+                <div className="pl-11 pr-4 pb-3 pt-1 text-slate-300 text-[12.5px] leading-relaxed animate-fade-in-up">
                   Our lightweight pre-launch browser simulation processes rapid response baseline inputs to model cognitive focus shifts, fatigue levels, and distraction resistance scoring.
                 </div>
               )}
@@ -278,7 +278,7 @@ export default function App() {
               </button>
               
               {openAccordion === 'privacy' && (
-                <div className="pl-11 pr-2 pb-3 pt-1 text-slate-300 text-[12.5px] leading-relaxed animate-fade-in-up">
+                <div className="pl-11 pr-4 pb-3 pt-1 text-slate-300 text-[12.5px] leading-relaxed animate-fade-in-up">
                   We collect no live vehicular telemetry, GPS streams, or dashboard camera feeds. Your data is strictly structured for pre-launch interest validation and remains isolated.
                 </div>
               )}
@@ -287,7 +287,7 @@ export default function App() {
           </div>
 
           {/* 3-Step Numbered Sequence Block */}
-          <div className="bg-slate-900 border border-white/10 rounded-[28px] p-6 shadow-md">
+          <div className="bg-slate-900 border border-white/10 rounded-[28px] px-6 py-4 shadow-md">
             <h3 className="text-white text-[14px] font-extrabold text-center mb-5.5 tracking-tight">
               How the validation flow works
             </h3>
@@ -343,7 +343,7 @@ export default function App() {
         {/* ========================================================================= */}
         {/* 5. "PRIVACY FIRST BY DESIGN" ARCHITECTURE CARD */}
         {/* ========================================================================= */}
-        <section id="privacy-architecture" className="bg-slate-900 border border-white/10 rounded-[28px] p-6 shadow-xl">
+        <section id="privacy-architecture" className="bg-slate-900 border border-white/10 rounded-[28px] px-6 py-4 shadow-xl">
           
           {/* Section Header */}
           <div className="flex items-center gap-3.5 mb-6 border-b border-white/5 pb-4">
@@ -467,7 +467,7 @@ export default function App() {
             href={getOutboundUrl("https://score.astrateqgadgets.com?intent=updates")}
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center justify-between p-4.5 bg-slate-900 border border-white/10 rounded-2xl shadow-sm hover:border-blue-500/50 hover:bg-slate-900/90 active:scale-[0.99] transition-all duration-200 group decoration-none"
+            className="flex items-center justify-between px-6 py-4 bg-slate-900 border border-white/10 rounded-2xl shadow-sm hover:border-blue-500/50 hover:bg-slate-900/90 active:scale-[0.99] transition-all duration-200 group decoration-none"
           >
             <div className="flex items-center gap-3.5">
               <div className="w-9 h-9 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 flex-shrink-0">
@@ -491,7 +491,7 @@ export default function App() {
           </a>
 
           {/* Pre-Launch Validation Notice Card */}
-          <div className="bg-slate-900 border border-white/10 rounded-[24px] p-5.5 shadow-md">
+          <div className="bg-slate-900 border border-white/10 rounded-[24px] px-6 py-4 shadow-md">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 text-blue-400">
                 <Info className="w-4.5 h-4.5" />
