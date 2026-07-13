@@ -125,7 +125,7 @@ export default function App() {
 
           {/* Hero text section */}
           <div className="px-6 py-4 flex flex-col gap-3">
-            <h1 className="text-xl md:text-2xl font-extrabold text-white leading-snug tracking-tight mb-2">
+            <h1 className="px-5 py-3 text-xl md:text-2xl font-extrabold text-white leading-snug tracking-tight mb-2">
               Privacy-first Driver Awareness Intelligence for Canadian roads.
             </h1>
             
@@ -166,7 +166,7 @@ export default function App() {
             </span>
           </div>
 
-          <h2 className="text-lg md:text-xl font-extrabold text-white leading-snug mb-2">
+          <h2 className="px-5 py-3 text-lg md:text-xl font-extrabold text-white leading-snug mb-2">
             Start the 60-second Driver Awareness Simulation
           </h2>
           
@@ -205,7 +205,7 @@ export default function App() {
           
           {/* Interactive Accordion Block */}
           <div className="bg-slate-900 border border-white/10 rounded-[28px] px-6 py-4 flex flex-col gap-3 shadow-md">
-            <h3 className="text-white text-[12.5px] font-black tracking-wider uppercase mb-1 border-b border-white/5 pb-2.5">
+            <h3 className="px-5 py-3 text-white text-[12.5px] font-black tracking-wider uppercase mb-1 border-b border-white/5 pb-2.5">
               Explore Concept Dimensions
             </h3>
 
@@ -351,7 +351,7 @@ export default function App() {
               <Shield className="w-5.5 h-5.5 text-blue-400" />
             </div>
             <div>
-              <h3 className="text-white font-extrabold text-[15px] leading-tight">
+              <h3 className="px-5 py-3 text-white font-extrabold text-[15px] leading-tight">
                 Privacy-First by Design
               </h3>
               <p className="text-[9.5px] font-black tracking-widest text-blue-400 uppercase mt-0.5">
@@ -474,7 +474,7 @@ export default function App() {
                 <Bell className="w-4.5 h-4.5" />
               </div>
               <div>
-                <h4 className="text-white text-[13.5px] font-extrabold leading-snug">
+                <h4 className="px-5 py-3 text-white text-[13.5px] font-extrabold leading-snug">
                   Join Research Updates
                 </h4>
                 <p className="text-slate-400 text-[11px] leading-normal font-medium">
@@ -496,7 +496,7 @@ export default function App() {
               <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 text-blue-400">
                 <Info className="w-4.5 h-4.5" />
               </div>
-              <h4 className="text-white text-[13px] font-extrabold">
+              <h4 className="px-5 py-3 text-white text-[13px] font-extrabold">
                 Pre-Launch Validation Notice
               </h4>
             </div>
