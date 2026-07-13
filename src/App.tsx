@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { 
   Shield, 
   PlusCircle, 
@@ -21,6 +22,31 @@ import {
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 
 export default function App() {
+
+  // State to hold incoming query parameters
+  const [outboundParams, setOutboundParams] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setOutboundParams(window.location.search);
+    }
+  }, []);
+
+  // Helper to preserve incoming query parameters on outbound links
+  const getOutboundUrl = (destUrlStr: string) => {
+    try {
+      const destUrl = new URL(destUrlStr);
+      if (outboundParams) {
+        const currentParams = new URLSearchParams(outboundParams);
+        currentParams.forEach((value, key) => {
+          destUrl.searchParams.set(key, value);
+        });
+      }
+      return destUrl.toString();
+    } catch (e) {
+      return destUrlStr;
+    }
+  };
 
   return (
     <div className="bg-[#e9f0f8] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-[#ebf0f7] to-[#d9e3ef] min-h-screen font-ms text-navy pb-16 px-4 relative overflow-x-hidden">
@@ -77,8 +103,8 @@ export default function App() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none"></div>
 
             {/* Bottom-left corner badge with ultra-glass structure */}
-            <div className="absolute bottom-3 left-3.5 z-10 text-[10px] font-ms font-semibold bg-white/80 backdrop-blur-md rounded-[8px] py-1 px-3 text-navy border border-white/40 shadow-xs">
-              Ontario · Summer 2026
+            <div className="absolute bottom-3 left-3.5 z-10 text-[10px] font-ms font-black tracking-wider bg-white/80 backdrop-blur-md rounded-[8px] py-1 px-3 text-navy border border-white/40 shadow-xs uppercase select-none">
+              Concept Visual
             </div>
           </div>
 
@@ -138,12 +164,12 @@ export default function App() {
           </p>
 
           <a 
-            href="https://score.astrateqgadgets.com"
+            href={getOutboundUrl("https://score.astrateqgadgets.com")}
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-cyan via-[#2195e3] to-[#0078d4] hover:from-[#1b85ce] hover:to-[#005a9e] active:scale-[0.985] text-white rounded-[16px] py-5.5 font-ms text-[16.5px] font-black text-decoration-none border-2 border-white/90 shadow-[0_0_16px_rgba(255,255,255,0.65)] hover:border-white hover:shadow-[0_0_28px_rgba(255,255,255,0.95)] hover:scale-[1.025] transition-all duration-300 cursor-pointer group/btn"
           >
-            <span>Start Awareness Simulation</span>
+            <span>Start Driver Awareness Simulation</span>
             <ArrowRight className="w-5.5 h-5.5 text-white transition-transform duration-300 group-hover/btn:translate-x-1.5" strokeWidth={2.8} />
           </a>
 
@@ -167,7 +193,7 @@ export default function App() {
         >
           {/* Row 1 — Check Your Driving Context */}
           <a 
-            href="https://score.astrateqgadgets.com?intent=context"
+            href={getOutboundUrl("https://score.astrateqgadgets.com?intent=context")}
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/25 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)]"
@@ -188,7 +214,7 @@ export default function App() {
 
           {/* Row 2 — How the Simulation Works */}
           <a 
-            href="https://score.astrateqgadgets.com?intent=howitworks"
+            href={getOutboundUrl("https://score.astrateqgadgets.com?intent=howitworks")}
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/25 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)]"
@@ -209,7 +235,7 @@ export default function App() {
 
           {/* Row 3 — Privacy & Trust */}
           <a 
-            href="https://score.astrateqgadgets.com?intent=privacy"
+            href={getOutboundUrl("https://score.astrateqgadgets.com?intent=privacy")}
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/25 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)]"
@@ -312,10 +338,9 @@ export default function App() {
             
             {/* Principle 1 — No vehicle tracking */}
             <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
-              {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
-                <span className="font-ms text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
+              {/* Design Principle Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center bg-[#2d8fd4]/15 px-2 py-0.5 rounded-full select-none border border-[#2d8fd4]/20">
+                <span className="font-ms text-[8.5px] font-black tracking-wider text-accent-cyan-2 uppercase">Design Principle</span>
               </div>
 
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
@@ -333,10 +358,9 @@ export default function App() {
 
             {/* Principle 2 — No insurance sharing */}
             <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
-              {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
-                <span className="font-ms text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
+              {/* Design Principle Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center bg-[#2d8fd4]/15 px-2 py-0.5 rounded-full select-none border border-[#2d8fd4]/20">
+                <span className="font-ms text-[8.5px] font-black tracking-wider text-accent-cyan-2 uppercase">Design Principle</span>
               </div>
 
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
@@ -354,10 +378,9 @@ export default function App() {
 
             {/* Principle 3 — No hardware required */}
             <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
-              {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
-                <span className="font-ms text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
+              {/* Design Principle Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center bg-[#2d8fd4]/15 px-2 py-0.5 rounded-full select-none border border-[#2d8fd4]/20">
+                <span className="font-ms text-[8.5px] font-black tracking-wider text-accent-cyan-2 uppercase">Design Principle</span>
               </div>
 
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
@@ -375,10 +398,9 @@ export default function App() {
 
             {/* Principle 4 — No advertising resale model */}
             <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
-              {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
-                <span className="font-ms text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
+              {/* Design Principle Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center bg-[#2d8fd4]/15 px-2 py-0.5 rounded-full select-none border border-[#2d8fd4]/20">
+                <span className="font-ms text-[8.5px] font-black tracking-wider text-accent-cyan-2 uppercase">Design Principle</span>
               </div>
 
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
@@ -396,10 +418,9 @@ export default function App() {
 
             {/* Principle 5 — Simulation-only research */}
             <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
-              {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
-                <span className="font-ms text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
+              {/* Design Principle Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center bg-[#2d8fd4]/15 px-2 py-0.5 rounded-full select-none border border-[#2d8fd4]/20">
+                <span className="font-ms text-[8.5px] font-black tracking-wider text-accent-cyan-2 uppercase">Design Principle</span>
               </div>
 
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
@@ -417,10 +438,9 @@ export default function App() {
 
             {/* Principle 6 — Canadian driver focus */}
             <div className="group flex items-start gap-4 p-5 bg-navy/40 rounded-2xl border-2 border-[#2d8fd4]/20 border-l-4 border-l-[#2d8fd4] hover:border-[#2d8fd4] hover:border-l-[#2d8fd4] hover:shadow-[0_12px_28px_rgba(0,120,212,0.12)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_12px_rgba(0,120,212,0.03)] relative overflow-hidden">
-              {/* Corner Verified Badge */}
-              <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-[#2d8fd4]/20 px-2 py-0.5 rounded-full select-none">
-                <Lock className="w-2.5 h-2.5 text-accent-cyan-2" strokeWidth={3} />
-                <span className="font-ms text-[8px] font-black tracking-wider text-accent-cyan-2 uppercase">VERIFIED</span>
+              {/* Design Principle Badge */}
+              <div className="absolute top-3.5 right-3.5 flex items-center bg-[#2d8fd4]/15 px-2 py-0.5 rounded-full select-none border border-[#2d8fd4]/20">
+                <span className="font-ms text-[8.5px] font-black tracking-wider text-accent-cyan-2 uppercase">Design Principle</span>
               </div>
 
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2d8fd4] to-[#0e1f3d] text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-all duration-200">
@@ -441,7 +461,7 @@ export default function App() {
 
         {/* SECTION 7.5 — SECONDARY RESEARCH CARD — Positioned lower to optimize top funnel conversions */}
         <a 
-          href="https://score.astrateqgadgets.com?intent=updates"
+          href={getOutboundUrl("https://score.astrateqgadgets.com?intent=updates")}
           target="_blank" 
           rel="noopener noreferrer"
           className="flex items-center gap-4.5 p-5 text-decoration-none bg-gradient-to-br from-navy via-[#0d2245] to-[#0a182f] rounded-[20px] border-2 border-[#2d8fd4]/35 hover:border-[#2d8fd4] hover:bg-[#0d2245]/80 hover:shadow-[0_10px_28px_rgba(45,143,212,0.15)] hover:scale-[1.01] active:scale-[0.99] group transition-all duration-300 shadow-[0_4px_16px_rgba(14,31,61,0.06)] animate-fade-in-up"
