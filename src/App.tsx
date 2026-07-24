@@ -164,22 +164,22 @@ export default function App() {
         {/* ========================================================================= */}
         {/* 1. TOP STATUS ANCHOR & BRANDING */}
         {/* ========================================================================= */}
-        <div id="top-status-branding" className="w-full flex flex-col items-center gap-4.5 mb-2">
+        <div id="top-status-branding" className="w-full flex flex-col items-center gap-4 mb-2">
           
           {/* Centered High-Contrast Capsule Badge */}
-          <div className="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200/60 rounded-full py-1 px-3.5 shadow-sm">
+          <div className="inline-flex items-center gap-2 bg-blue-50/90 border border-blue-200/80 rounded-full py-1.5 px-4 shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
             </span>
-            <span className="text-[11px] font-bold tracking-wide text-blue-700 uppercase">
-              Pre-launch validation active - Canada
+            <span className="text-[11px] font-bold tracking-wide text-blue-800 uppercase">
+              Pre-launch Research Active • Canada
             </span>
           </div>
 
           {/* Centered Minimal Logo Frame */}
           <div className="flex flex-col items-center text-center">
-            <div className="p-1 bg-white rounded-2xl shadow-md border border-slate-200/80">
+            <div className="p-1.5 bg-white rounded-2xl shadow-xl shadow-blue-900/5 border border-slate-200/80 ring-1 ring-slate-900/5">
               <img 
                 src="https://i.imgur.com/8Qoqkef.png" 
                 alt="Astrateq Automotive Software Intelligence Logo" 
@@ -189,13 +189,16 @@ export default function App() {
             </div>
             
             {/* Explicit Software Intelligence Brand Tagline */}
-            <div className="mt-3.5 flex flex-col items-center gap-0.5">
-              <span className="text-[11.5px] sm:text-[12px] font-black tracking-[0.18em] text-slate-900 uppercase">
-                ASTRATEQ | Automotive Software Intelligence
-              </span>
-              <span className="text-[10px] font-semibold tracking-[0.14em] text-blue-700 uppercase">
-                Intelligent Systems & Software
-              </span>
+            <div className="mt-3 flex flex-col items-center gap-1.5">
+              <h1 className="text-xl sm:text-2xl font-black tracking-[0.2em] text-slate-900 uppercase">
+                ASTRATEQ
+              </h1>
+              <div className="inline-flex items-center gap-1.5 bg-blue-600/10 border border-blue-600/20 rounded-full px-3.5 py-1">
+                <Cpu className="w-3.5 h-3.5 text-blue-700" />
+                <span className="text-[10.5px] font-extrabold tracking-[0.14em] text-blue-800 uppercase">
+                  Automotive Software Intelligence
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -215,7 +218,7 @@ export default function App() {
             />
             
             {/* Cinematic Gradient Tint */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/20 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/20 pointer-events-none"></div>
 
             {/* Overlapping top-left Concept Visual Badge */}
             <div className="absolute top-3.5 left-3.5 z-10 flex items-center gap-1.5 bg-slate-950/80 backdrop-blur-md rounded-lg py-1 px-2.5 border border-white/25 shadow-sm">
@@ -227,12 +230,12 @@ export default function App() {
           </div>
 
           {/* Hero text section */}
-          <div className="px-6 py-4 flex flex-col gap-3">
-            <h1 className="text-xl md:text-2xl font-extrabold text-white leading-snug tracking-tight mb-2">
-              Privacy-first Driver Awareness Intelligence for Canadian roads.
-            </h1>
+          <div className="px-6 py-5 flex flex-col gap-3">
+            <h2 className="text-xl md:text-2xl font-extrabold text-white leading-snug tracking-tight mb-1">
+              Privacy-First Driver Awareness Intelligence for Canadian Roads
+            </h2>
             
-            <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-4">
+            <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-3">
               Complete a brief simulation to explore your baseline focus profile—without vehicle tracking, hardware dependencies, or third-party data sharing.
             </p>
 
@@ -240,15 +243,15 @@ export default function App() {
             <div className="flex flex-wrap gap-2 pt-1">
               <div className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full py-1 px-3 text-slate-300 text-xs font-semibold">
                 <Shield className="w-3.5 h-3.5 text-cyan-400" />
-                <span>🔒 Privacy by design</span>
+                <span>Privacy by Design</span>
               </div>
               <div className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full py-1 px-3 text-slate-300 text-xs font-semibold">
                 <EyeOff className="w-3.5 h-3.5 text-cyan-400" />
-                <span>🚫 No tracking</span>
+                <span>No Tracking</span>
               </div>
               <div className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-full py-1 px-3 text-slate-300 text-xs font-semibold">
                 <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-                <span>🛠️ No hardware required</span>
+                <span>No Hardware Required</span>
               </div>
             </div>
           </div>
@@ -257,39 +260,45 @@ export default function App() {
         {/* ========================================================================= */}
         {/* 3. PRIMARY CTA ACCENT CARD */}
         {/* ========================================================================= */}
-        <section id="primary-cta" className="bg-slate-900 border border-white/10 rounded-[28px] px-6 py-4 relative overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group">
+        <section id="primary-cta" className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border border-white/10 rounded-[28px] p-6 relative overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group">
           
           {/* Subtle Ambient Accent Glow Grid in corner */}
-          <div className="absolute -top-[60px] -right-[60px] w-32 h-32 rounded-full bg-blue-500/10 blur-2xl pointer-events-none group-hover:bg-blue-500/15 transition-colors duration-300"></div>
+          <div className="absolute -top-[60px] -right-[60px] w-36 h-36 rounded-full bg-blue-500/15 blur-2xl pointer-events-none group-hover:bg-blue-500/20 transition-colors duration-300"></div>
           
           <div className="flex items-center gap-2 mb-2.5">
             <span className="w-4 h-1 bg-blue-500 rounded-full"></span>
-            <span className="text-[9px] font-black tracking-widest text-blue-400 uppercase">
+            <span className="text-[9.5px] font-black tracking-widest text-cyan-400 uppercase">
               IMMEDIATE SIMULATOR ACCESS
             </span>
           </div>
 
           <h2 className="text-lg md:text-xl font-extrabold text-white leading-snug mb-2">
-            Start the 60-second Driver Awareness Simulation
+            Start the 60-Second Driver Awareness Simulation
           </h2>
           
-          <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-4">
+          <p className="text-slate-300 text-[13px] font-medium leading-relaxed mb-5">
             Receive a simulated Driver Awareness Score, Fatigue Risk Profile, and Research Cohort Classification.
           </p>
 
-          {/* Primary Action Button with prominent royal blue styling and scaling effect */}
+          {/* Primary Action Button with glowing gradient */}
           <button 
             onClick={() => { setIsSimulatorOpen(true); resetSim(); }}
-            className="flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-500 text-white rounded-2xl py-4.5 px-6 font-bold text-[15px] shadow-lg shadow-blue-500/25 active:scale-[0.985] hover:scale-[1.015] transition-all duration-200 cursor-pointer text-center border-0"
+            className="flex items-center justify-center gap-2.5 w-full bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-2xl py-4 px-6 font-extrabold text-[15px] shadow-lg shadow-blue-500/25 active:scale-[0.985] hover:scale-[1.01] transition-all duration-200 cursor-pointer text-center border-0 group/btn"
           >
             <span>Start Driver Awareness Simulation</span>
-            <ArrowRight className="w-4 h-4 text-white" strokeWidth={2.5} />
+            <ArrowRight className="w-4.5 h-4.5 text-white transition-transform duration-200 group-hover/btn:translate-x-1" strokeWidth={2.5} />
           </button>
 
           {/* Micro-disclaimer */}
-          <p className="text-slate-400 text-[10.5px] font-semibold text-center mt-3.5 tracking-wide">
-            Free • 60 seconds • No vehicle tracking • No hardware required
-          </p>
+          <div className="flex items-center justify-center gap-2 text-slate-400 text-[10.5px] font-semibold text-center mt-3.5 tracking-wide">
+            <span>Free</span>
+            <span className="text-blue-500">•</span>
+            <span>60 seconds</span>
+            <span className="text-blue-500">•</span>
+            <span>No vehicle tracking</span>
+            <span className="text-blue-500">•</span>
+            <span>Software-only</span>
+          </div>
         </section>
 
         {/* SECTION LABEL UPPERCASE */}
