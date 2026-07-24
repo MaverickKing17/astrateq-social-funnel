@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Shield, 
   Lock, 
@@ -16,7 +16,13 @@ import {
   Car,
   Bell,
   Sparkles,
-  ExternalLink
+  ExternalLink,
+  X,
+  RefreshCw,
+  Award,
+  Zap,
+  CheckCircle2,
+  Copy
 } from 'lucide-react';
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 
@@ -27,30 +33,122 @@ export default function App() {
   // State for interactive accordions
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
+  // Modals state
+  const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
+  const [isUpdatesOpen, setIsUpdatesOpen] = useState(false);
+
+  // Simulation state
+  const [simStep, setSimStep] = useState<1 | 2 | 3>(1);
+  const [commuteType, setCommuteType] = useState('urban');
+  const [weatherCondition, setWeatherCondition] = useState('rain');
+  const [commuteTime, setCommuteTime] = useState('medium');
+  
+  // Interactive reaction test state
+  const [testStatus, setTestStatus] = useState<'idle' | 'waiting' | 'ready' | 'pressed' | 'done'>('idle');
+  const [trials, setTrials] = useState<number[]>([]);
+  const [currentTrial, setCurrentTrial] = useState(1);
+  const [reactionMsg, setReactionMsg] = useState('Tap "Start Reaction Test" when ready.');
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const startTimeRef = useRef<number>(0);
+
+  // Updates form state
+  const [updateEmail, setUpdateEmail] = useState('');
+  const [updateProvince, setUpdateProvince] = useState('ON');
+  const [updateSubscribed, setUpdateSubscribed] = useState(false);
+  const [copiedProfile, setCopiedProfile] = useState(false);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setOutboundParams(window.location.search);
     }
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
-
-  // Helper to preserve incoming query parameters on outbound links
-  const getOutboundUrl = (destUrlStr: string) => {
-    try {
-      const destUrl = new URL(destUrlStr);
-      if (outboundParams) {
-        const currentParams = new URLSearchParams(outboundParams);
-        currentParams.forEach((value, key) => {
-          destUrl.searchParams.set(key, value);
-        });
-      }
-      return destUrl.toString();
-    } catch (e) {
-      return destUrlStr;
-    }
-  };
 
   const toggleAccordion = (id: string) => {
     setOpenAccordion(openAccordion === id ? null : id);
+  };
+
+  // Reset simulator
+  const resetSim = () => {
+    setSimStep(1);
+    setTestStatus('idle');
+    setTrials([]);
+    setCurrentTrial(1);
+    setReactionMsg('Tap "Start Reaction Test" when ready.');
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  // Start trial
+  const startTrial = () => {
+    setTestStatus('waiting');
+    setReactionMsg('Wait for the signal to turn BLUE...');
+    const randomDelay = Math.floor(Math.random() * 2000) + 1500; // 1.5s - 3.5s
+    
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setTestStatus('ready');
+      setReactionMsg('TAP NOW!');
+      startTimeRef.current = Date.now();
+    }, randomDelay);
+  };
+
+  // Handle tap on reaction box
+  const handleReactionTap = () => {
+    if (testStatus === 'waiting') {
+      // Tapped too early
+      if (timerRef.current) clearTimeout(timerRef.current);
+      setReactionMsg('Too early! Wait for the blue signal.');
+      setTestStatus('idle');
+    } else if (testStatus === 'ready') {
+      const elapsed = Date.now() - startTimeRef.current;
+      const newTrials = [...trials, elapsed];
+      setTrials(newTrials);
+
+      if (currentTrial < 3) {
+        setTestStatus('pressed');
+        setReactionMsg(`Trial ${currentTrial} result: ${elapsed}ms. Preparing next trial...`);
+        setTimeout(() => {
+          setCurrentTrial(prev => prev + 1);
+          startTrial();
+        }, 1200);
+      } else {
+        setTestStatus('done');
+        setReactionMsg('Simulation Complete! Calculating baseline intelligence profile...');
+        setTimeout(() => {
+          setSimStep(3);
+        }, 1000);
+      }
+    }
+  };
+
+  // Calculate score
+  const avgReactionTime = trials.length > 0 
+    ? Math.round(trials.reduce((a, b) => a + b, 0) / trials.length) 
+    : 280;
+
+  // Compute Awareness Score
+  const awarenessScore = Math.min(99, Math.max(65, Math.round(100 - (avgReactionTime - 200) * 0.15)));
+  
+  const getFatigueLevel = () => {
+    if (avgReactionTime < 270) return { label: 'Low Risk', color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' };
+    if (avgReactionTime < 350) return { label: 'Moderate Risk', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' };
+    return { label: 'High Strain', color: 'text-rose-400', bg: 'bg-rose-500/10 border-rose-500/20' };
+  };
+
+  const copyProfile = () => {
+    const text = `Astrateq Driver Awareness Profile:\n- Score: ${awarenessScore}/100\n- Avg Reaction: ${avgReactionTime}ms\n- Fatigue Profile: ${getFatigueLevel().label}\n- Cohort: Canadian ${updateProvince} Benchmark`;
+    navigator.clipboard.writeText(text);
+    setCopiedProfile(true);
+    setTimeout(() => setCopiedProfile(false), 2000);
+  };
+
+  const handleUpdateSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (updateEmail) {
+      setUpdateSubscribed(true);
+    }
   };
 
   return (
@@ -180,15 +278,13 @@ export default function App() {
           </p>
 
           {/* Primary Action Button with prominent royal blue styling and scaling effect */}
-          <a 
-            href={getOutboundUrl("https://score.astrateqgadgets.com")}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-500 text-white rounded-2xl py-4.5 px-6 font-bold text-[15px] shadow-lg shadow-blue-500/25 active:scale-[0.985] hover:scale-[1.015] transition-all duration-200 cursor-pointer text-center decoration-none"
+          <button 
+            onClick={() => { setIsSimulatorOpen(true); resetSim(); }}
+            className="flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-500 text-white rounded-2xl py-4.5 px-6 font-bold text-[15px] shadow-lg shadow-blue-500/25 active:scale-[0.985] hover:scale-[1.015] transition-all duration-200 cursor-pointer text-center border-0"
           >
             <span>Start Driver Awareness Simulation</span>
             <ArrowRight className="w-4 h-4 text-white" strokeWidth={2.5} />
-          </a>
+          </button>
 
           {/* Micro-disclaimer */}
           <p className="text-slate-400 text-[10.5px] font-semibold text-center mt-3.5 tracking-wide">
@@ -468,11 +564,9 @@ export default function App() {
         <footer id="legal-footer" className="flex flex-col gap-5 mt-2">
           
           {/* Join Research Updates Link Component */}
-          <a 
-            href={getOutboundUrl("https://score.astrateqgadgets.com?intent=updates")}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center justify-between px-6 py-4 bg-slate-900 border border-white/10 rounded-2xl shadow-sm hover:border-blue-500/50 hover:bg-slate-900/90 active:scale-[0.99] transition-all duration-200 group decoration-none"
+          <button 
+            onClick={() => setIsUpdatesOpen(true)}
+            className="w-full flex items-center justify-between px-6 py-4 bg-slate-900 border border-white/10 rounded-2xl shadow-sm hover:border-blue-500/50 hover:bg-slate-900/90 active:scale-[0.99] transition-all duration-200 group text-left cursor-pointer"
           >
             <div className="flex items-center gap-3.5">
               <div className="w-9 h-9 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 flex-shrink-0">
@@ -493,7 +587,7 @@ export default function App() {
               </span>
               <ChevronRight className="w-4 h-4 text-blue-400 transition-transform duration-200 group-hover:translate-x-1" strokeWidth={2.5} />
             </div>
-          </a>
+          </button>
 
           {/* Pre-Launch Validation Notice Card */}
           <div className="bg-slate-900 border border-white/10 rounded-[24px] px-6 py-4 shadow-md">
@@ -562,6 +656,431 @@ export default function App() {
         </footer>
 
       </div>
+
+      {/* ========================================================================= */}
+      {/* 60-SECOND DRIVER AWARENESS SIMULATOR MODAL */}
+      {/* ========================================================================= */}
+      {isSimulatorOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
+          <div className="bg-slate-900 border border-white/15 rounded-[28px] w-full max-w-[500px] max-h-[90vh] overflow-y-auto p-6 shadow-2xl text-white relative flex flex-col gap-5">
+            
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8.5 h-8.5 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                  <Activity className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-[15px] font-extrabold text-white leading-tight">
+                    Driver Awareness Simulator
+                  </h3>
+                  <p className="text-[10px] font-bold text-blue-400 uppercase tracking-wider">
+                    Software Intelligence Benchmark
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setIsSimulatorOpen(false)}
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Step Progress Pills */}
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div className={`py-1.5 rounded-lg text-[10.5px] font-bold border transition-all ${simStep === 1 ? 'bg-blue-600 border-blue-500 text-white' : 'bg-white/5 border-white/10 text-slate-400'}`}>
+                1. Context
+              </div>
+              <div className={`py-1.5 rounded-lg text-[10.5px] font-bold border transition-all ${simStep === 2 ? 'bg-blue-600 border-blue-500 text-white' : 'bg-white/5 border-white/10 text-slate-400'}`}>
+                2. Focus Test
+              </div>
+              <div className={`py-1.5 rounded-lg text-[10.5px] font-bold border transition-all ${simStep === 3 ? 'bg-blue-600 border-blue-500 text-white' : 'bg-white/5 border-white/10 text-slate-400'}`}>
+                3. Profile
+              </div>
+            </div>
+
+            {/* STEP 1: CONTEXT SELECTION */}
+            {simStep === 1 && (
+              <div className="flex flex-col gap-4 animate-fade-in">
+                <p className="text-[12.5px] text-slate-300 leading-relaxed font-medium">
+                  Set your Canadian driving environment parameters to calibrate your baseline driver focus calculation:
+                </p>
+
+                {/* Commute Type */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                    Primary Route Type
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { id: 'urban', label: 'Urban Grid' },
+                      { id: 'highway', label: '400-Series Highway' },
+                      { id: 'rural', label: 'Rural / Secondary' },
+                      { id: 'longdistance', label: 'Intercity Commute' }
+                    ].map(item => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setCommuteType(item.id)}
+                        className={`py-2.5 px-3 rounded-xl border text-xs font-bold text-left transition-all cursor-pointer ${commuteType === item.id ? 'bg-blue-600/30 border-blue-500 text-white shadow-sm' : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'}`}
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Weather */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                    Typical Weather Conditions
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { id: 'clear', label: '☀️ Clear & Dry' },
+                      { id: 'rain', label: '🌧️ Heavy Rain' },
+                      { id: 'snow', label: '❄️ Winter Snow/Ice' },
+                      { id: 'fog', label: '🌙 Night / Low Vision' }
+                    ].map(item => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setWeatherCondition(item.id)}
+                        className={`py-2.5 px-3 rounded-xl border text-xs font-bold text-left transition-all cursor-pointer ${weatherCondition === item.id ? 'bg-blue-600/30 border-blue-500 text-white shadow-sm' : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'}`}
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Commute Duration */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                    Daily Commute Duration
+                  </label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { id: 'short', label: '< 30 mins' },
+                      { id: 'medium', label: '30 - 60 mins' },
+                      { id: 'long', label: '60+ mins' }
+                    ].map(item => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setCommuteTime(item.id)}
+                        className={`py-2 px-2.5 rounded-xl border text-xs font-bold text-center transition-all cursor-pointer ${commuteTime === item.id ? 'bg-blue-600/30 border-blue-500 text-white shadow-sm' : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'}`}
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setSimStep(2)}
+                  className="mt-2 w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-[0.98] transition-all"
+                >
+                  <span>Proceed to Focus Test</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            )}
+
+            {/* STEP 2: INTERACTIVE REACTION & FOCUS TEST */}
+            {simStep === 2 && (
+              <div className="flex flex-col gap-4 animate-fade-in text-center">
+                <div className="flex items-center justify-between text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  <span>Trial {currentTrial} of 3</span>
+                  <span>Interactive Reaction Speed</span>
+                </div>
+
+                {/* Reaction Area Box */}
+                <div 
+                  onClick={testStatus === 'ready' || testStatus === 'waiting' ? handleReactionTap : undefined}
+                  className={`min-h-[160px] rounded-2xl border-2 flex flex-col items-center justify-center p-6 transition-all duration-200 select-none ${
+                    testStatus === 'ready' 
+                      ? 'bg-cyan-500 border-cyan-300 text-slate-950 cursor-pointer shadow-lg shadow-cyan-500/30 scale-[1.02]' 
+                      : testStatus === 'waiting'
+                      ? 'bg-amber-500/20 border-amber-500/40 text-amber-300 cursor-pointer'
+                      : testStatus === 'pressed'
+                      ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
+                      : 'bg-slate-950 border-white/15 text-slate-300'
+                  }`}
+                >
+                  {testStatus === 'ready' && (
+                    <div className="flex flex-col items-center gap-1 animate-bounce">
+                      <Zap className="w-10 h-10 text-slate-950" />
+                      <span className="text-xl font-black uppercase tracking-widest">TAP NOW!</span>
+                    </div>
+                  )}
+
+                  {testStatus === 'waiting' && (
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="w-5 h-5 rounded-full bg-amber-400 animate-ping"></div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
+                        Wait for Blue Signal...
+                      </span>
+                    </div>
+                  )}
+
+                  {testStatus === 'pressed' && (
+                    <div className="flex flex-col items-center gap-1">
+                      <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+                      <span className="text-sm font-bold text-emerald-300">{reactionMsg}</span>
+                    </div>
+                  )}
+
+                  {testStatus === 'idle' && (
+                    <div className="flex flex-col items-center gap-3">
+                      <Activity className="w-8 h-8 text-blue-400" />
+                      <p className="text-xs font-semibold text-slate-300">
+                        Tap the button below to start Trial {currentTrial}. When the box turns <span className="text-cyan-400 font-bold">CYAN BLUE</span>, tap inside as fast as you can!
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {testStatus === 'idle' && (
+                  <button
+                    type="button"
+                    onClick={startTrial}
+                    className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-[0.98] transition-all"
+                  >
+                    <Zap className="w-4 h-4" />
+                    <span>Start Trial {currentTrial}</span>
+                  </button>
+                )}
+
+                {trials.length > 0 && (
+                  <div className="flex items-center justify-center gap-3 text-xs font-bold text-slate-400 border-t border-white/10 pt-3">
+                    {trials.map((t, idx) => (
+                      <span key={idx} className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-lg">
+                        T{idx + 1}: <strong className="text-cyan-400">{t}ms</strong>
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* STEP 3: RESULTS & PROFILE */}
+            {simStep === 3 && (
+              <div className="flex flex-col gap-4 animate-fade-in">
+                
+                {/* Score Hero Card */}
+                <div className="bg-gradient-to-b from-blue-950/80 to-slate-950 border border-blue-500/30 rounded-2xl p-5 text-center flex flex-col items-center gap-2 relative overflow-hidden shadow-lg">
+                  <div className="absolute top-2 right-2 flex items-center gap-1 bg-blue-500/20 border border-blue-500/30 rounded-full px-2.5 py-0.5 text-[9px] font-bold text-blue-300 uppercase">
+                    <Sparkles className="w-3 h-3 text-cyan-400" />
+                    <span>Calculated Profile</span>
+                  </div>
+
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                    Driver Awareness Score
+                  </span>
+
+                  <div className="text-4xl font-black text-white tracking-tight flex items-baseline justify-center gap-1 my-1">
+                    <span className="text-cyan-400">{awarenessScore}</span>
+                    <span className="text-slate-500 text-lg font-bold">/100</span>
+                  </div>
+
+                  <div className="inline-flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-full text-xs font-bold text-cyan-300">
+                    <Award className="w-3.5 h-3.5" />
+                    <span>Optimal Attention Recovery Margin</span>
+                  </div>
+                </div>
+
+                {/* Breakdown Metrics Grid */}
+                <div className="grid grid-cols-2 gap-2.5">
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col gap-1">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                      Avg Response Time
+                    </span>
+                    <span className="text-base font-extrabold text-white">
+                      {avgReactionTime} ms
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-medium">
+                      Fast visual reaction
+                    </span>
+                  </div>
+
+                  <div className={`border rounded-xl p-3 flex flex-col gap-1 ${getFatigueLevel().bg}`}>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                      Fatigue Risk Profile
+                    </span>
+                    <span className={`text-base font-extrabold ${getFatigueLevel().color}`}>
+                      {getFatigueLevel().label}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-medium">
+                      Baseline focus stability
+                    </span>
+                  </div>
+                </div>
+
+                {/* Cohort Classification */}
+                <div className="bg-slate-950 border border-white/10 rounded-xl p-3.5 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                      <Shield className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                        Canadian Research Cohort
+                      </span>
+                      <span className="text-xs font-extrabold text-white">
+                        {updateProvince} Urban Commuter Benchmark
+                      </span>
+                    </div>
+                  </div>
+                  <Check className="w-4 h-4 text-emerald-400" />
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={copyProfile}
+                    className="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer border border-white/10 text-xs transition-colors"
+                  >
+                    {copiedProfile ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                    <span>{copiedProfile ? 'Profile Copied to Clipboard!' : 'Copy Intelligence Profile'}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => { setIsSimulatorOpen(false); setIsUpdatesOpen(true); }}
+                    className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-xs shadow-md active:scale-[0.98] transition-all"
+                  >
+                    <Bell className="w-4 h-4" />
+                    <span>Join Research Updates with Profile</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={resetSim}
+                    className="text-slate-400 hover:text-slate-200 text-xs font-semibold py-1 flex items-center justify-center gap-1 cursor-pointer transition-colors"
+                  >
+                    <RefreshCw className="w-3 h-3" />
+                    <span>Retake 60-Second Simulation</span>
+                  </button>
+                </div>
+
+              </div>
+            )}
+
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* RESEARCH UPDATES MODAL */}
+      {/* ========================================================================= */}
+      {isUpdatesOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
+          <div className="bg-slate-900 border border-white/15 rounded-[28px] w-full max-w-[460px] p-6 shadow-2xl text-white relative flex flex-col gap-5">
+            
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8.5 h-8.5 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                  <Bell className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-[15px] font-extrabold text-white leading-tight">
+                    Join Astrateq Research Updates
+                  </h3>
+                  <p className="text-[10px] font-bold text-blue-400 uppercase tracking-wider">
+                    Automotive Software Intelligence
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={() => { setIsUpdatesOpen(false); setUpdateSubscribed(false); }}
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {updateSubscribed ? (
+              <div className="flex flex-col items-center text-center gap-3 py-4 animate-fade-in">
+                <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                  <CheckCircle2 className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-extrabold text-white">Registered for Research Cohort</h4>
+                <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
+                  Thank you! You have been enrolled in Astrateq's Canadian driver awareness research group (<strong className="text-blue-400">{updateProvince} Cohort</strong>). We will notify you when new milestone features are released.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setIsUpdatesOpen(false)}
+                  className="mt-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-3 px-6 rounded-xl cursor-pointer transition-colors"
+                >
+                  Done
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleUpdateSubmit} className="flex flex-col gap-4">
+                <p className="text-xs text-slate-300 leading-relaxed font-medium">
+                  Follow pre-launch research milestones and driver focus benchmarking updates directly from our Toronto research team.
+                </p>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                    Email Address
+                  </label>
+                  <input 
+                    type="email"
+                    required
+                    placeholder="driver@example.ca"
+                    value={updateEmail}
+                    onChange={(e) => setUpdateEmail(e.target.value)}
+                    className="w-full bg-slate-950 border border-white/15 rounded-xl px-4 py-3 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                    Province / Territory
+                  </label>
+                  <select
+                    value={updateProvince}
+                    onChange={(e) => setUpdateProvince(e.target.value)}
+                    className="w-full bg-slate-950 border border-white/15 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-blue-500 transition-colors"
+                  >
+                    <option value="ON">Ontario (ON)</option>
+                    <option value="BC">British Columbia (BC)</option>
+                    <option value="AB">Alberta (AB)</option>
+                    <option value="QC">Quebec (QC)</option>
+                    <option value="NS">Nova Scotia (NS)</option>
+                    <option value="MB">Manitoba (MB)</option>
+                    <option value="SK">Saskatchewan (SK)</option>
+                    <option value="NB">New Brunswick (NB)</option>
+                    <option value="NL">Newfoundland & Labrador (NL)</option>
+                    <option value="PE">Prince Edward Island (PE)</option>
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  className="mt-2 w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-[0.98] transition-all text-xs"
+                >
+                  <Bell className="w-4 h-4" />
+                  <span>Subscribe to Research Updates</span>
+                </button>
+
+                <p className="text-[10px] text-slate-400 text-center font-medium">
+                  🔒 Privacy guarantee: No spam. Your email will never be shared or sold.
+                </p>
+              </form>
+            )}
+
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
