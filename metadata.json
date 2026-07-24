@@ -1,6 +1,6 @@
 {
-  "name": "Astrateq Gadgets Link-in-Bio",
-  "description": "Privacy-first vehicle intelligence pre-launch link-in-bio page for Astrateq Gadgets.",
+  "name": "Astrateq Automotive Software Intelligence",
+  "description": "Privacy-first driver awareness software platform research for Canadian roads by Astrateq.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

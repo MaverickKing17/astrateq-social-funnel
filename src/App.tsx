@@ -84,16 +84,21 @@ export default function App() {
             <div className="p-1 bg-white rounded-2xl shadow-md border border-slate-200/80">
               <img 
                 src="https://i.imgur.com/8Qoqkef.png" 
-                alt="Astrateq Gadgets Logo" 
+                alt="Astrateq Automotive Software Intelligence Logo" 
                 className="w-14 h-14 rounded-xl object-cover select-none"
                 referrerPolicy="no-referrer"
               />
             </div>
             
-            {/* Tracking-Wide Uppercase Tagline */}
-            <p className="text-[10px] font-black tracking-[0.25em] text-slate-500 uppercase mt-4">
-              DRIVE SAFER. DRIVE SMARTER.
-            </p>
+            {/* Explicit Software Intelligence Brand Tagline */}
+            <div className="mt-3.5 flex flex-col items-center gap-0.5">
+              <span className="text-[11.5px] sm:text-[12px] font-black tracking-[0.18em] text-slate-900 uppercase">
+                ASTRATEQ | Automotive Software Intelligence
+              </span>
+              <span className="text-[10px] font-semibold tracking-[0.14em] text-blue-700 uppercase">
+                Intelligent Systems & Software
+              </span>
+            </div>
           </div>
         </div>
 
@@ -501,7 +506,7 @@ export default function App() {
               </h4>
             </div>
             <p className="text-slate-300 text-[11.5px] leading-relaxed border-l-2 border-blue-500/30 pl-3">
-              Astrateq Gadgets is currently conducting early-stage Canadian research to check demand and validate consumer interest in this software concept. This pre-launch simulation does not represent a finished consumer product, nor does it log live vehicular telemetry.
+              Astrateq is currently conducting early-stage Canadian research to check demand and validate consumer interest in this software intelligence platform concept. This pre-launch simulation does not represent a finished consumer product, nor does it require physical hardware or log live vehicular telemetry.
             </p>
           </div>
 
@@ -551,7 +556,7 @@ export default function App() {
 
           {/* Centered fine-print legal line */}
           <div className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">
-            © 2026 ASTRATEQ GADGETS • TORONTO, ON • CANADA
+            © 2026 ASTRATEQ • AUTOMOTIVE SOFTWARE INTELLIGENCE • TORONTO, ON • CANADA
           </div>
 
         </footer>
