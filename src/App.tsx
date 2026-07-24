@@ -145,9 +145,24 @@ export default function App() {
   const awarenessScore = Math.min(99, Math.max(65, Math.round(100 - (avgReactionTime - 200) * 0.15)));
   
   const getFatigueLevel = () => {
-    if (avgReactionTime < 270) return { label: 'Low Risk', color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' };
-    if (avgReactionTime < 350) return { label: 'Moderate Risk', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' };
-    return { label: 'High Strain', color: 'text-rose-400', bg: 'bg-rose-500/10 border-rose-500/20' };
+    if (avgReactionTime < 270) return { 
+      label: 'Optimal Response', 
+      color: 'text-emerald-400', 
+      bg: 'bg-emerald-500/10 border-emerald-500/20',
+      desc: 'High cognitive awareness margin'
+    };
+    if (avgReactionTime < 350) return { 
+      label: 'Moderate Strain', 
+      color: 'text-amber-300', 
+      bg: 'bg-amber-500/10 border-amber-500/20',
+      desc: 'Standard commute focus baseline'
+    };
+    return { 
+      label: 'High Strain', 
+      color: 'text-amber-200', 
+      bg: 'bg-amber-950/40 border-amber-500/30',
+      desc: 'Typical for urban grid congestion'
+    };
   };
 
   const copyProfile = () => {
@@ -1006,15 +1021,15 @@ export default function App() {
                         </span>
                       </div>
 
-                      <div className={`border rounded-xl p-3 flex flex-col gap-1 ${getFatigueLevel().bg}`}>
+                      <div className={`border rounded-xl p-3 flex flex-col gap-1 transition-all ${getFatigueLevel().bg}`}>
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                           Fatigue Risk Profile
                         </span>
                         <span className={`text-base font-extrabold ${getFatigueLevel().color}`}>
                           {getFatigueLevel().label}
                         </span>
-                        <span className="text-[10px] text-slate-400 font-medium">
-                          Baseline focus stability
+                        <span className="text-[10.5px] text-slate-300 font-semibold leading-tight">
+                          {getFatigueLevel().desc}
                         </span>
                       </div>
                     </div>
@@ -1037,38 +1052,42 @@ export default function App() {
                       <Check className="w-4 h-4 text-emerald-400" />
                     </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex flex-col gap-2 pt-2">
-                      <button
-                        type="button"
-                        onClick={copyProfile}
-                        className="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer border border-white/10 text-xs transition-colors"
-                      >
-                        {copiedProfile ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                        <span>{copiedProfile ? 'Profile Copied to Clipboard!' : 'Copy Intelligence Profile'}</span>
-                      </button>
-
+                    {/* Action Buttons with Refined Hierarchy */}
+                    <div className="flex flex-col gap-2.5 pt-2">
+                      {/* PRIMARY CONVERSION CTA */}
                       <button
                         type="button"
                         onClick={() => { setIsSimulatorOpen(false); setIsUpdatesOpen(true); }}
-                        className="w-full bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-xs shadow-lg shadow-blue-500/25 active:scale-[0.98] transition-all"
+                        className="w-full bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-xs uppercase tracking-wider shadow-lg shadow-blue-500/25 border border-blue-400/30 active:scale-[0.985] hover:scale-[1.01] transition-all group"
                       >
-                        <Bell className="w-4 h-4" />
+                        <Bell className="w-4 h-4 text-cyan-300 group-hover:scale-110 transition-transform" />
                         <span>Join Research Updates with Profile</span>
+                        <ArrowRight className="w-4 h-4 text-white ml-auto" />
                       </button>
 
+                      {/* SECONDARY UTILITY ACTION */}
+                      <button
+                        type="button"
+                        onClick={copyProfile}
+                        className="w-full bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer border border-white/10 text-xs transition-colors"
+                      >
+                        {copiedProfile ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-slate-400" />}
+                        <span>{copiedProfile ? 'Profile Copied to Clipboard!' : 'Copy Intelligence Profile'}</span>
+                      </button>
+
+                      {/* TERTIARY RETAKE SIMULATION ACTION */}
                       <button
                         type="button"
                         onClick={resetSim}
-                        className="text-slate-400 hover:text-slate-200 text-xs font-semibold py-1 flex items-center justify-center gap-1 cursor-pointer transition-colors"
+                        className="text-slate-400 hover:text-slate-200 text-xs font-semibold py-1 flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
                       >
-                        <RefreshCw className="w-3 h-3" />
+                        <RefreshCw className="w-3.5 h-3.5 text-slate-400" />
                         <span>Retake 60-Second Simulation</span>
                       </button>
 
-                      {/* IN-MODAL PRIVACY MICRO-COPY */}
-                      <div className="flex items-center justify-center gap-1.5 text-[11px] font-semibold text-slate-400 text-center bg-slate-950/60 border border-white/5 py-2 px-3 rounded-xl mt-1">
-                        <Lock className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                      {/* IN-MODAL PRIVACY MICRO-COPY WITH GENEROUS BOTTOM PADDING */}
+                      <div className="flex items-center justify-center gap-2 text-[11px] font-semibold text-slate-300 text-center bg-slate-950/80 border border-white/10 py-3 px-4 rounded-xl mt-3 mb-2 shadow-sm">
+                        <Lock className="w-4 h-4 text-cyan-400 shrink-0" />
                         <span>No personal data or telematics are logged or stored.</span>
                       </div>
                     </div>
