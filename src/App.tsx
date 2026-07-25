@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { jsPDF } from 'jspdf';
 import { 
   Shield, 
   Lock, 
@@ -33,7 +34,8 @@ import {
   GitCommit,
   SlidersHorizontal,
   TrendingUp,
-  Layers
+  Layers,
+  Download
 } from 'lucide-react';
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 import simVehicle3d from './assets/images/sim_vehicle_3d_1784999034628.jpg';
@@ -244,6 +246,208 @@ export default function App() {
     navigator.clipboard.writeText(text);
     setCopiedProfile(true);
     setTimeout(() => setCopiedProfile(false), 3000);
+  };
+
+  const generatePDFReport = () => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+
+    // Dark Header Banner
+    doc.setFillColor(11, 19, 36);
+    doc.rect(0, 0, pageWidth, 42, 'F');
+
+    // Astrateq Logo / Title
+    doc.setTextColor(34, 211, 238); // Cyan-400 (#22d3ee)
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
+    doc.text('ASTRATEQ', 15, 20);
+
+    doc.setFontSize(8.5);
+    doc.setTextColor(148, 163, 184); // Slate-400
+    doc.setFont('helvetica', 'bold');
+    doc.text('AUTOMOTIVE SOFTWARE INTELLIGENCE • PRIVACY-FIRST RESEARCH', 15, 28);
+    doc.setFont('helvetica', 'normal');
+    doc.text('DRIVER AWARENESS PROFILE REPORT', 15, 34);
+
+    // Right-aligned report metadata
+    doc.setFontSize(9);
+    doc.setTextColor(226, 232, 240);
+    doc.text('ANONYMOUS REPORT', pageWidth - 15, 18, { align: 'right' });
+    doc.setFontSize(8);
+    doc.setTextColor(148, 163, 184);
+    doc.text(`Generated: ${new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' })}`, pageWidth - 15, 25, { align: 'right' });
+    doc.text(`Profile Hash: #AST-${Math.floor(100000 + Math.random() * 900000)}`, pageWidth - 15, 31, { align: 'right' });
+
+    // Decorative Cyan Accent Line
+    doc.setDrawColor(34, 211, 238);
+    doc.setLineWidth(1.2);
+    doc.line(0, 42, pageWidth, 42);
+
+    // Main Overall Score Hero Banner Box
+    doc.setFillColor(240, 249, 255); // Light Cyan/Blue background
+    doc.roundedRect(15, 48, pageWidth - 30, 40, 4, 4, 'F');
+    doc.setDrawColor(186, 230, 253);
+    doc.setLineWidth(0.8);
+    doc.roundedRect(15, 48, pageWidth - 30, 40, 4, 4, 'S');
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(71, 85, 105);
+    doc.text('OVERALL COGNITIVE AWARENESS SCORE', 25, 61);
+
+    doc.setFontSize(32);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(2, 132, 199); // Cyan blue
+    doc.text(`${awarenessScore}`, 25, 77);
+    
+    doc.setFontSize(14);
+    doc.setTextColor(100, 116, 139);
+    doc.text('/ 100', 68, 77);
+
+    // Status pill on the right side of score card
+    doc.setFillColor(224, 242, 254);
+    doc.roundedRect(105, 56, pageWidth - 120, 24, 3, 3, 'F');
+    doc.setFontSize(9.5);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(3, 105, 161);
+    doc.text('Optimal Attention Recovery Margin', 110, 66);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(51, 65, 85);
+    doc.text(`Focus Assessment Velocity: ${avgReactionTime} ms avg`, 110, 73);
+
+    // Section 1: Driving Context Baseline
+    doc.setTextColor(15, 23, 42);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text('1. SIMULATED DRIVING CONTEXT BASELINE', 15, 102);
+
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(51, 65, 85);
+    
+    const routeLabel = commuteType === 'urban' ? 'Urban Grid Traffic & Signals' : commuteType === 'highway' ? '400-Series Highway High-Speed Cruising' : commuteType === 'rural' ? 'Rural Secondary Variable Pavement' : 'Intercity Long-Haul Endurance';
+    const weatherLabel = weatherCondition === 'clear' ? 'Clear & Dry Conditions' : weatherCondition === 'rain' ? 'Heavy Rain & Surface Water' : weatherCondition === 'snow' ? 'Winter Snow, Ice & Slush' : 'Night Vision & Low Visibility';
+    const durationLabel = commuteTime === 'short' ? '< 30 Minutes Short Commute' : commuteTime === 'medium' ? '30 - 60 Minutes Medium Commute' : '60+ Minutes Extended Commute';
+
+    doc.text(`• Primary Route Environment:  ${routeLabel}`, 20, 111);
+    doc.text(`• Environmental Weather:      ${weatherLabel}`, 20, 119);
+    doc.text(`• Daily Commute Duration:     ${durationLabel}`, 20, 127);
+
+    // Section 2: Cognitive Metrics Breakdown
+    doc.setTextColor(15, 23, 42);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text('2. COGNITIVE AWARENESS METRICS BREAKDOWN', 15, 142);
+
+    const attention = getAttentionStability();
+    const fatigue = getFatigueRisk();
+    const complexity = getEnvironmentalComplexity();
+
+    const cardWidth = (pageWidth - 40) / 3;
+
+    // Metric Card 1: Attention
+    doc.setFillColor(248, 250, 252);
+    doc.roundedRect(15, 148, cardWidth, 34, 3, 3, 'F');
+    doc.setDrawColor(226, 232, 240);
+    doc.roundedRect(15, 148, cardWidth, 34, 3, 3, 'S');
+
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(100, 116, 139);
+    doc.text('ATTENTION STABILITY', 20, 156);
+
+    doc.setFontSize(10.5);
+    doc.setTextColor(14, 116, 144);
+    doc.text(attention.label, 20, 165);
+
+    doc.setFontSize(7.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(71, 85, 105);
+    const attLines = doc.splitTextToSize(attention.desc, cardWidth - 10);
+    doc.text(attLines, 20, 172);
+
+    // Metric Card 2: Fatigue Risk
+    doc.setFillColor(248, 250, 252);
+    doc.roundedRect(15 + cardWidth + 5, 148, cardWidth, 34, 3, 3, 'F');
+    doc.setDrawColor(226, 232, 240);
+    doc.roundedRect(15 + cardWidth + 5, 148, cardWidth, 34, 3, 3, 'S');
+
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(100, 116, 139);
+    doc.text('FATIGUE RISK', 20 + cardWidth + 5, 156);
+
+    doc.setFontSize(10.5);
+    doc.setTextColor(16, 185, 129);
+    doc.text(fatigue.label, 20 + cardWidth + 5, 165);
+
+    doc.setFontSize(7.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(71, 85, 105);
+    const fatLines = doc.splitTextToSize(fatigue.desc, cardWidth - 10);
+    doc.text(fatLines, 20 + cardWidth + 5, 172);
+
+    // Metric Card 3: Environmental Complexity
+    doc.setFillColor(248, 250, 252);
+    doc.roundedRect(15 + (cardWidth + 5) * 2, 148, cardWidth, 34, 3, 3, 'F');
+    doc.setDrawColor(226, 232, 240);
+    doc.roundedRect(15 + (cardWidth + 5) * 2, 148, cardWidth, 34, 3, 3, 'S');
+
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(100, 116, 139);
+    doc.text('COMPLEXITY', 20 + (cardWidth + 5) * 2, 156);
+
+    doc.setFontSize(10.5);
+    doc.setTextColor(217, 119, 6);
+    doc.text(complexity.label, 20 + (cardWidth + 5) * 2, 165);
+
+    doc.setFontSize(7.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(71, 85, 105);
+    const compLines = doc.splitTextToSize(complexity.desc, cardWidth - 10);
+    doc.text(compLines, 20 + (cardWidth + 5) * 2, 172);
+
+    // Section 3: Educational Insights
+    doc.setTextColor(15, 23, 42);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text('3. RESEARCH & COGNITIVE ANALYSIS', 15, 196);
+
+    doc.setFillColor(240, 249, 255);
+    doc.roundedRect(15, 202, pageWidth - 30, 32, 3, 3, 'F');
+    doc.setDrawColor(186, 230, 253);
+    doc.roundedRect(15, 202, pageWidth - 30, 32, 3, 3, 'S');
+
+    doc.setFontSize(8.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(30, 58, 138);
+    const insightLines = doc.splitTextToSize(getEducationalInsight(), pageWidth - 42);
+    doc.text(insightLines, 21, 212);
+
+    // Section 4: Privacy & Compliance Verification Box
+    doc.setFillColor(241, 245, 249);
+    doc.roundedRect(15, 242, pageWidth - 30, 20, 3, 3, 'F');
+    doc.setDrawColor(203, 213, 225);
+    doc.roundedRect(15, 242, pageWidth - 30, 20, 3, 3, 'S');
+
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(51, 65, 85);
+    doc.text('ASTRATEQ ZERO-TELEMATICS PRIVACY VERIFICATION', 21, 250);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(100, 116, 139);
+    doc.text('This simulation profile is computed in-memory. No vehicle GPS tracking, CAN-bus, or personal identifiers are stored.', 21, 256);
+
+    // Footer
+    doc.setFontSize(7.5);
+    doc.setTextColor(148, 163, 184);
+    doc.text('Astrateq Automotive Software Intelligence Research • Canada', 15, 278);
+    doc.text('Page 1 of 1', pageWidth - 15, 278, { align: 'right' });
+
+    doc.save(`Astrateq_Driver_Awareness_Profile_${awarenessScore}.pdf`);
   };
 
   const handleUpdateSubmit = (e: React.FormEvent) => {
@@ -1637,23 +1841,32 @@ export default function App() {
                     )}
 
                     {/* SECONDARY UTILITY ACTIONS */}
-                    <div className="grid grid-cols-2 gap-2 mt-1">
+                    <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mt-1">
+                      <button
+                        type="button"
+                        onClick={generatePDFReport}
+                        className="bg-cyan-950/90 hover:bg-cyan-900/90 text-cyan-300 hover:text-white font-extrabold py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-cyan-500/40 text-[11px] sm:text-xs transition-all shadow-md shadow-cyan-950/40 active:scale-[0.985] group"
+                      >
+                        <Download className="w-3.5 h-3.5 text-cyan-400 shrink-0 group-hover:scale-110 transition-transform" />
+                        <span className="truncate">Download PDF</span>
+                      </button>
+
                       <button
                         type="button"
                         onClick={() => setIsFeedbackOpen(!isFeedbackOpen)}
-                        className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-xs transition-colors"
+                        className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-[11px] sm:text-xs transition-colors"
                       >
-                        <MessageSquare className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>Share Feedback</span>
+                        <MessageSquare className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                        <span className="truncate">Feedback</span>
                       </button>
 
                       <button
                         type="button"
                         onClick={copyProfile}
-                        className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-xs transition-colors"
+                        className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-[11px] sm:text-xs transition-colors"
                       >
-                        {copiedProfile ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
-                        <span>{copiedProfile ? 'Copied!' : 'Copy Profile'}</span>
+                        {copiedProfile ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" /> : <Copy className="w-3.5 h-3.5 text-slate-400 shrink-0" />}
+                        <span className="truncate">{copiedProfile ? 'Copied!' : 'Copy'}</span>
                       </button>
                     </div>
 
