@@ -838,15 +838,93 @@ export default function App() {
                     <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-[#0b132b] border border-cyan-500/20 rounded-2xl p-6 relative overflow-hidden shadow-xl flex flex-col items-center text-center">
                       
                       {/* Radial glowing pulse background */}
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
                       
-                      {/* Vehicle Contour & Pulse ring */}
-                      <div className="relative mb-4 mt-2">
-                        <div className="w-20 h-20 rounded-full bg-cyan-950/80 border-2 border-cyan-400/40 flex items-center justify-center text-cyan-300 shadow-lg shadow-cyan-500/20">
-                          <Car className="w-10 h-10 text-cyan-300" />
+                      {/* 3D Elevated Vehicle Telemetry Badge */}
+                      <div className="relative mb-5 mt-2 flex items-center justify-center">
+                        {/* Multi-layered volumetric glow & ambient aura */}
+                        <div className="absolute -inset-6 bg-gradient-to-r from-cyan-500/20 via-blue-600/15 to-indigo-500/20 rounded-full blur-xl pointer-events-none animate-pulse"></div>
+                        
+                        {/* Outer telemetry radar ring with revolving tick marks */}
+                        <div className="absolute -inset-3.5 rounded-full border border-cyan-400/20 flex items-center justify-center">
+                          <div className="w-full h-full rounded-full border border-dashed border-cyan-400/30 animate-[spin_20s_linear_infinite]"></div>
                         </div>
-                        <div className="absolute -inset-2 rounded-full border border-cyan-500/30 animate-ping opacity-20"></div>
-                        <div className="absolute -inset-4 rounded-full border border-cyan-400/20 pointer-events-none"></div>
+
+                        {/* Pulse aura ring */}
+                        <div className="absolute -inset-1 rounded-full border border-cyan-400/30 animate-ping opacity-20"></div>
+
+                        {/* Main 3D Glass Badge Container */}
+                        <div className="relative w-24 h-24 rounded-2xl bg-gradient-to-br from-slate-900/90 via-[#0a1835] to-[#0d224a] border border-cyan-400/40 flex items-center justify-center shadow-[0_10px_30px_rgba(6,182,212,0.35)] backdrop-blur-md overflow-hidden group">
+                          
+                          {/* Inner top specular shine */}
+                          <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/15 to-transparent pointer-events-none"></div>
+                          
+                          {/* Volumetric center spot light */}
+                          <div className="absolute -top-4 -left-4 w-16 h-16 bg-cyan-400/20 rounded-full blur-md"></div>
+                          
+                          {/* Ground reflection under vehicle */}
+                          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-cyan-400/30 rounded-full blur-sm"></div>
+
+                          {/* Pseudo-3D Isometric Vehicle Vector */}
+                          <svg className="w-14 h-14 relative z-10 drop-shadow-[0_8px_12px_rgba(6,182,212,0.5)] transform group-hover:scale-105 transition-transform duration-300" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                              <linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#38bdf8" />
+                                <stop offset="100%" stopColor="#0284c7" />
+                              </linearGradient>
+                              <linearGradient id="bodySideGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="#0ea5e9" />
+                                <stop offset="100%" stopColor="#0369a1" />
+                              </linearGradient>
+                              <linearGradient id="hoodGrad" x1="0%" y1="0%" x2="100%" y2="50%">
+                                <stop offset="0%" stopColor="#7dd3fc" />
+                                <stop offset="100%" stopColor="#0284c7" />
+                              </linearGradient>
+                              <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="#e0f2fe" stopOpacity="0.9" />
+                                <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.4" />
+                              </linearGradient>
+                              <filter id="cyanGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                              </filter>
+                            </defs>
+
+                            {/* Underbody Shadow Plane */}
+                            <ellipse cx="50" cy="74" rx="34" ry="10" fill="#030712" opacity="0.6" />
+                            <ellipse cx="50" cy="74" rx="28" ry="7" fill="#06b6d4" opacity="0.25" filter="url(#cyanGlow)" />
+
+                            {/* Isometric 3D Car Body Assembly */}
+                            {/* Wheels */}
+                            <ellipse cx="28" cy="68" rx="7" ry="4" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
+                            <ellipse cx="72" cy="68" rx="7" ry="4" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
+                            
+                            {/* Lower Chassis / Side Sill */}
+                            <path d="M 22 64 L 78 64 C 82 64 85 61 83 57 L 76 46 C 74 43 70 41 65 41 L 35 41 C 30 41 26 43 24 46 L 17 57 C 15 61 18 64 22 64 Z" fill="url(#bodySideGrad)" stroke="#38bdf8" strokeWidth="1" />
+
+                            {/* Hood & Front Fascia (Isometric Angle) */}
+                            <path d="M 65 41 L 76 46 L 83 57 L 78 64 L 62 61 L 58 41 Z" fill="url(#hoodGrad)" opacity="0.9" />
+
+                            {/* Cabin Roof & Pillars */}
+                            <path d="M 32 41 L 40 26 C 42 23 46 22 51 22 L 58 22 C 62 22 65 24 67 27 L 72 41 Z" fill="url(#roofGrad)" />
+
+                            {/* Windshield & Side Windows */}
+                            <path d="M 52 24 L 64 24 L 69 40 L 52 40 Z" fill="url(#glassGrad)" stroke="#e0f2fe" strokeWidth="0.75" />
+                            <path d="M 36 39 L 42 27 L 49 24 L 49 40 Z" fill="url(#glassGrad)" opacity="0.7" />
+
+                            {/* Specular Highlight lines */}
+                            <path d="M 42 23 C 48 23 56 23 60 23" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" opacity="0.8" />
+                            <path d="M 23 62 L 77 62" stroke="#67e8f9" strokeWidth="1" opacity="0.6" />
+
+                            {/* Glowing Headlight Beams */}
+                            <circle cx="79" cy="58" r="2.5" fill="#a5f3fc" filter="url(#cyanGlow)" />
+                            <path d="M 81 57 L 95 53 C 97 52 98 55 96 58 L 81 60 Z" fill="#67e8f9" opacity="0.35" />
+                            <circle cx="21" cy="58" r="2" fill="#38bdf8" />
+                          </svg>
+
+                          {/* Bottom subtle telemetry accent line */}
+                          <div className="absolute bottom-0 inset-x-2 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+                        </div>
                       </div>
 
                       <h4 className="text-lg font-black text-white tracking-tight mb-1">
@@ -857,19 +935,19 @@ export default function App() {
                         Discover how your driving environment influences attention, fatigue indicators, and cognitive awareness habits.
                       </p>
 
-                      {/* Highlight feature pills */}
-                      <div className="flex flex-wrap justify-center gap-2 mb-2">
-                        <span className="bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-[10.5px] font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
-                          <Lock className="w-3 h-3 text-cyan-400" />
-                          100% Anonymous & Private
+                      {/* Streamlined Single-Row Trust Badges Grid */}
+                      <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-sm sm:max-w-md mx-auto mb-1">
+                        <span className="bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
+                          <Lock className="w-3 h-3 text-cyan-400 shrink-0" />
+                          <span className="truncate">100% Anonymous</span>
                         </span>
-                        <span className="bg-blue-500/10 border border-blue-500/20 text-blue-300 text-[10.5px] font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
-                          <Zap className="w-3 h-3 text-blue-400" />
-                          60-Second Challenge
+                        <span className="bg-blue-950/60 border border-blue-500/30 text-blue-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
+                          <Zap className="w-3 h-3 text-blue-400 shrink-0" />
+                          <span className="truncate">60s Challenge</span>
                         </span>
-                        <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-[10.5px] font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
-                          <Brain className="w-3 h-3 text-emerald-400" />
-                          Cognitive Benchmark
+                        <span className="bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
+                          <Brain className="w-3 h-3 text-emerald-400 shrink-0" />
+                          <span className="truncate">Cognitive Benchmark</span>
                         </span>
                       </div>
 
@@ -880,10 +958,10 @@ export default function App() {
                       <button
                         type="button"
                         onClick={() => setSimStep(2)}
-                        className="w-full bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-cyan-500/20 border border-cyan-400/30 active:scale-[0.985] transition-all text-xs uppercase tracking-wider"
+                        className="w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:via-blue-500 hover:to-indigo-500 text-white font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2.5 cursor-pointer shadow-lg shadow-cyan-500/25 border border-cyan-400/40 hover:border-cyan-300 hover:shadow-cyan-500/40 hover:scale-[1.01] focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 active:scale-[0.985] transition-all duration-200 text-xs uppercase tracking-wider group"
                       >
                         <span>Begin Simulation</span>
-                        <ArrowRight className="w-4 h-4 text-cyan-200" />
+                        <ArrowRight className="w-4 h-4 text-cyan-200 group-hover:translate-x-1 group-hover:scale-110 transition-transform" />
                       </button>
 
                       {/* PERSISTENT PRIVACY SECTION */}
