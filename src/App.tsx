@@ -33,6 +33,7 @@ import {
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 import simVehicle3d from './assets/images/sim_vehicle_3d_1784999034628.jpg';
 import simVehicleHero3d from './assets/images/sim_vehicle_hero_3d_1784999345879.jpg';
+import cockpitWireframe3d from './assets/images/cockpit_wireframe_3d_1785000135508.jpg';
 
 export default function App() {
   // State to hold incoming query parameters
@@ -763,7 +764,7 @@ export default function App() {
       {/* ========================================================================= */}
       {isSimulatorOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-lg animate-fade-in">
-          <div className="bg-[#0b132b] border border-cyan-500/25 rounded-[28px] w-full max-w-[520px] max-h-[92vh] overflow-y-auto p-5 sm:p-6 shadow-2xl shadow-cyan-950/50 text-white relative flex flex-col gap-5">
+          <div className="bg-[#081028] border border-cyan-500/30 rounded-[28px] w-full max-w-[540px] max-h-[92vh] overflow-y-auto p-5 sm:p-6 shadow-[0_0_35px_rgba(6,182,212,0.25)] text-white relative flex flex-col gap-4 sm:gap-5">
             
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -777,19 +778,19 @@ export default function App() {
                   </h3>
                   <p className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-1.5 mt-0.5">
                     <Shield className="w-3 h-3 text-cyan-400" />
-                    <span>Astrateq Privacy-First Research</span>
+                    <span>ASTRATEQ PRIVACY-FIRST RESEARCH</span>
                   </p>
                 </div>
               </div>
               <button 
                 onClick={() => setIsSimulatorOpen(false)}
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer border border-white/5"
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer border border-white/10"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* 5-Stage Step Progress Indicators */}
+            {/* 5-Stage Step Progress Navigation Tabs */}
             <div className="grid grid-cols-5 gap-1.5 text-center">
               {[
                 { step: 1, label: 'Welcome' },
@@ -798,19 +799,21 @@ export default function App() {
                 { step: 4, label: 'Analysis' },
                 { step: 5, label: 'Profile' }
               ].map(item => (
-                <div 
+                <button 
                   key={item.step}
-                  className={`py-1.5 px-1 rounded-lg text-[10px] font-extrabold border transition-all flex items-center justify-center gap-1 ${
+                  type="button"
+                  onClick={() => setIsStepTransitioning(false) || setSimStep(item.step)}
+                  className={`py-1.5 px-1 rounded-xl text-[10px] font-extrabold border transition-all duration-200 flex items-center justify-center gap-1 cursor-pointer ${
                     simStep === item.step 
-                      ? 'bg-gradient-to-r from-cyan-600 to-blue-600 border-cyan-300 text-white shadow-md shadow-cyan-500/30 ring-1 ring-cyan-400/50 scale-[1.02]' 
+                      ? 'bg-cyan-500 border-cyan-300 text-white shadow-[0_0_14px_rgba(6,182,212,0.6)] scale-[1.02]' 
                       : simStep > item.step 
-                      ? 'bg-cyan-950/60 border-cyan-500/40 text-cyan-300' 
-                      : 'bg-slate-950/60 border-white/10 text-slate-500'
+                      ? 'bg-cyan-950/60 border-cyan-500/40 text-cyan-300 hover:bg-cyan-900/60' 
+                      : 'bg-slate-900/80 border-white/10 text-slate-400 hover:text-slate-200 hover:border-white/20'
                   }`}
                 >
                   {simStep > item.step ? <Check className="w-3 h-3 text-cyan-400 shrink-0" /> : null}
                   <span className="truncate">{item.label}</span>
-                </div>
+                </button>
               ))}
             </div>
 
@@ -832,64 +835,102 @@ export default function App() {
               </div>
             ) : (
               <>
-                {/* SCREEN 1: WELCOME */}
+                {/* SCREEN 1: WELCOME & HIGH-TECH WIREFRAME SIMULATION */}
                 {simStep === 1 && (
                   <div className="flex flex-col gap-5 animate-fade-in">
                     
                     {/* Visual Interface Shell */}
-                    <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-[#050b18] border border-cyan-500/25 rounded-2xl p-5 sm:p-6 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
+                    <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-[#050b18] border border-cyan-500/25 rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
                       
                       {/* Ambient Volumetric Backdrop */}
                       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full h-48 bg-gradient-to-b from-cyan-500/15 via-blue-600/10 to-transparent blur-2xl pointer-events-none"></div>
                       
-                      {/* Full-Space Premium 3D Vehicle Showcase Visualization (No Circular Frames) */}
-                      <div className="relative w-full max-w-md h-40 sm:h-48 mb-4 mt-1 rounded-2xl bg-[#050b18] border border-cyan-500/30 overflow-hidden group shadow-[0_10px_30px_rgba(6,182,212,0.25)] flex items-center justify-center">
+                      {/* High-Tech 3D Cockpit Wireframe Visual with Interactive Telemetry Callouts */}
+                      <div className="relative w-full h-52 sm:h-60 mb-4 rounded-2xl bg-[#030814] border border-cyan-500/35 overflow-hidden group shadow-[0_12px_36px_rgba(6,182,212,0.3)] flex items-center justify-center">
                         
-                        {/* 3D Realistic Concept Vehicle Render */}
+                        {/* 3D Wireframe Cockpit Render */}
                         <img 
-                          src={simVehicleHero3d} 
-                          alt="Astrateq 3D Concept SUV Vehicle Telemetry Model" 
+                          src={cockpitWireframe3d} 
+                          alt="3D Wireframe Car Cockpit Telemetry Simulation" 
                           referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
                         />
 
-                        {/* Specular Edge & Glass Top Overlay */}
-                        <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-cyan-400/15 via-transparent to-transparent pointer-events-none"></div>
-                        
-                        {/* Corner Telemetry HUD Markers */}
-                        <div className="absolute top-2.5 left-3 flex items-center gap-1.5 bg-slate-950/80 backdrop-blur-md px-2 py-0.5 rounded-full border border-cyan-500/30 text-[9px] font-mono text-cyan-300">
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                          <span>SYS.AI_ACTIVE</span>
+                        {/* Top specular reflection overlay */}
+                        <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-cyan-400/20 via-transparent to-transparent pointer-events-none"></div>
+
+                        {/* TELEMETRY CALLOUT 1: Top Left - Cognitive Demand */}
+                        <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[150px] sm:max-w-[170px] pointer-events-none">
+                          <p className="text-[8.5px] font-mono font-bold text-cyan-400 uppercase tracking-tight">
+                            COGNITIVE DEMAND [SIM]:
+                          </p>
+                          <p className="text-[10px] font-extrabold text-white truncate">
+                            Moderate (72/100)
+                          </p>
                         </div>
-                        <div className="absolute top-2.5 right-3 bg-slate-950/80 backdrop-blur-md px-2 py-0.5 rounded-full border border-cyan-500/30 text-[9px] font-mono text-cyan-400">
-                          <span>3D.TELEMETRY_V2</span>
+
+                        {/* TELEMETRY CALLOUT 2: Top Right - Attention Profile */}
+                        <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[150px] sm:max-w-[170px] pointer-events-none">
+                          <p className="text-[8.5px] font-mono font-bold text-cyan-400 uppercase tracking-tight">
+                            ATTENTION PROFILE [SIM]:
+                          </p>
+                          <p className="text-[10px] font-extrabold text-white truncate">
+                            Multi-Screen Focus
+                          </p>
+                        </div>
+
+                        {/* TELEMETRY CALLOUT 3: Mid/Bottom Left - Gaze Vectors */}
+                        <div className="absolute bottom-9 left-2.5 sm:bottom-10 sm:left-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[140px] sm:max-w-[160px] pointer-events-none">
+                          <p className="text-[8.5px] font-mono font-bold text-cyan-400 uppercase tracking-tight">
+                            GAZE VECTORS [SIM]:
+                          </p>
+                          <p className="text-[10px] font-extrabold text-white truncate">
+                            Optimal Path
+                          </p>
+                        </div>
+
+                        {/* TELEMETRY CALLOUT 4: Mid/Bottom Right - Fatigue Marker */}
+                        <div className="absolute bottom-9 right-2.5 sm:bottom-10 sm:right-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[140px] sm:max-w-[160px] pointer-events-none">
+                          <p className="text-[8.5px] font-mono font-bold text-cyan-400 uppercase tracking-tight">
+                            FATIGUE MARKER [SIM]:
+                          </p>
+                          <p className="text-[10px] font-extrabold text-emerald-400 truncate">
+                            Low Risk
+                          </p>
+                        </div>
+
+                        {/* Image Subtitle Overlay Label */}
+                        <div className="absolute bottom-1.5 inset-x-0 text-center pointer-events-none">
+                          <span className="bg-slate-950/90 text-cyan-300 text-[8.5px] font-mono px-2.5 py-0.5 rounded-full border border-cyan-500/30">
+                            [Simulated Sensor Input - Privacy-First Architecture]
+                          </span>
                         </div>
 
                         {/* Bottom Glowing Accent Bar */}
                         <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#22d3ee]"></div>
                       </div>
 
-                      <h4 className="text-lg font-black text-white tracking-tight mb-1">
+                      <h4 className="text-lg sm:text-xl font-black text-white tracking-tight mb-1">
                         Driver Awareness Simulation
                       </h4>
 
-                      <p className="text-xs text-slate-300 max-w-sm leading-relaxed mb-4">
-                        Discover how your driving environment influences attention, fatigue indicators, and cognitive awareness habits.
+                      <p className="text-xs text-slate-300 max-w-md leading-relaxed mb-4">
+                        Understand how your simulated driving environment influences attention, fatigue indicators, and cognitive awareness habits. <span className="text-slate-400 text-[11px]">(This analysis uses zero vehicle-level or GPS tracking)</span>
                       </p>
 
                       {/* Streamlined Single-Row Trust Badges Grid */}
                       <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-sm sm:max-w-md mx-auto mb-1">
-                        <span className="bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
-                          <Lock className="w-3 h-3 text-cyan-400 shrink-0" />
+                        <span className="bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
+                          <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
                           <span className="truncate">100% Anonymous</span>
                         </span>
-                        <span className="bg-blue-950/60 border border-blue-500/30 text-blue-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
+                        <span className="bg-blue-950/60 border border-blue-500/40 text-blue-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
                           <Zap className="w-3 h-3 text-blue-400 shrink-0" />
                           <span className="truncate">60s Challenge</span>
                         </span>
-                        <span className="bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
-                          <Brain className="w-3 h-3 text-emerald-400 shrink-0" />
-                          <span className="truncate">Cognitive Benchmark</span>
+                        <span className="bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
+                          <Brain className="w-3 h-3 text-cyan-400 shrink-0" />
+                          <span className="truncate">Cognitive Bench...</span>
                         </span>
                       </div>
 
@@ -900,9 +941,9 @@ export default function App() {
                       <button
                         type="button"
                         onClick={() => setSimStep(2)}
-                        className="w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:via-blue-500 hover:to-indigo-500 text-white font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2.5 cursor-pointer shadow-lg shadow-cyan-500/25 border border-cyan-400/40 hover:border-cyan-300 hover:shadow-cyan-500/40 hover:scale-[1.01] focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 active:scale-[0.985] transition-all duration-200 text-xs uppercase tracking-wider group"
+                        className="w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 hover:from-cyan-400 hover:via-blue-500 hover:to-purple-500 text-white font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2.5 cursor-pointer shadow-lg shadow-cyan-500/25 border border-cyan-400/40 hover:border-cyan-300 hover:shadow-cyan-500/40 hover:scale-[1.01] focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 active:scale-[0.985] transition-all duration-200 text-xs sm:text-sm uppercase tracking-wider group"
                       >
-                        <span>Begin Simulation</span>
+                        <span>PROCEED TO ANALYSIS</span>
                         <ArrowRight className="w-4 h-4 text-cyan-200 group-hover:translate-x-1 group-hover:scale-110 transition-transform" />
                       </button>
 
