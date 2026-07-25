@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 import simVehicle3d from './assets/images/sim_vehicle_3d_1784999034628.jpg';
+import simVehicleHero3d from './assets/images/sim_vehicle_hero_3d_1784999345879.jpg';
 
 export default function App() {
   // State to hold incoming query parameters
@@ -836,41 +837,36 @@ export default function App() {
                   <div className="flex flex-col gap-5 animate-fade-in">
                     
                     {/* Visual Interface Shell */}
-                    <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-[#0b132b] border border-cyan-500/20 rounded-2xl p-6 relative overflow-hidden shadow-xl flex flex-col items-center text-center">
+                    <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-[#050b18] border border-cyan-500/25 rounded-2xl p-5 sm:p-6 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
                       
-                      {/* Radial glowing pulse background */}
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                      {/* Ambient Volumetric Backdrop */}
+                      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full h-48 bg-gradient-to-b from-cyan-500/15 via-blue-600/10 to-transparent blur-2xl pointer-events-none"></div>
                       
-                      {/* 3D Elevated Vehicle Telemetry Badge */}
-                      <div className="relative mb-5 mt-2 flex items-center justify-center">
-                        {/* Multi-layered volumetric glow & ambient aura */}
-                        <div className="absolute -inset-6 bg-gradient-to-r from-cyan-500/25 via-blue-600/20 to-indigo-500/25 rounded-full blur-2xl pointer-events-none animate-pulse"></div>
+                      {/* Full-Space Premium 3D Vehicle Showcase Visualization (No Circular Frames) */}
+                      <div className="relative w-full max-w-md h-40 sm:h-48 mb-4 mt-1 rounded-2xl bg-[#050b18] border border-cyan-500/30 overflow-hidden group shadow-[0_10px_30px_rgba(6,182,212,0.25)] flex items-center justify-center">
                         
-                        {/* Outer telemetry radar ring with revolving tick marks */}
-                        <div className="absolute -inset-4 rounded-full border border-cyan-400/25 flex items-center justify-center">
-                          <div className="w-full h-full rounded-full border border-dashed border-cyan-400/40 animate-[spin_25s_linear_infinite]"></div>
+                        {/* 3D Realistic Concept Vehicle Render */}
+                        <img 
+                          src={simVehicleHero3d} 
+                          alt="Astrateq 3D Concept SUV Vehicle Telemetry Model" 
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
+                        />
+
+                        {/* Specular Edge & Glass Top Overlay */}
+                        <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-cyan-400/15 via-transparent to-transparent pointer-events-none"></div>
+                        
+                        {/* Corner Telemetry HUD Markers */}
+                        <div className="absolute top-2.5 left-3 flex items-center gap-1.5 bg-slate-950/80 backdrop-blur-md px-2 py-0.5 rounded-full border border-cyan-500/30 text-[9px] font-mono text-cyan-300">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                          <span>SYS.AI_ACTIVE</span>
+                        </div>
+                        <div className="absolute top-2.5 right-3 bg-slate-950/80 backdrop-blur-md px-2 py-0.5 rounded-full border border-cyan-500/30 text-[9px] font-mono text-cyan-400">
+                          <span>3D.TELEMETRY_V2</span>
                         </div>
 
-                        {/* Pulse aura ring */}
-                        <div className="absolute -inset-1 rounded-full border border-cyan-400/30 animate-ping opacity-25"></div>
-
-                        {/* Main 3D Glass Badge Container */}
-                        <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-slate-950 border border-cyan-400/40 flex items-center justify-center shadow-[0_12px_36px_rgba(6,182,212,0.4)] backdrop-blur-md overflow-hidden group p-1">
-                          
-                          {/* Generated 3D Realistic Concept Vehicle Image */}
-                          <img 
-                            src={simVehicle3d} 
-                            alt="Astrateq 3D Concept Vehicle Telemetry Model" 
-                            referrerPolicy="no-referrer"
-                            className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500 shadow-inner"
-                          />
-
-                          {/* Top specular reflection overlay */}
-                          <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 via-white/5 to-transparent pointer-events-none rounded-t-2xl"></div>
-                          
-                          {/* Bottom subtle telemetry accent bar */}
-                          <div className="absolute bottom-0 inset-x-3 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#22d3ee]"></div>
-                        </div>
+                        {/* Bottom Glowing Accent Bar */}
+                        <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#22d3ee]"></div>
                       </div>
 
                       <h4 className="text-lg font-black text-white tracking-tight mb-1">
