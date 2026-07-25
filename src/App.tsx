@@ -945,28 +945,39 @@ export default function App() {
                         <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#22d3ee]"></div>
                       </div>
 
-                      <h4 className="text-lg sm:text-xl font-black text-white tracking-tight mb-1">
-                        Driver Awareness Simulation
-                      </h4>
+                      <div className="flex flex-col items-center text-center mt-1 w-full max-w-lg mx-auto">
+                        <h4 className="text-lg sm:text-xl font-black text-white tracking-tight mb-1.5 flex items-center gap-2 justify-center">
+                          <span>Driver Awareness Simulation</span>
+                        </h4>
 
-                      <p className="text-xs text-slate-300 max-w-md leading-relaxed mb-4">
-                        Understand how your simulated driving environment influences attention, fatigue indicators, and cognitive awareness habits. <span className="text-slate-400 text-[11px]">(This analysis uses zero vehicle-level or GPS tracking)</span>
-                      </p>
+                        <p className="text-xs text-slate-300 leading-relaxed font-medium mb-3 max-w-md">
+                          Understand how your simulated driving environment influences attention, fatigue indicators, and cognitive awareness habits.
+                        </p>
 
-                      {/* Streamlined Single-Row Trust Badges Grid */}
-                      <div className="grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-sm sm:max-w-md mx-auto mb-1">
-                        <span className="bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
-                          <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
-                          <span className="truncate">100% Anonymous</span>
-                        </span>
-                        <span className="bg-blue-950/60 border border-blue-500/40 text-blue-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
-                          <Zap className="w-3 h-3 text-blue-400 shrink-0" />
-                          <span className="truncate">60s Challenge</span>
-                        </span>
-                        <span className="bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-[10px] sm:text-[10.5px] font-bold py-1.5 px-1.5 sm:px-2 rounded-xl flex items-center justify-center gap-1 sm:gap-1.5 shadow-sm text-center truncate">
-                          <Brain className="w-3 h-3 text-cyan-400 shrink-0" />
-                          <span className="truncate">Cognitive Bench...</span>
-                        </span>
+                        {/* Privacy Micro-Pill Disclaimer */}
+                        <div className="inline-flex items-center gap-1.5 bg-slate-950/90 border border-cyan-500/25 px-3 py-1 rounded-full text-[10.5px] font-medium text-slate-300 mb-3.5 shadow-inner">
+                          <Lock className="w-3 h-3 text-cyan-400 shrink-0" />
+                          <span>Zero vehicle-level or GPS tracking used</span>
+                        </div>
+
+                        {/* High-Tech Cohesive Highlight Badges */}
+                        <div className="flex flex-wrap items-center justify-center gap-2 w-full">
+                          <div className="bg-slate-900/90 border border-cyan-500/30 text-cyan-300 text-[10.5px] font-bold py-1.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-cyan-950/40">
+                            <Lock className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                            <span className="whitespace-nowrap">100% Anonymous</span>
+                          </div>
+
+                          <div className="bg-slate-900/90 border border-blue-500/30 text-blue-300 text-[10.5px] font-bold py-1.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-blue-950/40">
+                            <Zap className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                            <span className="whitespace-nowrap">60s Challenge</span>
+                          </div>
+
+                          <div className="bg-slate-900/90 border border-indigo-500/30 text-indigo-300 text-[10.5px] font-bold py-1.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-indigo-950/40">
+                            <Brain className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+                            <span className="whitespace-nowrap">Cognitive Baseline</span>
+                          </div>
+                        </div>
+
                       </div>
 
                     </div>
