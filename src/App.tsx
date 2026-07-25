@@ -28,7 +28,12 @@ import {
   Compass,
   Sliders,
   HeartPulse,
-  Gauge
+  Gauge,
+  LayoutGrid,
+  GitCommit,
+  SlidersHorizontal,
+  TrendingUp,
+  Layers
 } from 'lucide-react';
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
 import simVehicle3d from './assets/images/sim_vehicle_3d_1784999034628.jpg';
@@ -52,6 +57,10 @@ export default function App() {
   const [commuteType, setCommuteType] = useState('urban');
   const [weatherCondition, setWeatherCondition] = useState('rain');
   const [commuteTime, setCommuteTime] = useState('medium');
+  
+  // Visual layout variation options (User Prompt requested variations)
+  const [welcomeOption, setWelcomeOption] = useState<'option1' | 'option2' | 'option3'>('option1');
+  const [resultsOption, setResultsOption] = useState<'grid' | 'journey' | 'minimal'>('grid');
   
   // Generation & profile animation state
   const [genStep, setGenStep] = useState(1);
@@ -837,8 +846,36 @@ export default function App() {
               <>
                 {/* SCREEN 1: WELCOME & HIGH-TECH WIREFRAME SIMULATION */}
                 {simStep === 1 && (
-                  <div className="flex flex-col gap-5 animate-fade-in">
+                  <div className="flex flex-col gap-4 animate-fade-in">
                     
+                    {/* Visual Mode Selector for Welcome Screen */}
+                    <div className="bg-slate-950/80 border border-cyan-500/30 rounded-xl p-1.5 flex items-center justify-between text-[10px] font-bold">
+                      <span className="text-slate-400 pl-2 uppercase tracking-wider flex items-center gap-1">
+                        <Layers className="w-3 h-3 text-cyan-400" />
+                        <span>Visual Mode:</span>
+                      </span>
+                      <div className="flex items-center gap-1">
+                        {[
+                          { id: 'option1', label: '1: Hero SUV' },
+                          { id: 'option2', label: '2: Angled Scan' },
+                          { id: 'option3', label: '3: Cockpit 3D' }
+                        ].map((opt) => (
+                          <button
+                            key={opt.id}
+                            type="button"
+                            onClick={() => setWelcomeOption(opt.id as 'option1' | 'option2' | 'option3')}
+                            className={`px-2 py-1 rounded-lg transition-all cursor-pointer ${
+                              welcomeOption === opt.id
+                                ? 'bg-cyan-500 text-slate-950 font-black shadow-md shadow-cyan-500/30'
+                                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                            }`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
                     {/* Visual Interface Shell */}
                     <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-[#050b18] border border-cyan-500/25 rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
                       
@@ -850,11 +887,15 @@ export default function App() {
                         
                         {/* 3D Wireframe Cockpit Render */}
                         <img 
-                          src={cockpitWireframe3d} 
+                          src={welcomeOption === 'option1' ? simVehicleHero3d : welcomeOption === 'option2' ? simVehicle3d : cockpitWireframe3d} 
                           alt="3D Wireframe Car Cockpit Telemetry Simulation" 
                           referrerPolicy="no-referrer"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
                         />
+
+                        {welcomeOption === 'option2' && (
+                          <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/10 via-cyan-400/20 to-transparent pointer-events-none animate-pulse"></div>
+                        )}
 
                         {/* Top specular reflection overlay */}
                         <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-cyan-400/20 via-transparent to-transparent pointer-events-none"></div>
@@ -1220,89 +1261,318 @@ export default function App() {
                   </div>
                 )}
 
-                {/* SCREEN 5: RESULTS DASHBOARD (Apple Health & Tesla Inspired) */}
+                {/* SCREEN 5: RESULTS DASHBOARD WITH 3 LAYOUT VARIATIONS */}
                 {simStep === 5 && (
                   <div className="flex flex-col gap-4 animate-fade-in">
                     
-                    {/* Overall Score Hero Card */}
-                    <div className="bg-gradient-to-b from-cyan-950/80 via-slate-900 to-slate-950 border border-cyan-500/40 rounded-2xl p-5 text-center flex flex-col items-center gap-2 relative overflow-hidden shadow-xl">
-                      <div className="absolute top-2.5 right-3 flex items-center gap-1 bg-cyan-500/20 border border-cyan-400/30 rounded-full px-2.5 py-0.5 text-[9px] font-extrabold text-cyan-300 uppercase">
-                        <Sparkles className="w-3 h-3 text-cyan-400" />
-                        <span>Intelligence Profile</span>
+                    {/* LAYOUT VARIATION MODE SWITCHER TABS */}
+                    <div className="bg-slate-950 border border-cyan-500/30 rounded-2xl p-1.5 flex flex-col gap-1 text-center">
+                      <div className="flex items-center justify-between px-2 pt-1 text-[10px] font-bold text-slate-400">
+                        <span className="flex items-center gap-1 uppercase tracking-wider text-cyan-400">
+                          <SlidersHorizontal className="w-3 h-3" />
+                          <span>Results Layout Mode</span>
+                        </span>
+                        <span className="text-[9px] text-slate-500 font-mono">Verbatim Astrateq Data</span>
                       </div>
+                      <div className="grid grid-cols-3 gap-1 mt-0.5">
+                        <button
+                          type="button"
+                          onClick={() => setResultsOption('grid')}
+                          className={`py-2 px-1.5 rounded-xl text-[10px] font-extrabold transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                            resultsOption === 'grid'
+                              ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/30 ring-1 ring-cyan-300'
+                              : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'
+                          }`}
+                        >
+                          <LayoutGrid className="w-3 h-3 shrink-0" />
+                          <span className="truncate">1: Dashboard Grid</span>
+                        </button>
 
-                      <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-                        Overall Awareness Score
-                      </span>
+                        <button
+                          type="button"
+                          onClick={() => setResultsOption('journey')}
+                          className={`py-2 px-1.5 rounded-xl text-[10px] font-extrabold transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                            resultsOption === 'journey'
+                              ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/30 ring-1 ring-cyan-300'
+                              : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'
+                          }`}
+                        >
+                          <GitCommit className="w-3 h-3 shrink-0" />
+                          <span className="truncate">2: User Journey</span>
+                        </button>
 
-                      <div className="text-4xl font-black text-white tracking-tight flex items-baseline justify-center gap-1 my-0.5">
-                        <span className="text-cyan-400">{awarenessScore}</span>
-                        <span className="text-slate-500 text-lg font-bold">/ 100</span>
-                      </div>
-
-                      <div className="inline-flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/25 px-3 py-1 rounded-full text-xs font-bold text-cyan-300">
-                        <Award className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>Optimal Attention Recovery Margin</span>
-                      </div>
-                    </div>
-
-                    {/* Apple Health Metric Cards Grid */}
-                    <div className="grid grid-cols-3 gap-2">
-                      <div className="bg-slate-950/80 border border-white/10 rounded-xl p-3 flex flex-col gap-1 text-left">
-                        <span className="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider">
-                          Attention Stability
-                        </span>
-                        <span className={`text-sm font-black ${getAttentionStability().color}`}>
-                          {getAttentionStability().label}
-                        </span>
-                        <span className="text-[9.5px] text-slate-400 font-medium leading-tight">
-                          {getAttentionStability().desc}
-                        </span>
-                      </div>
-
-                      <div className="bg-slate-950/80 border border-white/10 rounded-xl p-3 flex flex-col gap-1 text-left">
-                        <span className="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider">
-                          Fatigue Risk
-                        </span>
-                        <span className={`text-sm font-black ${getFatigueRisk().color}`}>
-                          {getFatigueRisk().label}
-                        </span>
-                        <span className="text-[9.5px] text-slate-400 font-medium leading-tight">
-                          {getFatigueRisk().desc}
-                        </span>
-                      </div>
-
-                      <div className="bg-slate-950/80 border border-white/10 rounded-xl p-3 flex flex-col gap-1 text-left">
-                        <span className="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider">
-                          Complexity
-                        </span>
-                        <span className={`text-sm font-black ${getEnvironmentalComplexity().color}`}>
-                          {getEnvironmentalComplexity().label}
-                        </span>
-                        <span className="text-[9.5px] text-slate-400 font-medium leading-tight">
-                          {getEnvironmentalComplexity().desc}
-                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setResultsOption('minimal')}
+                          className={`py-2 px-1.5 rounded-xl text-[10px] font-extrabold transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                            resultsOption === 'minimal'
+                              ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/30 ring-1 ring-cyan-300'
+                              : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'
+                          }`}
+                        >
+                          <Zap className="w-3 h-3 shrink-0" />
+                          <span className="truncate">3: Minimal Summary</span>
+                        </button>
                       </div>
                     </div>
 
-                    {/* Driving Context Summary Pill */}
-                    <div className="bg-slate-950 border border-white/10 rounded-xl p-3 flex items-center justify-between text-xs">
-                      <div className="flex items-center gap-2.5">
-                        <Compass className="w-4 h-4 text-cyan-400 shrink-0" />
-                        <span className="font-extrabold text-white text-[11px]">
-                          {commuteType === 'urban' ? 'Urban Grid' : commuteType === 'highway' ? '400-Series Highway' : commuteType === 'rural' ? 'Rural Secondary' : 'Intercity Commute'} • {weatherCondition === 'clear' ? 'Clear & Dry' : weatherCondition === 'rain' ? 'Heavy Rain' : weatherCondition === 'snow' ? 'Winter Snow/Ice' : 'Night Vision'} • {commuteTime === 'short' ? '<30m' : commuteTime === 'medium' ? '30-60m' : '60m+'}
-                        </span>
-                      </div>
-                      <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                    </div>
+                    {/* VARIATION 1: INTEGRATED DASHBOARD GRID */}
+                    {resultsOption === 'grid' && (
+                      <div className="flex flex-col gap-3.5 animate-fade-in">
+                        
+                        {/* Overall Score Hero Card */}
+                        <div className="bg-gradient-to-b from-cyan-950/80 via-slate-900 to-slate-950 border border-cyan-500/40 rounded-2xl p-4 text-center flex flex-col items-center gap-2 relative overflow-hidden shadow-xl">
+                          <div className="absolute top-2.5 right-3 flex items-center gap-1 bg-cyan-500/20 border border-cyan-400/30 rounded-full px-2.5 py-0.5 text-[9px] font-extrabold text-cyan-300 uppercase">
+                            <Sparkles className="w-3 h-3 text-cyan-400" />
+                            <span>Intelligence Profile</span>
+                          </div>
 
-                    {/* Educational Insights Section */}
-                    <div className="bg-cyan-950/30 border border-cyan-500/20 rounded-xl p-3.5 flex items-start gap-3">
-                      <Brain className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
-                      <p className="text-[11px] text-slate-300 font-medium leading-relaxed">
-                        {getEducationalInsight()}
-                      </p>
-                    </div>
+                          <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                            Overall Awareness Score
+                          </span>
+
+                          <div className="text-4xl font-black text-white tracking-tight flex items-baseline justify-center gap-1 my-0.5">
+                            <span className="text-cyan-400">{awarenessScore}</span>
+                            <span className="text-slate-500 text-lg font-bold">/ 100</span>
+                          </div>
+
+                          <div className="inline-flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/25 px-3 py-1 rounded-full text-xs font-bold text-cyan-300">
+                            <Award className="w-3.5 h-3.5 text-cyan-400" />
+                            <span>Optimal Attention Recovery Margin</span>
+                          </div>
+                        </div>
+
+                        {/* Cohesive Dashboard Grid of Secondary Metrics with Linear Gauge Bars */}
+                        <div className="grid grid-cols-3 gap-2">
+                          <div className="bg-slate-950/80 border border-white/10 rounded-xl p-3 flex flex-col gap-1.5 text-left relative overflow-hidden">
+                            <span className="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider">
+                              Attention Stability
+                            </span>
+                            <span className={`text-sm font-black ${getAttentionStability().color}`}>
+                              {getAttentionStability().label}
+                            </span>
+                            {/* Linear Progress Bar */}
+                            <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-white/5">
+                              <div className="bg-cyan-400 h-full rounded-full w-[85%]"></div>
+                            </div>
+                            <span className="text-[9.5px] text-slate-400 font-medium leading-tight mt-0.5">
+                              {getAttentionStability().desc}
+                            </span>
+                          </div>
+
+                          <div className="bg-slate-950/80 border border-white/10 rounded-xl p-3 flex flex-col gap-1.5 text-left relative overflow-hidden">
+                            <span className="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider">
+                              Fatigue Risk
+                            </span>
+                            <span className={`text-sm font-black ${getFatigueRisk().color}`}>
+                              {getFatigueRisk().label}
+                            </span>
+                            {/* Linear Progress Bar */}
+                            <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-white/5">
+                              <div className="bg-emerald-400 h-full rounded-full w-[25%]"></div>
+                            </div>
+                            <span className="text-[9.5px] text-slate-400 font-medium leading-tight mt-0.5">
+                              {getFatigueRisk().desc}
+                            </span>
+                          </div>
+
+                          <div className="bg-slate-950/80 border border-white/10 rounded-xl p-3 flex flex-col gap-1.5 text-left relative overflow-hidden">
+                            <span className="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider">
+                              Complexity
+                            </span>
+                            <span className={`text-sm font-black ${getEnvironmentalComplexity().color}`}>
+                              {getEnvironmentalComplexity().label}
+                            </span>
+                            {/* Linear Progress Bar */}
+                            <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-white/5">
+                              <div className="bg-amber-400 h-full rounded-full w-[60%]"></div>
+                            </div>
+                            <span className="text-[9.5px] text-slate-400 font-medium leading-tight mt-0.5">
+                              {getEnvironmentalComplexity().desc}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Integrated Context Summary Bar */}
+                        <div className="bg-slate-950 border border-cyan-500/20 rounded-xl p-3 flex items-center justify-between text-xs">
+                          <div className="flex items-center gap-2.5">
+                            <Compass className="w-4 h-4 text-cyan-400 shrink-0" />
+                            <span className="font-extrabold text-white text-[11px]">
+                              {commuteType === 'urban' ? 'Urban Grid' : commuteType === 'highway' ? '400-Series Highway' : commuteType === 'rural' ? 'Rural Secondary' : 'Intercity Commute'} • {weatherCondition === 'clear' ? 'Clear & Dry' : weatherCondition === 'rain' ? 'Heavy Rain' : weatherCondition === 'snow' ? 'Winter Snow/Ice' : 'Night Vision'} • {commuteTime === 'short' ? '<30m' : commuteTime === 'medium' ? '30-60m' : '60m+'}
+                            </span>
+                          </div>
+                          <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                        </div>
+
+                        {/* Educational Insights Section */}
+                        <div className="bg-cyan-950/30 border border-cyan-500/20 rounded-xl p-3.5 flex items-start gap-3">
+                          <Brain className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+                          <p className="text-[11px] text-slate-300 font-medium leading-relaxed">
+                            {getEducationalInsight()}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* VARIATION 2: USER JOURNEY INFOGRAPHIC */}
+                    {resultsOption === 'journey' && (
+                      <div className="flex flex-col gap-3.5 animate-fade-in">
+                        
+                        <div className="text-center mb-1">
+                          <h5 className="text-xs font-extrabold text-cyan-300 uppercase tracking-widest flex items-center justify-center gap-1.5">
+                            <GitCommit className="w-4 h-4 text-cyan-400" />
+                            <span>Simulation Journey Flowchart</span>
+                          </h5>
+                          <p className="text-[11px] font-medium text-slate-400 mt-0.5">
+                            From environment input selection to synthesized cognitive intelligence
+                          </p>
+                        </div>
+
+                        {/* Flowchart Timeline Nodes */}
+                        <div className="flex flex-col gap-2.5 relative">
+                          
+                          {/* NODE 1: INPUTS */}
+                          <div className="bg-slate-950/90 border border-cyan-500/30 rounded-xl p-3.5 flex items-center gap-3 relative shadow-lg">
+                            <div className="w-8 h-8 rounded-xl bg-cyan-950 border border-cyan-400/40 flex items-center justify-center text-cyan-400 shrink-0 font-extrabold text-xs">
+                              01
+                            </div>
+                            <div className="flex flex-col gap-0.5 text-left flex-1 min-w-0">
+                              <span className="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-wider">
+                                STEP 1: CONTEXT INPUTS
+                              </span>
+                              <span className="text-xs font-extrabold text-white truncate">
+                                {commuteType === 'urban' ? 'Urban Grid' : commuteType === 'highway' ? '400-Series Highway' : commuteType === 'rural' ? 'Rural Secondary' : 'Intercity'} • {weatherCondition === 'clear' ? 'Clear & Dry' : weatherCondition === 'rain' ? 'Heavy Rain' : weatherCondition === 'snow' ? 'Snow/Ice' : 'Night'}
+                              </span>
+                              <span className="text-[10px] text-slate-400">
+                                Duration: {commuteTime === 'short' ? '< 30 mins' : commuteTime === 'medium' ? '30-60 mins' : '60+ mins'}
+                              </span>
+                            </div>
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                          </div>
+
+                          {/* CONNECTING FLOW ARROW */}
+                          <div className="flex justify-center -my-1">
+                            <div className="w-0.5 h-4 bg-gradient-to-b from-cyan-400 to-blue-500"></div>
+                          </div>
+
+                          {/* NODE 2: ASSESSMENT TRIALS */}
+                          <div className="bg-slate-950/90 border border-cyan-500/30 rounded-xl p-3.5 flex items-center gap-3 relative shadow-lg">
+                            <div className="w-8 h-8 rounded-xl bg-blue-950 border border-blue-400/40 flex items-center justify-center text-blue-400 shrink-0 font-extrabold text-xs">
+                              02
+                            </div>
+                            <div className="flex flex-col gap-0.5 text-left flex-1 min-w-0">
+                              <span className="text-[10px] font-mono font-bold text-blue-400 uppercase tracking-wider">
+                                STEP 2: FOCUS ASSESSMENT
+                              </span>
+                              <span className="text-xs font-extrabold text-white truncate">
+                                Reaction Velocity: <strong className="text-cyan-400">{avgReactionTime} ms avg</strong>
+                              </span>
+                              <span className="text-[10px] text-slate-400">
+                                3 Attention Switching Trials Completed
+                              </span>
+                            </div>
+                            <Zap className="w-4 h-4 text-cyan-400 shrink-0 animate-pulse" />
+                          </div>
+
+                          {/* CONNECTING FLOW ARROW */}
+                          <div className="flex justify-center -my-1">
+                            <div className="w-0.5 h-4 bg-gradient-to-b from-blue-500 to-indigo-500"></div>
+                          </div>
+
+                          {/* NODE 3: INTELLIGENCE PROFILE RESULT */}
+                          <div className="bg-gradient-to-r from-cyan-950/80 via-slate-950 to-indigo-950/80 border border-cyan-400/50 rounded-xl p-4 flex items-center gap-3.5 relative shadow-xl">
+                            <div className="w-10 h-10 rounded-2xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 shrink-0 font-black text-sm">
+                              03
+                            </div>
+                            <div className="flex flex-col gap-0.5 text-left flex-1 min-w-0">
+                              <span className="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-wider">
+                                FINAL CULMINATION PROFILE
+                              </span>
+                              <div className="flex items-baseline gap-1.5">
+                                <span className="text-xl font-black text-white">{awarenessScore}</span>
+                                <span className="text-xs font-bold text-cyan-400">/ 100 Overall Score</span>
+                              </div>
+                              <span className="text-[10px] text-slate-300 font-medium">
+                                Optimal Attention Recovery Margin
+                              </span>
+                            </div>
+                            <Award className="w-6 h-6 text-cyan-400 shrink-0" />
+                          </div>
+
+                        </div>
+
+                        {/* Educational Insight Card */}
+                        <div className="bg-cyan-950/30 border border-cyan-500/20 rounded-xl p-3 flex items-start gap-2.5 text-xs text-slate-300">
+                          <Brain className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                          <p className="text-[10.5px] leading-relaxed">
+                            {getEducationalInsight()}
+                          </p>
+                        </div>
+
+                      </div>
+                    )}
+
+                    {/* VARIATION 3: ACTION-ORIENTED MINIMALIST SUMMARY */}
+                    {resultsOption === 'minimal' && (
+                      <div className="flex flex-col gap-3.5 animate-fade-in">
+                        
+                        {/* Massive Hero Score Ring Callout */}
+                        <div className="bg-gradient-to-b from-slate-900 to-slate-950 border border-cyan-500/40 rounded-2xl p-5 text-center flex flex-col items-center gap-3 relative overflow-hidden shadow-2xl">
+                          <div className="relative w-32 h-32 flex items-center justify-center my-1">
+                            <div className="absolute inset-0 rounded-full border-4 border-cyan-500/20 border-t-cyan-400 animate-spin-slow"></div>
+                            <div className="flex flex-col items-center justify-center bg-slate-950 rounded-full w-28 h-28 border border-cyan-400/40 shadow-inner">
+                              <span className="text-4xl font-black text-cyan-400 tracking-tight">{awarenessScore}</span>
+                              <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest">/ 100</span>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col items-center gap-0.5">
+                            <h5 className="text-sm font-extrabold text-white tracking-wide">
+                              Optimal Attention Recovery Margin
+                            </h5>
+                            <p className="text-[10.5px] font-medium text-slate-400">
+                              Verified with zero vehicle-level tracking or telematics stored
+                            </p>
+                          </div>
+
+                          {/* Condensed Secondary Metric Badges with Hover Tooltips */}
+                          <div className="grid grid-cols-3 gap-1.5 w-full mt-1">
+                            <div className="bg-slate-950/90 border border-white/10 rounded-xl py-2 px-1 text-center flex flex-col items-center gap-0.5">
+                              <span className="text-[8.5px] font-mono text-slate-400 uppercase">Attention</span>
+                              <span className={`text-[11px] font-extrabold ${getAttentionStability().color}`}>
+                                {getAttentionStability().label}
+                              </span>
+                            </div>
+
+                            <div className="bg-slate-950/90 border border-white/10 rounded-xl py-2 px-1 text-center flex flex-col items-center gap-0.5">
+                              <span className="text-[8.5px] font-mono text-slate-400 uppercase">Fatigue</span>
+                              <span className={`text-[11px] font-extrabold ${getFatigueRisk().color}`}>
+                                {getFatigueRisk().label}
+                              </span>
+                            </div>
+
+                            <div className="bg-slate-950/90 border border-white/10 rounded-xl py-2 px-1 text-center flex flex-col items-center gap-0.5">
+                              <span className="text-[8.5px] font-mono text-slate-400 uppercase">Complexity</span>
+                              <span className={`text-[11px] font-extrabold ${getEnvironmentalComplexity().color}`}>
+                                {getEnvironmentalComplexity().label}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* PROMINENT IMMEDIATE CTA PLACED DIRECTLY BELOW SCORE */}
+                          <button
+                            type="button"
+                            onClick={() => { setIsSimulatorOpen(false); setIsUpdatesOpen(true); }}
+                            className="w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-black py-3.5 px-5 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-cyan-500/30 border border-cyan-300 mt-1 hover:scale-[1.01] active:scale-[0.985] transition-all group"
+                          >
+                            <Bell className="w-4 h-4 text-cyan-200 group-hover:scale-110 transition-transform" />
+                            <span>JOIN RESEARCH COHORT</span>
+                            <ArrowRight className="w-4 h-4 text-white ml-auto" />
+                          </button>
+                        </div>
+
+                      </div>
+                    )}
 
                     {/* In-Modal Feedback Drawer (if open) */}
                     {isFeedbackOpen && (
@@ -1341,60 +1611,61 @@ export default function App() {
                       </div>
                     )}
 
-                    {/* Final Conversion CTAs & Actions */}
-                    <div className="flex flex-col gap-2.5 pt-1">
-                      
-                      <p className="text-[11px] font-bold text-slate-400 text-center">
-                        Help shape the future of privacy-first driver intelligence in Canada.
-                      </p>
+                    {/* Final Conversion CTAs & Actions (for Grid & Journey modes) */}
+                    {resultsOption !== 'minimal' && (
+                      <div className="flex flex-col gap-2.5 pt-1">
+                        <p className="text-[11px] font-bold text-slate-400 text-center">
+                          Help shape the future of privacy-first driver intelligence in Canada.
+                        </p>
 
-                      {/* PRIMARY CONVERSION CTA */}
-                      <button
-                        type="button"
-                        onClick={() => { setIsSimulatorOpen(false); setIsUpdatesOpen(true); }}
-                        className="w-full bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/25 border border-cyan-400/30 active:scale-[0.985] hover:scale-[1.01] transition-all group"
-                      >
-                        <Bell className="w-4 h-4 text-cyan-300 group-hover:scale-110 transition-transform" />
-                        <span>Join Research Cohort</span>
-                        <ArrowRight className="w-4 h-4 text-white ml-auto" />
-                      </button>
-
-                      {/* SECONDARY UTILITY ACTIONS */}
-                      <div className="grid grid-cols-2 gap-2">
+                        {/* PRIMARY CONVERSION CTA */}
                         <button
                           type="button"
-                          onClick={() => setIsFeedbackOpen(!isFeedbackOpen)}
-                          className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-xs transition-colors"
+                          onClick={() => { setIsSimulatorOpen(false); setIsUpdatesOpen(true); }}
+                          className="w-full bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-xs uppercase tracking-wider shadow-lg shadow-cyan-500/25 border border-cyan-400/30 active:scale-[0.985] hover:scale-[1.01] transition-all group"
                         >
-                          <MessageSquare className="w-3.5 h-3.5 text-cyan-400" />
-                          <span>Share Feedback</span>
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={copyProfile}
-                          className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-xs transition-colors"
-                        >
-                          {copiedProfile ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
-                          <span>{copiedProfile ? 'Copied!' : 'Copy Profile'}</span>
+                          <Bell className="w-4 h-4 text-cyan-300 group-hover:scale-110 transition-transform" />
+                          <span>Join Research Cohort</span>
+                          <ArrowRight className="w-4 h-4 text-white ml-auto" />
                         </button>
                       </div>
+                    )}
 
-                      {/* RETAKE SIMULATION ACTION */}
+                    {/* SECONDARY UTILITY ACTIONS */}
+                    <div className="grid grid-cols-2 gap-2 mt-1">
                       <button
                         type="button"
-                        onClick={resetSim}
-                        className="text-slate-400 hover:text-slate-200 text-xs font-semibold py-1 flex items-center justify-center gap-1.5 cursor-pointer transition-colors mt-0.5"
+                        onClick={() => setIsFeedbackOpen(!isFeedbackOpen)}
+                        className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-xs transition-colors"
                       >
-                        <RefreshCw className="w-3.5 h-3.5 text-slate-400" />
-                        <span>Retake Simulation</span>
+                        <MessageSquare className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>Share Feedback</span>
                       </button>
 
-                      {/* PERSISTENT PRIVACY SECTION WITH GENEROUS BOTTOM PADDING */}
-                      <div className="flex items-center justify-center gap-2 text-[11px] font-semibold text-slate-300 text-center bg-slate-950/80 border border-white/10 py-3 px-4 rounded-xl mt-2 mb-2 shadow-sm">
-                        <Lock className="w-4 h-4 text-cyan-400 shrink-0" />
-                        <span>Your simulation responses are processed anonymously. No vehicle tracking or telematics stored.</span>
-                      </div>
+                      <button
+                        type="button"
+                        onClick={copyProfile}
+                        className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-xs transition-colors"
+                      >
+                        {copiedProfile ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
+                        <span>{copiedProfile ? 'Copied!' : 'Copy Profile'}</span>
+                      </button>
+                    </div>
+
+                    {/* RETAKE SIMULATION ACTION */}
+                    <button
+                      type="button"
+                      onClick={resetSim}
+                      className="text-slate-400 hover:text-slate-200 text-xs font-semibold py-1 flex items-center justify-center gap-1.5 cursor-pointer transition-colors mt-0.5"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Retake Simulation</span>
+                    </button>
+
+                    {/* PERSISTENT PRIVACY SECTION WITH GENEROUS BOTTOM PADDING */}
+                    <div className="flex items-center justify-center gap-2 text-[11px] font-semibold text-slate-300 text-center bg-slate-950/80 border border-white/10 py-3 px-4 rounded-xl mt-2 mb-2 shadow-sm">
+                      <Lock className="w-4 h-4 text-cyan-400 shrink-0" />
+                      <span>Your simulation responses are processed anonymously. No vehicle tracking or telematics stored.</span>
                     </div>
 
                   </div>
