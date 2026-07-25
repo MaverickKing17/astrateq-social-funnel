@@ -31,6 +31,7 @@ import {
   Gauge
 } from 'lucide-react';
 import luxurySuvHero from './assets/images/luxury_suv_hero_1782157912256.jpg';
+import simVehicle3d from './assets/images/sim_vehicle_3d_1784999034628.jpg';
 
 export default function App() {
   // State to hold incoming query parameters
@@ -843,87 +844,32 @@ export default function App() {
                       {/* 3D Elevated Vehicle Telemetry Badge */}
                       <div className="relative mb-5 mt-2 flex items-center justify-center">
                         {/* Multi-layered volumetric glow & ambient aura */}
-                        <div className="absolute -inset-6 bg-gradient-to-r from-cyan-500/20 via-blue-600/15 to-indigo-500/20 rounded-full blur-xl pointer-events-none animate-pulse"></div>
+                        <div className="absolute -inset-6 bg-gradient-to-r from-cyan-500/25 via-blue-600/20 to-indigo-500/25 rounded-full blur-2xl pointer-events-none animate-pulse"></div>
                         
                         {/* Outer telemetry radar ring with revolving tick marks */}
-                        <div className="absolute -inset-3.5 rounded-full border border-cyan-400/20 flex items-center justify-center">
-                          <div className="w-full h-full rounded-full border border-dashed border-cyan-400/30 animate-[spin_20s_linear_infinite]"></div>
+                        <div className="absolute -inset-4 rounded-full border border-cyan-400/25 flex items-center justify-center">
+                          <div className="w-full h-full rounded-full border border-dashed border-cyan-400/40 animate-[spin_25s_linear_infinite]"></div>
                         </div>
 
                         {/* Pulse aura ring */}
-                        <div className="absolute -inset-1 rounded-full border border-cyan-400/30 animate-ping opacity-20"></div>
+                        <div className="absolute -inset-1 rounded-full border border-cyan-400/30 animate-ping opacity-25"></div>
 
                         {/* Main 3D Glass Badge Container */}
-                        <div className="relative w-24 h-24 rounded-2xl bg-gradient-to-br from-slate-900/90 via-[#0a1835] to-[#0d224a] border border-cyan-400/40 flex items-center justify-center shadow-[0_10px_30px_rgba(6,182,212,0.35)] backdrop-blur-md overflow-hidden group">
+                        <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-slate-950 border border-cyan-400/40 flex items-center justify-center shadow-[0_12px_36px_rgba(6,182,212,0.4)] backdrop-blur-md overflow-hidden group p-1">
                           
-                          {/* Inner top specular shine */}
-                          <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/15 to-transparent pointer-events-none"></div>
+                          {/* Generated 3D Realistic Concept Vehicle Image */}
+                          <img 
+                            src={simVehicle3d} 
+                            alt="Astrateq 3D Concept Vehicle Telemetry Model" 
+                            referrerPolicy="no-referrer"
+                            className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500 shadow-inner"
+                          />
+
+                          {/* Top specular reflection overlay */}
+                          <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 via-white/5 to-transparent pointer-events-none rounded-t-2xl"></div>
                           
-                          {/* Volumetric center spot light */}
-                          <div className="absolute -top-4 -left-4 w-16 h-16 bg-cyan-400/20 rounded-full blur-md"></div>
-                          
-                          {/* Ground reflection under vehicle */}
-                          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-cyan-400/30 rounded-full blur-sm"></div>
-
-                          {/* Pseudo-3D Isometric Vehicle Vector */}
-                          <svg className="w-14 h-14 relative z-10 drop-shadow-[0_8px_12px_rgba(6,182,212,0.5)] transform group-hover:scale-105 transition-transform duration-300" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                              <linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#38bdf8" />
-                                <stop offset="100%" stopColor="#0284c7" />
-                              </linearGradient>
-                              <linearGradient id="bodySideGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="#0ea5e9" />
-                                <stop offset="100%" stopColor="#0369a1" />
-                              </linearGradient>
-                              <linearGradient id="hoodGrad" x1="0%" y1="0%" x2="100%" y2="50%">
-                                <stop offset="0%" stopColor="#7dd3fc" />
-                                <stop offset="100%" stopColor="#0284c7" />
-                              </linearGradient>
-                              <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#e0f2fe" stopOpacity="0.9" />
-                                <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.4" />
-                              </linearGradient>
-                              <filter id="cyanGlow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur stdDeviation="2.5" result="blur" />
-                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                              </filter>
-                            </defs>
-
-                            {/* Underbody Shadow Plane */}
-                            <ellipse cx="50" cy="74" rx="34" ry="10" fill="#030712" opacity="0.6" />
-                            <ellipse cx="50" cy="74" rx="28" ry="7" fill="#06b6d4" opacity="0.25" filter="url(#cyanGlow)" />
-
-                            {/* Isometric 3D Car Body Assembly */}
-                            {/* Wheels */}
-                            <ellipse cx="28" cy="68" rx="7" ry="4" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
-                            <ellipse cx="72" cy="68" rx="7" ry="4" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
-                            
-                            {/* Lower Chassis / Side Sill */}
-                            <path d="M 22 64 L 78 64 C 82 64 85 61 83 57 L 76 46 C 74 43 70 41 65 41 L 35 41 C 30 41 26 43 24 46 L 17 57 C 15 61 18 64 22 64 Z" fill="url(#bodySideGrad)" stroke="#38bdf8" strokeWidth="1" />
-
-                            {/* Hood & Front Fascia (Isometric Angle) */}
-                            <path d="M 65 41 L 76 46 L 83 57 L 78 64 L 62 61 L 58 41 Z" fill="url(#hoodGrad)" opacity="0.9" />
-
-                            {/* Cabin Roof & Pillars */}
-                            <path d="M 32 41 L 40 26 C 42 23 46 22 51 22 L 58 22 C 62 22 65 24 67 27 L 72 41 Z" fill="url(#roofGrad)" />
-
-                            {/* Windshield & Side Windows */}
-                            <path d="M 52 24 L 64 24 L 69 40 L 52 40 Z" fill="url(#glassGrad)" stroke="#e0f2fe" strokeWidth="0.75" />
-                            <path d="M 36 39 L 42 27 L 49 24 L 49 40 Z" fill="url(#glassGrad)" opacity="0.7" />
-
-                            {/* Specular Highlight lines */}
-                            <path d="M 42 23 C 48 23 56 23 60 23" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" opacity="0.8" />
-                            <path d="M 23 62 L 77 62" stroke="#67e8f9" strokeWidth="1" opacity="0.6" />
-
-                            {/* Glowing Headlight Beams */}
-                            <circle cx="79" cy="58" r="2.5" fill="#a5f3fc" filter="url(#cyanGlow)" />
-                            <path d="M 81 57 L 95 53 C 97 52 98 55 96 58 L 81 60 Z" fill="#67e8f9" opacity="0.35" />
-                            <circle cx="21" cy="58" r="2" fill="#38bdf8" />
-                          </svg>
-
-                          {/* Bottom subtle telemetry accent line */}
-                          <div className="absolute bottom-0 inset-x-2 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+                          {/* Bottom subtle telemetry accent bar */}
+                          <div className="absolute bottom-0 inset-x-3 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_8px_#22d3ee]"></div>
                         </div>
                       </div>
 
