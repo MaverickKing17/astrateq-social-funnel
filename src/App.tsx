@@ -383,13 +383,26 @@ export default function App() {
           </p>
 
           {/* Primary Action Button with glowing gradient */}
-          <button 
-            onClick={() => { setIsSimulatorOpen(true); resetSim(); }}
-            className="flex items-center justify-center gap-2.5 w-full bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-2xl py-4 px-6 font-extrabold text-[15px] shadow-lg shadow-blue-500/25 active:scale-[0.985] hover:scale-[1.01] transition-all duration-200 cursor-pointer text-center border-0 group/btn"
-          >
-            <span>Start Driver Awareness Simulation</span>
-            <ArrowRight className="w-4.5 h-4.5 text-white transition-transform duration-200 group-hover/btn:translate-x-1" strokeWidth={2.5} />
-          </button>
+          <div className="flex flex-col gap-2.5 w-full">
+            <button 
+              onClick={() => { setIsSimulatorOpen(true); resetSim(); }}
+              className="flex items-center justify-center gap-2.5 w-full bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-2xl py-4 px-6 font-extrabold text-[15px] shadow-lg shadow-blue-500/25 active:scale-[0.985] hover:scale-[1.01] transition-all duration-200 cursor-pointer text-center border-0 group/btn"
+            >
+              <span>Start Driver Awareness Simulation</span>
+              <ArrowRight className="w-4.5 h-4.5 text-white transition-transform duration-200 group-hover/btn:translate-x-1" strokeWidth={2.5} />
+            </button>
+
+            {/* Direct Quick Launch Button for Results UI Variations */}
+            <button 
+              type="button"
+              onClick={() => { setIsSimulatorOpen(true); setIsStepTransitioning(false); setSimStep(5); }}
+              className="flex items-center justify-center gap-2 w-full bg-cyan-950/80 hover:bg-cyan-900/80 text-cyan-300 border border-cyan-500/40 rounded-2xl py-3 px-5 font-bold text-xs shadow-md shadow-cyan-950/50 active:scale-[0.985] hover:scale-[1.01] transition-all duration-200 cursor-pointer text-center group/layoutBtn"
+            >
+              <LayoutGrid className="w-4 h-4 text-cyan-400 group-hover/layoutBtn:scale-110 transition-transform" />
+              <span>Preview 3 Results Layout Variations</span>
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400 ml-auto" />
+            </button>
+          </div>
 
           {/* Micro-disclaimer */}
           <div className="flex items-center justify-center gap-2 text-slate-400 text-[10.5px] font-semibold text-center mt-3.5 tracking-wide">
