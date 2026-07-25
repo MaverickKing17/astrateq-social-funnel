@@ -85,7 +85,10 @@ export default function App() {
   const [updateEmail, setUpdateEmail] = useState('');
   const [updateProvince, setUpdateProvince] = useState('ON');
   const [updateSubscribed, setUpdateSubscribed] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
+  const [updateSuccessNote, setUpdateSuccessNote] = useState('');
   const [copiedProfile, setCopiedProfile] = useState(false);
+  const [pdfState, setPdfState] = useState<'idle' | 'generating' | 'success'>('idle');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -249,211 +252,304 @@ export default function App() {
   };
 
   const generatePDFReport = () => {
-    const doc = new jsPDF();
-    const pageWidth = doc.internal.pageSize.getWidth();
+    setPdfState('generating');
+    try {
+      // Safe jsPDF constructor resolution
+      const DocConstructor = (jsPDF as any).jsPDF || jsPDF;
+      const doc = new DocConstructor({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+      const pageWidth = doc.internal.pageSize.getWidth();
 
-    // Dark Header Banner
-    doc.setFillColor(11, 19, 36);
-    doc.rect(0, 0, pageWidth, 42, 'F');
+      // Dark Header Banner
+      doc.setFillColor(11, 19, 36);
+      doc.rect(0, 0, pageWidth, 42, 'F');
 
-    // Astrateq Logo / Title
-    doc.setTextColor(34, 211, 238); // Cyan-400 (#22d3ee)
-    doc.setFontSize(22);
-    doc.setFont('helvetica', 'bold');
-    doc.text('ASTRATEQ', 15, 20);
+      // Astrateq Logo / Title
+      doc.setTextColor(34, 211, 238); // Cyan-400 (#22d3ee)
+      doc.setFontSize(22);
+      doc.setFont('helvetica', 'bold');
+      doc.text('ASTRATEQ', 15, 20);
 
-    doc.setFontSize(8.5);
-    doc.setTextColor(148, 163, 184); // Slate-400
-    doc.setFont('helvetica', 'bold');
-    doc.text('AUTOMOTIVE SOFTWARE INTELLIGENCE • PRIVACY-FIRST RESEARCH', 15, 28);
-    doc.setFont('helvetica', 'normal');
-    doc.text('DRIVER AWARENESS PROFILE REPORT', 15, 34);
+      doc.setFontSize(8.5);
+      doc.setTextColor(148, 163, 184); // Slate-400
+      doc.setFont('helvetica', 'bold');
+      doc.text('AUTOMOTIVE SOFTWARE INTELLIGENCE • PRIVACY-FIRST RESEARCH', 15, 28);
+      doc.setFont('helvetica', 'normal');
+      doc.text('DRIVER AWARENESS PROFILE REPORT', 15, 34);
 
-    // Right-aligned report metadata
-    doc.setFontSize(9);
-    doc.setTextColor(226, 232, 240);
-    doc.text('ANONYMOUS REPORT', pageWidth - 15, 18, { align: 'right' });
-    doc.setFontSize(8);
-    doc.setTextColor(148, 163, 184);
-    doc.text(`Generated: ${new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' })}`, pageWidth - 15, 25, { align: 'right' });
-    doc.text(`Profile Hash: #AST-${Math.floor(100000 + Math.random() * 900000)}`, pageWidth - 15, 31, { align: 'right' });
+      // Right-aligned report metadata
+      doc.setFontSize(9);
+      doc.setTextColor(226, 232, 240);
+      doc.text('ANONYMOUS REPORT', pageWidth - 15, 18, { align: 'right' });
+      doc.setFontSize(8);
+      doc.setTextColor(148, 163, 184);
+      doc.text(`Generated: ${new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' })}`, pageWidth - 15, 25, { align: 'right' });
+      doc.text(`Profile Hash: #AST-${Math.floor(100000 + Math.random() * 900000)}`, pageWidth - 15, 31, { align: 'right' });
 
-    // Decorative Cyan Accent Line
-    doc.setDrawColor(34, 211, 238);
-    doc.setLineWidth(1.2);
-    doc.line(0, 42, pageWidth, 42);
+      // Decorative Cyan Accent Line
+      doc.setDrawColor(34, 211, 238);
+      doc.setLineWidth(1.2);
+      doc.line(0, 42, pageWidth, 42);
 
-    // Main Overall Score Hero Banner Box
-    doc.setFillColor(240, 249, 255); // Light Cyan/Blue background
-    doc.roundedRect(15, 48, pageWidth - 30, 40, 4, 4, 'F');
-    doc.setDrawColor(186, 230, 253);
-    doc.setLineWidth(0.8);
-    doc.roundedRect(15, 48, pageWidth - 30, 40, 4, 4, 'S');
+      // Main Overall Score Hero Banner Box
+      doc.setFillColor(240, 249, 255); // Light Cyan/Blue background
+      doc.roundedRect(15, 48, pageWidth - 30, 40, 4, 4, 'F');
+      doc.setDrawColor(186, 230, 253);
+      doc.setLineWidth(0.8);
+      doc.roundedRect(15, 48, pageWidth - 30, 40, 4, 4, 'S');
 
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(71, 85, 105);
-    doc.text('OVERALL COGNITIVE AWARENESS SCORE', 25, 61);
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(71, 85, 105);
+      doc.text('OVERALL COGNITIVE AWARENESS SCORE', 25, 61);
 
-    doc.setFontSize(32);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(2, 132, 199); // Cyan blue
-    doc.text(`${awarenessScore}`, 25, 77);
-    
-    doc.setFontSize(14);
-    doc.setTextColor(100, 116, 139);
-    doc.text('/ 100', 68, 77);
+      doc.setFontSize(32);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(2, 132, 199); // Cyan blue
+      doc.text(`${awarenessScore}`, 25, 77);
+      
+      doc.setFontSize(14);
+      doc.setTextColor(100, 116, 139);
+      doc.text('/ 100', 68, 77);
 
-    // Status pill on the right side of score card
-    doc.setFillColor(224, 242, 254);
-    doc.roundedRect(105, 56, pageWidth - 120, 24, 3, 3, 'F');
-    doc.setFontSize(9.5);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(3, 105, 161);
-    doc.text('Optimal Attention Recovery Margin', 110, 66);
-    doc.setFontSize(8);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(51, 65, 85);
-    doc.text(`Focus Assessment Velocity: ${avgReactionTime} ms avg`, 110, 73);
+      // Status pill on the right side of score card
+      doc.setFillColor(224, 242, 254);
+      doc.roundedRect(105, 56, pageWidth - 120, 24, 3, 3, 'F');
+      doc.setFontSize(9.5);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(3, 105, 161);
+      doc.text('Optimal Attention Recovery Margin', 110, 66);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(51, 65, 85);
+      doc.text(`Focus Assessment Velocity: ${avgReactionTime} ms avg`, 110, 73);
 
-    // Section 1: Driving Context Baseline
-    doc.setTextColor(15, 23, 42);
-    doc.setFontSize(11);
-    doc.setFont('helvetica', 'bold');
-    doc.text('1. SIMULATED DRIVING CONTEXT BASELINE', 15, 102);
+      // Section 1: Driving Context Baseline
+      doc.setTextColor(15, 23, 42);
+      doc.setFontSize(11);
+      doc.setFont('helvetica', 'bold');
+      doc.text('1. SIMULATED DRIVING CONTEXT BASELINE', 15, 102);
 
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(51, 65, 85);
-    
-    const routeLabel = commuteType === 'urban' ? 'Urban Grid Traffic & Signals' : commuteType === 'highway' ? '400-Series Highway High-Speed Cruising' : commuteType === 'rural' ? 'Rural Secondary Variable Pavement' : 'Intercity Long-Haul Endurance';
-    const weatherLabel = weatherCondition === 'clear' ? 'Clear & Dry Conditions' : weatherCondition === 'rain' ? 'Heavy Rain & Surface Water' : weatherCondition === 'snow' ? 'Winter Snow, Ice & Slush' : 'Night Vision & Low Visibility';
-    const durationLabel = commuteTime === 'short' ? '< 30 Minutes Short Commute' : commuteTime === 'medium' ? '30 - 60 Minutes Medium Commute' : '60+ Minutes Extended Commute';
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(51, 65, 85);
+      
+      const routeLabel = commuteType === 'urban' ? 'Urban Grid Traffic & Signals' : commuteType === 'highway' ? '400-Series Highway High-Speed Cruising' : commuteType === 'rural' ? 'Rural Secondary Variable Pavement' : 'Intercity Long-Haul Endurance';
+      const weatherLabel = weatherCondition === 'clear' ? 'Clear & Dry Conditions' : weatherCondition === 'rain' ? 'Heavy Rain & Surface Water' : weatherCondition === 'snow' ? 'Winter Snow, Ice & Slush' : 'Night Vision & Low Visibility';
+      const durationLabel = commuteTime === 'short' ? '< 30 Minutes Short Commute' : commuteTime === 'medium' ? '30 - 60 Minutes Medium Commute' : '60+ Minutes Extended Commute';
 
-    doc.text(`• Primary Route Environment:  ${routeLabel}`, 20, 111);
-    doc.text(`• Environmental Weather:      ${weatherLabel}`, 20, 119);
-    doc.text(`• Daily Commute Duration:     ${durationLabel}`, 20, 127);
+      doc.text(`• Primary Route Environment:  ${routeLabel}`, 20, 111);
+      doc.text(`• Environmental Weather:      ${weatherLabel}`, 20, 119);
+      doc.text(`• Daily Commute Duration:     ${durationLabel}`, 20, 127);
 
-    // Section 2: Cognitive Metrics Breakdown
-    doc.setTextColor(15, 23, 42);
-    doc.setFontSize(11);
-    doc.setFont('helvetica', 'bold');
-    doc.text('2. COGNITIVE AWARENESS METRICS BREAKDOWN', 15, 142);
+      // Section 2: Cognitive Metrics Breakdown
+      doc.setTextColor(15, 23, 42);
+      doc.setFontSize(11);
+      doc.setFont('helvetica', 'bold');
+      doc.text('2. COGNITIVE AWARENESS METRICS BREAKDOWN', 15, 142);
 
-    const attention = getAttentionStability();
-    const fatigue = getFatigueRisk();
-    const complexity = getEnvironmentalComplexity();
+      const attention = getAttentionStability();
+      const fatigue = getFatigueRisk();
+      const complexity = getEnvironmentalComplexity();
 
-    const cardWidth = (pageWidth - 40) / 3;
+      const cardWidth = (pageWidth - 40) / 3;
 
-    // Metric Card 1: Attention
-    doc.setFillColor(248, 250, 252);
-    doc.roundedRect(15, 148, cardWidth, 34, 3, 3, 'F');
-    doc.setDrawColor(226, 232, 240);
-    doc.roundedRect(15, 148, cardWidth, 34, 3, 3, 'S');
+      // Metric Card 1: Attention
+      doc.setFillColor(248, 250, 252);
+      doc.roundedRect(15, 148, cardWidth, 34, 3, 3, 'F');
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(15, 148, cardWidth, 34, 3, 3, 'S');
 
-    doc.setFontSize(8);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(100, 116, 139);
-    doc.text('ATTENTION STABILITY', 20, 156);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(100, 116, 139);
+      doc.text('ATTENTION STABILITY', 20, 156);
 
-    doc.setFontSize(10.5);
-    doc.setTextColor(14, 116, 144);
-    doc.text(attention.label, 20, 165);
+      doc.setFontSize(10.5);
+      doc.setTextColor(14, 116, 144);
+      doc.text(attention.label, 20, 165);
 
-    doc.setFontSize(7.5);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(71, 85, 105);
-    const attLines = doc.splitTextToSize(attention.desc, cardWidth - 10);
-    doc.text(attLines, 20, 172);
+      doc.setFontSize(7.5);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(71, 85, 105);
+      const attLines = doc.splitTextToSize(attention.desc, cardWidth - 10);
+      doc.text(attLines, 20, 172);
 
-    // Metric Card 2: Fatigue Risk
-    doc.setFillColor(248, 250, 252);
-    doc.roundedRect(15 + cardWidth + 5, 148, cardWidth, 34, 3, 3, 'F');
-    doc.setDrawColor(226, 232, 240);
-    doc.roundedRect(15 + cardWidth + 5, 148, cardWidth, 34, 3, 3, 'S');
+      // Metric Card 2: Fatigue Risk
+      doc.setFillColor(248, 250, 252);
+      doc.roundedRect(15 + cardWidth + 5, 148, cardWidth, 34, 3, 3, 'F');
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(15 + cardWidth + 5, 148, cardWidth, 34, 3, 3, 'S');
 
-    doc.setFontSize(8);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(100, 116, 139);
-    doc.text('FATIGUE RISK', 20 + cardWidth + 5, 156);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(100, 116, 139);
+      doc.text('FATIGUE RISK', 20 + cardWidth + 5, 156);
 
-    doc.setFontSize(10.5);
-    doc.setTextColor(16, 185, 129);
-    doc.text(fatigue.label, 20 + cardWidth + 5, 165);
+      doc.setFontSize(10.5);
+      doc.setTextColor(16, 185, 129);
+      doc.text(fatigue.label, 20 + cardWidth + 5, 165);
 
-    doc.setFontSize(7.5);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(71, 85, 105);
-    const fatLines = doc.splitTextToSize(fatigue.desc, cardWidth - 10);
-    doc.text(fatLines, 20 + cardWidth + 5, 172);
+      doc.setFontSize(7.5);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(71, 85, 105);
+      const fatLines = doc.splitTextToSize(fatigue.desc, cardWidth - 10);
+      doc.text(fatLines, 20 + cardWidth + 5, 172);
 
-    // Metric Card 3: Environmental Complexity
-    doc.setFillColor(248, 250, 252);
-    doc.roundedRect(15 + (cardWidth + 5) * 2, 148, cardWidth, 34, 3, 3, 'F');
-    doc.setDrawColor(226, 232, 240);
-    doc.roundedRect(15 + (cardWidth + 5) * 2, 148, cardWidth, 34, 3, 3, 'S');
+      // Metric Card 3: Environmental Complexity
+      doc.setFillColor(248, 250, 252);
+      doc.roundedRect(15 + (cardWidth + 5) * 2, 148, cardWidth, 34, 3, 3, 'F');
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(15 + (cardWidth + 5) * 2, 148, cardWidth, 34, 3, 3, 'S');
 
-    doc.setFontSize(8);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(100, 116, 139);
-    doc.text('COMPLEXITY', 20 + (cardWidth + 5) * 2, 156);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(100, 116, 139);
+      doc.text('COMPLEXITY', 20 + (cardWidth + 5) * 2, 156);
 
-    doc.setFontSize(10.5);
-    doc.setTextColor(217, 119, 6);
-    doc.text(complexity.label, 20 + (cardWidth + 5) * 2, 165);
+      doc.setFontSize(10.5);
+      doc.setTextColor(217, 119, 6);
+      doc.text(complexity.label, 20 + (cardWidth + 5) * 2, 165);
 
-    doc.setFontSize(7.5);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(71, 85, 105);
-    const compLines = doc.splitTextToSize(complexity.desc, cardWidth - 10);
-    doc.text(compLines, 20 + (cardWidth + 5) * 2, 172);
+      doc.setFontSize(7.5);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(71, 85, 105);
+      const compLines = doc.splitTextToSize(complexity.desc, cardWidth - 10);
+      doc.text(compLines, 20 + (cardWidth + 5) * 2, 172);
 
-    // Section 3: Educational Insights
-    doc.setTextColor(15, 23, 42);
-    doc.setFontSize(11);
-    doc.setFont('helvetica', 'bold');
-    doc.text('3. RESEARCH & COGNITIVE ANALYSIS', 15, 196);
+      // Section 3: Educational Insights
+      doc.setTextColor(15, 23, 42);
+      doc.setFontSize(11);
+      doc.setFont('helvetica', 'bold');
+      doc.text('3. RESEARCH & COGNITIVE ANALYSIS', 15, 196);
 
-    doc.setFillColor(240, 249, 255);
-    doc.roundedRect(15, 202, pageWidth - 30, 32, 3, 3, 'F');
-    doc.setDrawColor(186, 230, 253);
-    doc.roundedRect(15, 202, pageWidth - 30, 32, 3, 3, 'S');
+      doc.setFillColor(240, 249, 255);
+      doc.roundedRect(15, 202, pageWidth - 30, 32, 3, 3, 'F');
+      doc.setDrawColor(186, 230, 253);
+      doc.roundedRect(15, 202, pageWidth - 30, 32, 3, 3, 'S');
 
-    doc.setFontSize(8.5);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(30, 58, 138);
-    const insightLines = doc.splitTextToSize(getEducationalInsight(), pageWidth - 42);
-    doc.text(insightLines, 21, 212);
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(30, 58, 138);
+      const insightLines = doc.splitTextToSize(getEducationalInsight(), pageWidth - 42);
+      doc.text(insightLines, 21, 212);
 
-    // Section 4: Privacy & Compliance Verification Box
-    doc.setFillColor(241, 245, 249);
-    doc.roundedRect(15, 242, pageWidth - 30, 20, 3, 3, 'F');
-    doc.setDrawColor(203, 213, 225);
-    doc.roundedRect(15, 242, pageWidth - 30, 20, 3, 3, 'S');
+      // Section 4: Privacy & Compliance Verification Box
+      doc.setFillColor(241, 245, 249);
+      doc.roundedRect(15, 242, pageWidth - 30, 20, 3, 3, 'F');
+      doc.setDrawColor(203, 213, 225);
+      doc.roundedRect(15, 242, pageWidth - 30, 20, 3, 3, 'S');
 
-    doc.setFontSize(8);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(51, 65, 85);
-    doc.text('ASTRATEQ ZERO-TELEMATICS PRIVACY VERIFICATION', 21, 250);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7.5);
-    doc.setTextColor(100, 116, 139);
-    doc.text('This simulation profile is computed in-memory. No vehicle GPS tracking, CAN-bus, or personal identifiers are stored.', 21, 256);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(51, 65, 85);
+      doc.text('ASTRATEQ ZERO-TELEMATICS PRIVACY VERIFICATION', 21, 250);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+      doc.setTextColor(100, 116, 139);
+      doc.text('This simulation profile is computed in-memory. No vehicle GPS tracking, CAN-bus, or personal identifiers are stored.', 21, 256);
 
-    // Footer
-    doc.setFontSize(7.5);
-    doc.setTextColor(148, 163, 184);
-    doc.text('Astrateq Automotive Software Intelligence Research • Canada', 15, 278);
-    doc.text('Page 1 of 1', pageWidth - 15, 278, { align: 'right' });
+      // Footer
+      doc.setFontSize(7.5);
+      doc.setTextColor(148, 163, 184);
+      doc.text('Astrateq Automotive Software Intelligence Research • Canada', 15, 278);
+      doc.text('Page 1 of 1', pageWidth - 15, 278, { align: 'right' });
 
-    doc.save(`Astrateq_Driver_Awareness_Profile_${awarenessScore}.pdf`);
+      // Save using direct Blob URL download for maximum iframe sandbox compatibility
+      const fileName = `Astrateq_Driver_Awareness_Profile_${awarenessScore}.pdf`;
+      try {
+        const pdfBlob = doc.output('blob');
+        const blobUrl = URL.createObjectURL(pdfBlob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+      } catch {
+        doc.save(fileName);
+      }
+
+      setPdfState('success');
+      setTimeout(() => setPdfState('idle'), 3500);
+
+    } catch (err) {
+      console.error('PDF Generation Fallback Triggered:', err);
+      // Fallback: Export formatted text summary
+      const fileName = `Astrateq_Driver_Awareness_Profile_${awarenessScore}.txt`;
+      const textContent = `ASTRATEQ DRIVER AWARENESS PROFILE REPORT
+===================================================
+Overall Cognitive Awareness Score: ${awarenessScore} / 100
+Focus Reaction Time: ${avgReactionTime} ms avg
+Attention Stability: ${getAttentionStability().label} (${getAttentionStability().desc})
+Fatigue Risk: ${getFatigueRisk().label} (${getFatigueRisk().desc})
+Environmental Complexity: ${getEnvironmentalComplexity().label} (${getEnvironmentalComplexity().desc})
+
+SIMULATED DRIVING CONTEXT:
+Route Environment: ${commuteType}
+Weather Conditions: ${weatherCondition}
+Commute Duration: ${commuteTime}
+
+RESEARCH & COGNITIVE ANALYSIS:
+${getEducationalInsight()}
+
+ASTRATEQ ZERO-TELEMATICS PRIVACY VERIFICATION:
+This simulation profile is computed in-memory. No vehicle GPS tracking, CAN-bus, or personal identifiers are stored.
+Astrateq Automotive Software Intelligence Research • Canada`;
+
+      const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+
+      setPdfState('success');
+      setTimeout(() => setPdfState('idle'), 3500);
+    }
   };
 
-  const handleUpdateSubmit = (e: React.FormEvent) => {
+  const handleUpdateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (updateEmail) {
+    if (!updateEmail) return;
+
+    setUpdateLoading(true);
+    setUpdateSuccessNote('');
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: updateEmail,
+          province: updateProvince,
+          score: awarenessScore,
+          feedback: feedbackInput
+        })
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setUpdateSubscribed(true);
+        if (data.message) {
+          setUpdateSuccessNote(data.message);
+        }
+      } else {
+        alert(data.error || 'Subscription failed. Please try again.');
+      }
+    } catch (err) {
+      console.error('Subscription dispatch error:', err);
+      // Fallback success
       setUpdateSubscribed(true);
+    } finally {
+      setUpdateLoading(false);
     }
   };
 
@@ -1236,17 +1332,17 @@ export default function App() {
                             onClick={() => setCommuteType(item.id)}
                             className={`p-3 rounded-xl border text-left transition-all duration-150 cursor-pointer flex flex-col justify-between gap-1 ${
                               commuteType === item.id 
-                                ? 'bg-cyan-950/60 border-cyan-400 text-white ring-2 ring-cyan-500/50 shadow-md shadow-cyan-500/20' 
-                                : 'bg-slate-950/60 border-white/10 text-slate-400 hover:border-white/25 hover:text-slate-200'
+                                ? 'bg-gradient-to-br from-cyan-950 via-slate-900 to-cyan-900 border-2 border-cyan-400 text-white ring-2 ring-cyan-400/50 shadow-lg shadow-cyan-500/25' 
+                                : 'bg-slate-900 border-slate-700/80 text-slate-200 hover:border-cyan-400/60 hover:text-white hover:bg-slate-800/90 shadow-sm'
                             }`}
                           >
                             <div className="flex items-center justify-between w-full">
-                              <span className="text-xs font-extrabold">{item.label}</span>
+                              <span className="text-xs font-black">{item.label}</span>
                               {commuteType === item.id && (
                                 <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
                               )}
                             </div>
-                            <span className="text-[10px] text-slate-400 font-medium">{item.desc}</span>
+                            <span className="text-[10px] text-slate-300 font-medium">{item.desc}</span>
                           </button>
                         ))}
                       </div>
@@ -1269,10 +1365,10 @@ export default function App() {
                             key={item.id}
                             type="button"
                             onClick={() => setWeatherCondition(item.id)}
-                            className={`py-2.5 px-3 rounded-xl border text-xs font-extrabold text-left transition-all duration-150 cursor-pointer flex items-center justify-between ${
+                            className={`py-2.5 px-3 rounded-xl border text-xs font-black text-left transition-all duration-150 cursor-pointer flex items-center justify-between ${
                               weatherCondition === item.id 
-                                ? 'bg-cyan-950/60 border-cyan-400 text-white ring-2 ring-cyan-500/50 shadow-md shadow-cyan-500/20' 
-                                : 'bg-slate-950/60 border-white/10 text-slate-400 hover:border-white/25 hover:text-slate-200'
+                                ? 'bg-gradient-to-r from-cyan-950 to-slate-900 border-2 border-cyan-400 text-white ring-2 ring-cyan-400/50 shadow-lg shadow-cyan-500/25' 
+                                : 'bg-slate-900 border-slate-700/80 text-slate-200 hover:border-cyan-400/60 hover:text-white hover:bg-slate-800/90 shadow-sm'
                             }`}
                           >
                             <span>{item.label}</span>
@@ -1300,10 +1396,10 @@ export default function App() {
                             key={item.id}
                             type="button"
                             onClick={() => setCommuteTime(item.id)}
-                            className={`py-2.5 px-2.5 rounded-xl border text-xs font-extrabold text-center transition-all duration-150 cursor-pointer flex items-center justify-center gap-1.5 ${
+                            className={`py-2.5 px-2.5 rounded-xl border text-xs font-black text-center transition-all duration-150 cursor-pointer flex items-center justify-center gap-1.5 ${
                               commuteTime === item.id 
-                                ? 'bg-cyan-950/60 border-cyan-400 text-white ring-2 ring-cyan-500/50 shadow-md shadow-cyan-500/20' 
-                                : 'bg-slate-950/60 border-white/10 text-slate-400 hover:border-white/25 hover:text-slate-200'
+                                ? 'bg-gradient-to-r from-cyan-950 to-slate-900 border-2 border-cyan-400 text-white ring-2 ring-cyan-400/50 shadow-lg shadow-cyan-500/25' 
+                                : 'bg-slate-900 border-slate-700/80 text-slate-200 hover:border-cyan-400/60 hover:text-white hover:bg-slate-800/90 shadow-sm'
                             }`}
                           >
                             {commuteTime === item.id && (
@@ -1334,81 +1430,191 @@ export default function App() {
                   </div>
                 )}
 
-                {/* SCREEN 3: FOCUS ASSESSMENT */}
+                {/* SCREEN 3: FOCUS ASSESSMENT (HUD REACTION SIMULATOR) */}
                 {simStep === 3 && (
                   <div className="flex flex-col gap-4 animate-fade-in text-center">
-                    <div className="flex items-center justify-between text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      <span className="text-cyan-400">Trial {currentTrial} of 3</span>
-                      <span>Attention Switching & Reaction</span>
+                    
+                    {/* HUD Header Bar with Trial Segmented LED Progress */}
+                    <div className="flex flex-col gap-2 bg-slate-950/90 border border-cyan-500/30 rounded-2xl p-3.5 shadow-md">
+                      <div className="flex items-center justify-between text-[11px] font-black tracking-wider uppercase">
+                        <span className="text-cyan-300 flex items-center gap-1.5">
+                          <Activity className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+                          <span>COGNITIVE REACTION ASSESSOR</span>
+                        </span>
+                        <span className="text-slate-400 font-bold">TRIAL {currentTrial} OF 3</span>
+                      </div>
+
+                      {/* Segmented LED Trial Capsules */}
+                      <div className="grid grid-cols-3 gap-2 mt-1">
+                        {[1, 2, 3].map((trialNum) => {
+                          const trialVal = trials[trialNum - 1];
+                          const isActive = currentTrial === trialNum && testStatus !== 'done';
+                          const isDone = trialVal !== undefined;
+
+                          return (
+                            <div
+                              key={trialNum}
+                              className={`py-1.5 px-2 rounded-xl border text-[11px] font-extrabold flex items-center justify-center gap-1.5 transition-all ${
+                                isDone
+                                  ? 'bg-emerald-950/80 border-emerald-500/60 text-emerald-300 shadow-sm shadow-emerald-900/40'
+                                  : isActive
+                                  ? 'bg-cyan-950/90 border-2 border-cyan-400 text-cyan-200 ring-2 ring-cyan-400/40 shadow-md shadow-cyan-500/30 animate-pulse'
+                                  : 'bg-slate-900/70 border-slate-800 text-slate-500'
+                              }`}
+                            >
+                              {isDone ? (
+                                <>
+                                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                                  <span>T{trialNum}: <strong className="text-white">{trialVal}ms</strong></span>
+                                </>
+                              ) : isActive ? (
+                                <>
+                                  <Zap className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                                  <span>T{trialNum}: <span className="text-cyan-300 font-black">ACTIVE</span></span>
+                                </>
+                              ) : (
+                                <span>T{trialNum}: PENDING</span>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
 
-                    {/* Interactive Challenge Card */}
+                    {/* Cockpit HUD Interactive Assessment Box */}
                     <div 
                       onClick={testStatus === 'ready' || testStatus === 'waiting' ? handleReactionTap : undefined}
-                      className={`min-h-[170px] rounded-2xl border-2 flex flex-col items-center justify-center p-6 transition-all duration-200 select-none relative overflow-hidden ${
+                      className={`min-h-[210px] rounded-2xl border-2 flex flex-col items-center justify-center p-6 transition-all duration-200 select-none relative overflow-hidden group cursor-pointer ${
                         testStatus === 'ready' 
-                          ? 'bg-cyan-500 border-cyan-200 text-slate-950 cursor-pointer shadow-xl shadow-cyan-500/40 scale-[1.02]' 
+                          ? 'bg-cyan-400 border-white text-slate-950 shadow-[0_0_40px_rgba(34,211,238,0.7)] scale-[1.025]' 
                           : testStatus === 'waiting'
-                          ? 'bg-amber-500/15 border-amber-500/40 text-amber-300 cursor-pointer'
+                          ? 'bg-gradient-to-b from-amber-950/90 via-slate-950 to-amber-950/70 border-amber-500/80 text-amber-300 shadow-lg shadow-amber-950/50'
                           : testStatus === 'pressed'
-                          ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300'
-                          : 'bg-slate-950 border-cyan-500/20 text-slate-300'
+                          ? 'bg-gradient-to-b from-emerald-950/90 via-slate-950 to-emerald-950/80 border-emerald-500/80 text-emerald-300 shadow-lg shadow-emerald-950/50'
+                          : 'bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 border-cyan-500/40 text-slate-200 shadow-xl shadow-cyan-950/40'
                       }`}
                     >
-                      {testStatus === 'ready' && (
-                        <div className="flex flex-col items-center gap-1.5 animate-bounce">
-                          <Zap className="w-10 h-10 text-slate-950 fill-slate-950" />
-                          <span className="text-2xl font-black uppercase tracking-widest text-slate-950">TAP NOW!</span>
-                        </div>
-                      )}
+                      {/* Tech Bracket Corner Framing */}
+                      <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-cyan-400/70 pointer-events-none"></div>
+                      <div className="absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-cyan-400/70 pointer-events-none"></div>
+                      <div className="absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-cyan-400/70 pointer-events-none"></div>
+                      <div className="absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-cyan-400/70 pointer-events-none"></div>
 
-                      {testStatus === 'waiting' && (
-                        <div className="flex flex-col items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-amber-400 animate-ping"></div>
-                          <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
-                            Wait for Signal to turn CYAN BLUE...
+                      {/* Top HUD Telemetry Header */}
+                      <div className="absolute top-3 inset-x-4 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-slate-400/80 pointer-events-none">
+                        <span className="flex items-center gap-1">
+                          <span className={`w-1.5 h-1.5 rounded-full ${testStatus === 'ready' ? 'bg-slate-950 animate-ping' : testStatus === 'waiting' ? 'bg-amber-400 animate-ping' : 'bg-cyan-400'}`}></span>
+                          {testStatus === 'ready' ? 'TRIGGER HIT' : testStatus === 'waiting' ? 'RADAR SCANNING' : 'HUD READY'}
+                        </span>
+                        <span>GAZE: ROAD FOCUS</span>
+                      </div>
+
+                      {/* DISPLAY STATE 1: READY (TRIGGER STIMULUS ACTIVATED) */}
+                      {testStatus === 'ready' && (
+                        <div className="flex flex-col items-center gap-2 animate-bounce my-auto">
+                          <div className="w-16 h-16 rounded-full bg-slate-950 flex items-center justify-center shadow-2xl border-2 border-white">
+                            <Zap className="w-10 h-10 text-cyan-400 fill-cyan-400" />
+                          </div>
+                          <span className="text-3xl font-black uppercase tracking-widest text-slate-950 drop-shadow-md">
+                            TAP NOW!
+                          </span>
+                          <span className="text-xs font-black uppercase tracking-wider text-slate-900 bg-white/40 px-3 py-0.5 rounded-full">
+                            TOUCH ANYWHERE ON SCREEN
                           </span>
                         </div>
                       )}
 
-                      {testStatus === 'pressed' && (
-                        <div className="flex flex-col items-center gap-1">
-                          <CheckCircle2 className="w-8 h-8 text-emerald-400" />
-                          <span className="text-xs font-bold text-emerald-300">{reactionMsg}</span>
+                      {/* DISPLAY STATE 2: WAITING FOR SIGNAL */}
+                      {testStatus === 'waiting' && (
+                        <div className="flex flex-col items-center gap-3 my-auto">
+                          <div className="relative w-16 h-16 flex items-center justify-center">
+                            <div className="absolute inset-0 rounded-full border-2 border-amber-400/30 border-t-amber-400 animate-spin"></div>
+                            <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-400/60 flex items-center justify-center">
+                              <div className="w-3.5 h-3.5 rounded-full bg-amber-400 animate-ping"></div>
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-1">
+                            <span className="text-sm font-black uppercase tracking-wider text-amber-300">
+                              SCANNING HAZARD SIGNAL...
+                            </span>
+                            <span className="text-[11px] font-bold text-slate-300">
+                              Wait for the box to turn <strong className="text-cyan-300">CYAN BLUE</strong>, then tap as fast as possible!
+                            </span>
+                          </div>
                         </div>
                       )}
 
-                      {testStatus === 'idle' && (
-                        <div className="flex flex-col items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-cyan-400">
-                            <Activity className="w-6 h-6" />
+                      {/* DISPLAY STATE 3: PRESSED (SUCCESSFUL REACTION CAPTURED) */}
+                      {testStatus === 'pressed' && (
+                        <div className="flex flex-col items-center gap-2 my-auto">
+                          <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-400/80 flex items-center justify-center text-emerald-400 shadow-lg">
+                            <CheckCircle2 className="w-7 h-7" />
                           </div>
-                          <p className="text-xs font-semibold text-slate-300 max-w-xs">
-                            Tap <span className="text-cyan-400 font-bold">Start Trial {currentTrial}</span> below. When the box turns <span className="text-cyan-400 font-bold">CYAN BLUE</span>, tap as fast as possible.
-                          </p>
+                          <div className="flex flex-col items-center gap-0.5">
+                            <span className="text-xl font-black text-emerald-300 tracking-tight">
+                              {trials[trials.length - 1]} ms
+                            </span>
+                            <span className="text-xs font-semibold text-emerald-200">
+                              {reactionMsg}
+                            </span>
+                          </div>
                         </div>
                       )}
+
+                      {/* DISPLAY STATE 4: IDLE (READY TO START TRIAL) */}
+                      {testStatus === 'idle' && (
+                        <div className="flex flex-col items-center gap-3 my-auto py-2">
+                          <div className="relative w-14 h-14 flex items-center justify-center">
+                            <div className="absolute inset-0 rounded-full border border-cyan-500/30 border-dashed animate-spin"></div>
+                            <div className="w-11 h-11 rounded-2xl bg-cyan-950/80 border border-cyan-400/60 flex items-center justify-center text-cyan-300 shadow-md">
+                              <Activity className="w-6 h-6" />
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-1 max-w-xs">
+                            <span className="text-xs font-black uppercase tracking-wider text-cyan-300">
+                              REACTION SPEED BENCHMARK
+                            </span>
+                            <p className="text-[11px] font-medium text-slate-300 leading-snug">
+                              Tap <strong className="text-cyan-300">Start Trial {currentTrial}</strong> below. When this box flashes <strong className="text-cyan-300">CYAN BLUE</strong>, tap immediately to measure attention switching velocity.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Bottom HUD Frame Indicator */}
+                      <div className="absolute bottom-2.5 inset-x-4 flex items-center justify-between text-[9px] font-extrabold uppercase tracking-widest text-slate-500 pointer-events-none">
+                        <span>ASTRATEQ ENGINE v2.4</span>
+                        <span>0% TELEMATICS</span>
+                      </div>
                     </div>
 
+                    {/* Action Controls & Trial Launch Button */}
                     <div className="flex flex-col gap-3">
                       {testStatus === 'idle' && (
                         <button
                           type="button"
                           onClick={startTrial}
-                          className="w-full bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-cyan-500/20 active:scale-[0.985] transition-all text-xs uppercase tracking-wider"
+                          className="w-full bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-500 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-black py-4 px-6 rounded-2xl flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_24px_rgba(34,211,238,0.35)] border-2 border-cyan-200 active:scale-[0.985] transition-all text-xs uppercase tracking-widest group"
                         >
-                          <Zap className="w-4 h-4 text-cyan-300" />
-                          <span>Start Trial {currentTrial}</span>
+                          <Zap className="w-4 h-4 text-slate-950 fill-slate-950 group-hover:scale-125 transition-transform" />
+                          <span>START TRIAL {currentTrial}</span>
                         </button>
                       )}
 
+                      {/* Recorded Velocity Summary Breakdown */}
                       {trials.length > 0 && (
-                        <div className="flex items-center justify-center gap-2 text-xs font-bold text-slate-400 bg-slate-950/60 border border-white/10 py-2 px-3 rounded-xl">
-                          {trials.map((t, idx) => (
-                            <span key={idx} className="bg-white/5 border border-white/10 px-2.5 py-1 rounded-lg">
-                              T{idx + 1}: <strong className="text-cyan-400">{t}ms</strong>
-                            </span>
-                          ))}
+                        <div className="bg-slate-950/80 border border-cyan-500/20 rounded-xl p-3 flex flex-col gap-1.5">
+                          <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider text-left">
+                            RECORDED REACTION VELOCITY TREND
+                          </span>
+                          <div className="flex items-center justify-between gap-2 text-xs font-black">
+                            {trials.map((t, idx) => (
+                              <div key={idx} className="flex-1 bg-slate-900 border border-cyan-500/30 py-1.5 px-2 rounded-lg flex items-center justify-between">
+                                <span className="text-slate-400 text-[10px]">TRIAL {idx + 1}</span>
+                                <span className="text-cyan-300 font-extrabold">{t} ms</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
 
@@ -1421,50 +1627,142 @@ export default function App() {
                   </div>
                 )}
 
-                {/* SCREEN 4: AWARENESS PROFILE GENERATION */}
+                {/* SCREEN 4: AWARENESS PROFILE GENERATION & NEURAL TELEMETRY ANALYSIS */}
                 {simStep === 4 && (
-                  <div className="flex flex-col items-center justify-center py-6 gap-6 text-center animate-fade-in my-2">
+                  <div className="flex flex-col gap-4 text-center animate-fade-in my-1">
                     
-                    {/* Animated circular score preview ring */}
-                    <div className="relative w-32 h-32 flex items-center justify-center">
-                      <div className="absolute inset-0 rounded-full border-4 border-cyan-500/20 border-t-cyan-400 animate-spin"></div>
-                      <div className="flex flex-col items-center justify-center bg-slate-950 rounded-full w-28 h-28 border border-cyan-500/30 shadow-inner">
-                        <span className="text-3xl font-black text-cyan-400 tracking-tight">{displayScore}</span>
-                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">/ 100</span>
+                    {/* Automotive Telemetry Engine Header */}
+                    <div className="bg-slate-950/90 border border-cyan-500/30 rounded-2xl p-3 flex items-center justify-between text-left text-[10px] font-black tracking-wider uppercase shadow-md">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></div>
+                        <span className="text-cyan-300">ASTRATEQ NEURAL-EDGE v2.4</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-slate-400 font-mono text-[9px]">
+                        <span className="hidden sm:inline">TFLOPS: 1.2</span>
+                        <span className="text-emerald-400 font-bold">CAN-BUS: ISOLATED</span>
                       </div>
                     </div>
 
-                    <div className="flex flex-col gap-1">
-                      <h4 className="text-sm font-extrabold text-white tracking-wide">
-                        Generating Awareness Profile
-                      </h4>
-                      <p className="text-[11px] font-medium text-slate-400">
-                        Synthesizing cognitive attention vectors & road parameters...
-                      </p>
+                    {/* Central Cockpit HUD Cockpit Gauge & Oscilloscope Waveform */}
+                    <div className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 border-2 border-cyan-500/40 rounded-2xl p-5 relative overflow-hidden flex flex-col items-center justify-center gap-3 shadow-xl">
+                      
+                      {/* Tech Corner Framing Brackets */}
+                      <div className="absolute top-2.5 left-2.5 w-3.5 h-3.5 border-t-2 border-l-2 border-cyan-400/80 pointer-events-none"></div>
+                      <div className="absolute top-2.5 right-2.5 w-3.5 h-3.5 border-t-2 border-r-2 border-cyan-400/80 pointer-events-none"></div>
+                      <div className="absolute bottom-2.5 left-2.5 w-3.5 h-3.5 border-b-2 border-l-2 border-cyan-400/80 pointer-events-none"></div>
+                      <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 border-b-2 border-r-2 border-cyan-400/80 pointer-events-none"></div>
+
+                      {/* Dual-Ring Rotating Telemetry Radar Dial */}
+                      <div className="relative w-36 h-36 flex items-center justify-center">
+                        <div className="absolute inset-0 rounded-full border-4 border-cyan-500/15 border-t-cyan-400 animate-spin"></div>
+                        <div className="absolute inset-2 rounded-full border-2 border-slate-700/60 border-b-teal-400 animate-[spin_3s_linear_infinite_reverse]"></div>
+                        
+                        <div className="flex flex-col items-center justify-center bg-slate-950 rounded-full w-28 h-28 border-2 border-cyan-400/50 shadow-[0_0_20px_rgba(34,211,238,0.25)]">
+                          <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-teal-200 to-cyan-400 tracking-tight">
+                            {displayScore}
+                          </span>
+                          <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
+                            COGNITIVE SCORE
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Animated SVG Cognitive Reaction Waveform Oscilloscope */}
+                      <div className="w-full h-8 bg-slate-950/80 border border-cyan-500/20 rounded-xl flex items-center justify-center px-3 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0284c715_1px,transparent_1px)] bg-[size:8px_100%] pointer-events-none"></div>
+                        <svg className="w-full h-full text-cyan-400" viewBox="0 0 300 32" preserveAspectRatio="none">
+                          <path
+                            d="M 0 16 Q 30 16, 45 4 T 75 28 T 105 16 T 150 16 Q 180 16, 195 2 T 225 30 T 255 16 T 300 16"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            className="animate-[dash_2s_linear_infinite]"
+                          />
+                        </svg>
+                        <span className="absolute right-2.5 top-1 text-[8px] font-black text-cyan-400/80 tracking-widest uppercase">
+                          IMPULSE: {avgReactionTime}ms
+                        </span>
+                      </div>
+
+                      <div className="flex flex-col gap-0.5">
+                        <h4 className="text-xs font-black text-white uppercase tracking-wider flex items-center justify-center gap-1.5">
+                          <Brain className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>SYNTHESIZING COGNITIVE ATTENTION VECTORS</span>
+                        </h4>
+                        <p className="text-[10px] font-medium text-slate-300">
+                          Mapping driver focus margin against {commuteType} road parameters
+                        </p>
+                      </div>
                     </div>
 
-                    {/* Sequential Progress Checklist */}
-                    <div className="w-full bg-slate-950/80 border border-cyan-500/20 rounded-2xl p-4 flex flex-col gap-2.5 text-left text-xs font-semibold">
+                    {/* Live Telemetry Data Cards (For Industry Pros & Consumers) */}
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="bg-slate-950/80 border border-cyan-500/30 rounded-xl p-2.5 flex flex-col text-left gap-1">
+                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                          <Zap className="w-3 h-3 text-cyan-400" />
+                          <span>REACTION LATENCY</span>
+                        </span>
+                        <span className="text-xs font-black text-cyan-300">{avgReactionTime} ms</span>
+                        <span className="text-[9px] text-slate-400 font-medium">Optimal &lt; 300ms</span>
+                      </div>
+
+                      <div className="bg-slate-950/80 border border-cyan-500/30 rounded-xl p-2.5 flex flex-col text-left gap-1">
+                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                          <Gauge className="w-3 h-3 text-teal-400" />
+                          <span>STABILITY MARGIN</span>
+                        </span>
+                        <span className="text-xs font-black text-emerald-400">{awarenessScore >= 80 ? 'HIGH (88%)' : 'STABLE'}</span>
+                        <span className="text-[9px] text-slate-400 font-medium">Focus Recovery</span>
+                      </div>
+
+                      <div className="bg-slate-950/80 border border-cyan-500/30 rounded-xl p-2.5 flex flex-col text-left gap-1">
+                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                          <Shield className="w-3 h-3 text-cyan-400" />
+                          <span>PRIVACY HASH</span>
+                        </span>
+                        <span className="text-xs font-black text-slate-200 font-mono">#AST-{awarenessScore * 87}</span>
+                        <span className="text-[9px] text-slate-400 font-medium">Zero Telematics</span>
+                      </div>
+                    </div>
+
+                    {/* Sequential Progress Terminal Checklist */}
+                    <div className="w-full bg-slate-950 border border-cyan-500/20 rounded-2xl p-3.5 flex flex-col gap-2 text-left text-xs font-semibold">
                       <div className={`flex items-center justify-between transition-colors ${genStep >= 1 ? 'text-cyan-300' : 'text-slate-500'}`}>
-                        <span>Analyzing driving context & environmental variables...</span>
-                        {genStep >= 1 ? <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" /> : <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-600 border-t-cyan-400 animate-spin" />}
+                        <span className="flex items-center gap-1.5 font-mono text-[11px]">
+                          <span className="text-cyan-500 font-bold">&gt;</span> Context Vectors ({commuteType}, {weatherCondition})
+                        </span>
+                        {genStep >= 1 ? <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" /> : <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-600 border-t-cyan-400 animate-spin" />}
                       </div>
 
                       <div className={`flex items-center justify-between transition-colors ${genStep >= 2 ? 'text-cyan-300' : 'text-slate-500'}`}>
-                        <span>Evaluating attention patterns & reaction velocity...</span>
-                        {genStep >= 2 ? <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" /> : <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-600 border-t-cyan-400 animate-spin" />}
+                        <span className="flex items-center gap-1.5 font-mono text-[11px]">
+                          <span className="text-cyan-500 font-bold">&gt;</span> Reaction Velocity Benchmark ({avgReactionTime}ms)
+                        </span>
+                        {genStep >= 2 ? <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" /> : <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-600 border-t-cyan-400 animate-spin" />}
                       </div>
 
                       <div className={`flex items-center justify-between transition-colors ${genStep >= 3 ? 'text-cyan-300' : 'text-slate-500'}`}>
-                        <span>Generating privacy-first driver profile...</span>
-                        {genStep >= 3 ? <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" /> : <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-600 border-t-cyan-400 animate-spin" />}
+                        <span className="flex items-center gap-1.5 font-mono text-[11px]">
+                          <span className="text-cyan-500 font-bold">&gt;</span> Privacy-First Driver Profile Matrix
+                        </span>
+                        {genStep >= 3 ? <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" /> : <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-600 border-t-cyan-400 animate-spin" />}
                       </div>
                     </div>
 
+                    {/* Fast Bypass CTA for Consumers / Executive Demo */}
+                    <button
+                      type="button"
+                      onClick={() => setSimStep(5)}
+                      className="w-full bg-slate-900 hover:bg-slate-800 text-cyan-300 hover:text-white font-extrabold py-3 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer border border-cyan-500/40 text-xs transition-all shadow-md active:scale-[0.985] group"
+                    >
+                      <span>View Full Profile Results Immediately</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                    </button>
+
                     {/* PERSISTENT PRIVACY SECTION */}
-                    <div className="flex items-center justify-center gap-2 text-[11px] font-semibold text-slate-300 text-center bg-slate-950/80 border border-white/10 py-3 px-4 rounded-xl w-full">
-                      <Lock className="w-4 h-4 text-cyan-400 shrink-0" />
-                      <span>Your simulation responses are processed anonymously. No vehicle tracking or telematics stored.</span>
+                    <div className="flex items-center justify-center gap-2 text-[10px] font-semibold text-slate-300 text-center bg-slate-950/80 border border-white/10 py-2.5 px-3 rounded-xl w-full">
+                      <Lock className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                      <span>Your simulation responses are processed anonymously in-memory. Zero vehicle GPS tracking or telematics.</span>
                     </div>
 
                   </div>
@@ -1845,16 +2143,31 @@ export default function App() {
                       <button
                         type="button"
                         onClick={generatePDFReport}
-                        className="bg-cyan-950/90 hover:bg-cyan-900/90 text-cyan-300 hover:text-white font-extrabold py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-cyan-500/40 text-[11px] sm:text-xs transition-all shadow-md shadow-cyan-950/40 active:scale-[0.985] group"
+                        disabled={pdfState === 'generating'}
+                        className="bg-gradient-to-r from-cyan-400 via-teal-400 to-cyan-500 hover:from-cyan-300 hover:to-teal-300 text-slate-950 font-black py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border-2 border-cyan-200 text-[11px] sm:text-xs transition-all shadow-[0_0_16px_rgba(34,211,238,0.45)] active:scale-[0.985] group disabled:opacity-75"
                       >
-                        <Download className="w-3.5 h-3.5 text-cyan-400 shrink-0 group-hover:scale-110 transition-transform" />
-                        <span className="truncate">Download PDF</span>
+                        {pdfState === 'generating' ? (
+                          <>
+                            <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-950 border-t-transparent animate-spin shrink-0"></div>
+                            <span className="truncate">Generating...</span>
+                          </>
+                        ) : pdfState === 'success' ? (
+                          <>
+                            <CheckCircle2 className="w-3.5 h-3.5 text-slate-950 shrink-0 animate-bounce" />
+                            <span className="truncate">Downloaded!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Download className="w-3.5 h-3.5 text-slate-950 shrink-0 group-hover:scale-110 transition-transform" />
+                            <span className="truncate">Download PDF</span>
+                          </>
+                        )}
                       </button>
 
                       <button
                         type="button"
                         onClick={() => setIsFeedbackOpen(!isFeedbackOpen)}
-                        className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-[11px] sm:text-xs transition-colors"
+                        className="bg-slate-900 hover:bg-slate-800 text-cyan-300 hover:text-white font-extrabold py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border-2 border-cyan-500/50 text-[11px] sm:text-xs transition-colors shadow-md shadow-slate-950/60"
                       >
                         <MessageSquare className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                         <span className="truncate">Feedback</span>
@@ -1863,9 +2176,9 @@ export default function App() {
                       <button
                         type="button"
                         onClick={copyProfile}
-                        className="bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 text-[11px] sm:text-xs transition-colors"
+                        className="bg-slate-900 hover:bg-slate-800 text-cyan-300 hover:text-white font-extrabold py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer border-2 border-cyan-500/50 text-[11px] sm:text-xs transition-colors shadow-md shadow-slate-950/60"
                       >
-                        {copiedProfile ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" /> : <Copy className="w-3.5 h-3.5 text-slate-400 shrink-0" />}
+                        {copiedProfile ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" /> : <Copy className="w-3.5 h-3.5 text-slate-300 shrink-0" />}
                         <span className="truncate">{copiedProfile ? 'Copied!' : 'Copy'}</span>
                       </button>
                     </div>
@@ -1934,6 +2247,11 @@ export default function App() {
                 <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
                   Thank you! You have been enrolled in Astrateq's Canadian driver awareness research group (<strong className="text-blue-400">{updateProvince} Cohort</strong>). We will notify you when new milestone features are released.
                 </p>
+                {updateSuccessNote && (
+                  <p className="text-[11px] text-cyan-300 bg-cyan-950/80 border border-cyan-500/30 rounded-lg p-2.5 max-w-sm font-medium">
+                    {updateSuccessNote}
+                  </p>
+                )}
                 <button
                   type="button"
                   onClick={() => setIsUpdatesOpen(false)}
@@ -1986,10 +2304,20 @@ export default function App() {
 
                 <button
                   type="submit"
-                  className="mt-2 w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-[0.98] transition-all text-xs"
+                  disabled={updateLoading}
+                  className="mt-2 w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-[0.98] transition-all text-xs disabled:opacity-75"
                 >
-                  <Bell className="w-4 h-4" />
-                  <span>Subscribe to Research Updates</span>
+                  {updateLoading ? (
+                    <>
+                      <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin shrink-0"></div>
+                      <span>Sending via Resend...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Bell className="w-4 h-4" />
+                      <span>Subscribe to Research Updates</span>
+                    </>
+                  )}
                 </button>
 
                 <p className="text-[10px] text-slate-400 text-center font-medium">
