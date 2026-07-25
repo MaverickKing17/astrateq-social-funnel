@@ -383,26 +383,13 @@ export default function App() {
           </p>
 
           {/* Primary Action Button with glowing gradient */}
-          <div className="flex flex-col gap-2.5 w-full">
-            <button 
-              onClick={() => { setIsSimulatorOpen(true); resetSim(); }}
-              className="flex items-center justify-center gap-2.5 w-full bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-2xl py-4 px-6 font-extrabold text-[15px] shadow-lg shadow-blue-500/25 active:scale-[0.985] hover:scale-[1.01] transition-all duration-200 cursor-pointer text-center border-0 group/btn"
-            >
-              <span>Start Driver Awareness Simulation</span>
-              <ArrowRight className="w-4.5 h-4.5 text-white transition-transform duration-200 group-hover/btn:translate-x-1" strokeWidth={2.5} />
-            </button>
-
-            {/* Direct Quick Launch Button for Results UI Variations */}
-            <button 
-              type="button"
-              onClick={() => { setIsSimulatorOpen(true); setIsStepTransitioning(false); setSimStep(5); }}
-              className="flex items-center justify-center gap-2 w-full bg-cyan-950/80 hover:bg-cyan-900/80 text-cyan-300 border border-cyan-500/40 rounded-2xl py-3 px-5 font-bold text-xs shadow-md shadow-cyan-950/50 active:scale-[0.985] hover:scale-[1.01] transition-all duration-200 cursor-pointer text-center group/layoutBtn"
-            >
-              <LayoutGrid className="w-4 h-4 text-cyan-400 group-hover/layoutBtn:scale-110 transition-transform" />
-              <span>Preview 3 Results Layout Variations</span>
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400 ml-auto" />
-            </button>
-          </div>
+          <button 
+            onClick={() => { setIsSimulatorOpen(true); resetSim(); }}
+            className="flex items-center justify-center gap-2.5 w-full bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-2xl py-4 px-6 font-extrabold text-[15px] shadow-lg shadow-blue-500/25 active:scale-[0.985] hover:scale-[1.01] transition-all duration-200 cursor-pointer text-center border-0 group/btn"
+          >
+            <span>Start Driver Awareness Simulation</span>
+            <ArrowRight className="w-4.5 h-4.5 text-white transition-transform duration-200 group-hover/btn:translate-x-1" strokeWidth={2.5} />
+          </button>
 
           {/* Micro-disclaimer */}
           <div className="flex items-center justify-center gap-2 text-slate-400 text-[10.5px] font-semibold text-center mt-3.5 tracking-wide">
@@ -861,51 +848,24 @@ export default function App() {
                 {simStep === 1 && (
                   <div className="flex flex-col gap-4 animate-fade-in">
                     
-                    {/* Visual Mode Selector for Welcome Screen */}
-                    <div className="bg-slate-950/80 border border-cyan-500/30 rounded-xl p-1.5 flex items-center justify-between text-[10px] font-bold">
-                      <span className="text-slate-400 pl-2 uppercase tracking-wider flex items-center gap-1">
-                        <Layers className="w-3 h-3 text-cyan-400" />
-                        <span>Visual Mode:</span>
-                      </span>
-                      <div className="flex items-center gap-1">
-                        {[
-                          { id: 'option1', label: '1: Hero SUV' },
-                          { id: 'option2', label: '2: Angled Scan' },
-                          { id: 'option3', label: '3: Cockpit 3D' }
-                        ].map((opt) => (
-                          <button
-                            key={opt.id}
-                            type="button"
-                            onClick={() => setWelcomeOption(opt.id as 'option1' | 'option2' | 'option3')}
-                            className={`px-2 py-1 rounded-lg transition-all cursor-pointer ${
-                              welcomeOption === opt.id
-                                ? 'bg-cyan-500 text-slate-950 font-black shadow-md shadow-cyan-500/30'
-                                : 'text-slate-400 hover:text-white hover:bg-white/5'
-                            }`}
-                          >
-                            {opt.label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
                     {/* Visual Interface Shell */}
                     <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-[#050b18] border border-cyan-500/25 rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
                       
                       {/* Ambient Volumetric Backdrop */}
                       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full h-48 bg-gradient-to-b from-cyan-500/15 via-blue-600/10 to-transparent blur-2xl pointer-events-none"></div>
                       
-                      {/* High-Tech 3D Cockpit Wireframe Visual with Interactive Telemetry Callouts */}
-                      <div className="relative w-full h-52 sm:h-60 mb-4 rounded-2xl bg-[#030814] border border-cyan-500/35 overflow-hidden group shadow-[0_12px_36px_rgba(6,182,212,0.3)] flex items-center justify-center">
+                      {/* High-Tech 3D Vehicle & Cockpit Visual Canvas with Telemetry Callouts */}
+                      <div className="relative w-full h-56 sm:h-64 mb-3 rounded-2xl bg-[#030814] border border-cyan-500/35 overflow-hidden group shadow-[0_12px_36px_rgba(6,182,212,0.3)] flex items-center justify-center">
                         
-                        {/* 3D Wireframe Cockpit Render */}
+                        {/* 3D Render Image based on selected Layout Variation */}
                         <img 
                           src={welcomeOption === 'option1' ? simVehicleHero3d : welcomeOption === 'option2' ? simVehicle3d : cockpitWireframe3d} 
-                          alt="3D Wireframe Car Cockpit Telemetry Simulation" 
+                          alt="Driver Telemetry Simulation Perspective" 
                           referrerPolicy="no-referrer"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
                         />
 
+                        {/* Animated Grid / Scanning Effect for Option 2 */}
                         {welcomeOption === 'option2' && (
                           <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/10 via-cyan-400/20 to-transparent pointer-events-none animate-pulse"></div>
                         )}
@@ -913,51 +873,72 @@ export default function App() {
                         {/* Top specular reflection overlay */}
                         <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-cyan-400/20 via-transparent to-transparent pointer-events-none"></div>
 
-                        {/* TELEMETRY CALLOUT 1: Top Left - Cognitive Demand */}
+                        {/* TELEMETRY CALLOUT 1: Top Left */}
                         <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[150px] sm:max-w-[170px] pointer-events-none">
                           <p className="text-[8.5px] font-mono font-bold text-cyan-400 uppercase tracking-tight">
-                            COGNITIVE DEMAND [SIM]:
+                            {welcomeOption === 'option1' ? 'EXTERIOR RENDER:' : welcomeOption === 'option2' ? 'AI SCAN MATRIX:' : 'COGNITIVE DEMAND:'}
                           </p>
                           <p className="text-[10px] font-extrabold text-white truncate">
-                            Moderate (72/100)
+                            {welcomeOption === 'option1' ? 'Full-Width Hero' : welcomeOption === 'option2' ? 'Active Scanning' : 'Moderate (72/100)'}
                           </p>
                         </div>
 
-                        {/* TELEMETRY CALLOUT 2: Top Right - Attention Profile */}
+                        {/* TELEMETRY CALLOUT 2: Top Right */}
                         <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[150px] sm:max-w-[170px] pointer-events-none">
                           <p className="text-[8.5px] font-mono font-bold text-cyan-400 uppercase tracking-tight">
-                            ATTENTION PROFILE [SIM]:
+                            ATTENTION PROFILE:
                           </p>
                           <p className="text-[10px] font-extrabold text-white truncate">
                             Multi-Screen Focus
                           </p>
                         </div>
 
-                        {/* TELEMETRY CALLOUT 3: Mid/Bottom Left - Gaze Vectors */}
-                        <div className="absolute bottom-9 left-2.5 sm:bottom-10 sm:left-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[140px] sm:max-w-[160px] pointer-events-none">
+                        {/* TELEMETRY CALLOUT 3: Mid Left */}
+                        <div className="absolute bottom-11 left-2.5 sm:bottom-12 sm:left-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[140px] sm:max-w-[160px] pointer-events-none">
                           <p className="text-[8.5px] font-mono font-bold text-cyan-400 uppercase tracking-tight">
-                            GAZE VECTORS [SIM]:
+                            GAZE VECTORS:
                           </p>
                           <p className="text-[10px] font-extrabold text-white truncate">
                             Optimal Path
                           </p>
                         </div>
 
-                        {/* TELEMETRY CALLOUT 4: Mid/Bottom Right - Fatigue Marker */}
-                        <div className="absolute bottom-9 right-2.5 sm:bottom-10 sm:right-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[140px] sm:max-w-[160px] pointer-events-none">
+                        {/* TELEMETRY CALLOUT 4: Mid Right */}
+                        <div className="absolute bottom-11 right-2.5 sm:bottom-12 sm:right-3 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/40 shadow-lg text-left max-w-[140px] sm:max-w-[160px] pointer-events-none">
                           <p className="text-[8.5px] font-mono font-bold text-cyan-400 uppercase tracking-tight">
-                            FATIGUE MARKER [SIM]:
+                            FATIGUE MARKER:
                           </p>
                           <p className="text-[10px] font-extrabold text-emerald-400 truncate">
                             Low Risk
                           </p>
                         </div>
 
-                        {/* Image Subtitle Overlay Label */}
-                        <div className="absolute bottom-1.5 inset-x-0 text-center pointer-events-none">
-                          <span className="bg-slate-950/90 text-cyan-300 text-[8.5px] font-mono px-2.5 py-0.5 rounded-full border border-cyan-500/30">
-                            [Simulated Sensor Input - Privacy-First Architecture]
+                        {/* INTEGRATED HUD PERSPECTIVE SELECTOR INSIDE IMAGE CANVAS */}
+                        <div className="absolute bottom-2 inset-x-2 flex items-center justify-between bg-slate-950/90 backdrop-blur-md px-2.5 py-1 rounded-xl border border-cyan-500/30 text-[10px] font-bold z-10">
+                          <span className="text-cyan-400 font-mono text-[9px] flex items-center gap-1 uppercase tracking-tight">
+                            <Layers className="w-3 h-3 text-cyan-400" />
+                            <span className="hidden sm:inline">PERSPECTIVE:</span>
                           </span>
+                          <div className="flex items-center gap-1">
+                            {[
+                              { id: 'option1', label: '1: Hero SUV' },
+                              { id: 'option2', label: '2: AI Scanning' },
+                              { id: 'option3', label: '3: Cockpit 3D' }
+                            ].map((opt) => (
+                              <button
+                                key={opt.id}
+                                type="button"
+                                onClick={() => setWelcomeOption(opt.id as 'option1' | 'option2' | 'option3')}
+                                className={`px-2 py-0.5 rounded-lg text-[9px] sm:text-[9.5px] font-extrabold transition-all cursor-pointer ${
+                                  welcomeOption === opt.id
+                                    ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/40 font-black'
+                                    : 'text-slate-400 hover:text-cyan-200 hover:bg-white/5'
+                                }`}
+                              >
+                                {opt.label}
+                              </button>
+                            ))}
+                          </div>
                         </div>
 
                         {/* Bottom Glowing Accent Bar */}
